@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private Tile _tilePrefab;
+    [SerializeField] private Tile[] _tilePrefab;
     [SerializeField] private float _tileSize;
     [SerializeField] private float _tileOffset;
     [SerializeField] private float _endOffset;
@@ -31,7 +31,7 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < _tileCount; y++)
             {
-                var spawnedTile = Instantiate(_tilePrefab, _parentSprite);
+                var spawnedTile = Instantiate(_tilePrefab[Random.Range(0,_tilePrefab.Length)], _parentSprite);
                 spawnedTile.name = $"Tile {x} {y}";
                 spawnedTile.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * (_tileSize + _tileOffset) + _endOffset, y * (_tileSize + _tileOffset) + _endOffset);
                 spawnedTile.Init(_tileSize, new Vector2(x,y));
