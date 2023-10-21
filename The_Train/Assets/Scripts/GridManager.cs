@@ -12,6 +12,13 @@ public class GridManager : MonoBehaviour
     [SerializeField] private float _endOffset;
     [SerializeField] private int _tileCount;
     [SerializeField] private RectTransform _parentSprite;
+
+    [Header("DestinationSettings")]
+    [SerializeField] private Vector2 _startPoint;
+    [SerializeField] private Vector2 _endPoint;
+    [SerializeField] private Direction _startInput;
+    [SerializeField] private Direction _endOutput;
+
     private Dictionary<Vector2, Tile> _tiles;
     public static GridManager instance;
 
@@ -41,6 +48,9 @@ public class GridManager : MonoBehaviour
 
         }
         Debug.Log("State::GenerateGrid");
+
+        Tile nextTile = GetNextTile(_startPoint, _startInput);
+        nextTile.StartInflate();
     }
 
     public Tile GetTileAtPosition(Vector2 pos)
@@ -48,6 +58,66 @@ public class GridManager : MonoBehaviour
         if (_tiles.TryGetValue(pos, out var tile)) return tile;
         return null;
     }
+    public void InflateNextTile(Vector2 pos, Direction output)
+    {
+        Tile nextTile = GetNextTile(pos, output);
+        nextTile.StartInflate();
+    }
+    public Tile GetNextTile(Vector2 pos, Direction output)
+    {
+        Tile nextTile;
+        Vector2 nextPos;
+        Direction nextInput;
+        switch (output)
+        {
+            case Direction.up:
+                nextPos = new Vector2(pos.x, pos.y + 1);
+                nextInput = Direction.down;
+                break;
+            case Direction.right:
+                nextPos = new Vector2(pos.x+1, pos.y);
+                nextInput = Direction.left;
+                break;
+            case Direction.down:
+                nextPos = new Vector2(pos.x, pos.y - 1);
+                nextInput = Direction.up;
+                break;
+            case Direction.left:
+                nextPos = new Vector2(pos.x-1, pos.y);
+                nextInput = Direction.right;
+                break;
+            default:
+                nextPos = new Vector2(0,0);
+                nextInput = Direction.right;
+                Debug.Log("Exception direction find");
+                break;
+        }
+        if (pos == _endPoint)
+        {
+            Debug.Log("win");
+            return null;
+        }
+        if (_tiles.TryGetValue(nextPos, out var tile))
+        {
+            nextTile = tile;
+            if (nextTile.CheckInputDirectionValid(nextInput))
+            {
+                return nextTile;
+            }
+            else
+            {
+                Debug.Log("critical damage... (next tile doesnt have this direction)");
+                return null;
+            }
+        }
+        else
+        {
+            Debug.Log("critical damage... (next tile undefined)");
+            return null;
+        }
+        
+    }
+
     public void PrintTouched(Vector2 pos)
     {
         if (_tiles.TryGetValue(pos, out var tile))
