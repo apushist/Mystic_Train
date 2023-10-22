@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
-    private Vector2 _index;
+    internal Vector2 _index;
     [SerializeField] private float _rotationTime;
     [SerializeField] private float _rotationFrames;
-    [SerializeField] internal float _inflationTime;
-    [SerializeField] internal float _inflationFrames;
+    [SerializeField] internal float _fillTime;
+    [SerializeField] internal float _fillFrames;
     [SerializeField] internal bool _clickable = true;
     [SerializeField] private RectTransform _tube;
     [SerializeField] internal Image _tubeContent;
@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour
     {
         var rect = GetComponent<RectTransform>();
         rect.localScale = new Vector2(_tileSize, _tileSize) / (rect.offsetMax.x - rect.offsetMin.x);
-        _tubeContent.fillAmount = 0;
+        ResetThisTile();
         _index = ind;
         rotationRandomize();
 
@@ -30,7 +30,6 @@ public class Tile : MonoBehaviour
         if (_clickable)
         {
             StartCoroutine(rotationLerp(_rotationTime, _rotationFrames));
-            //GridManager.instance.PrintTouched(_index);
         }
     }
 
@@ -44,10 +43,10 @@ public class Tile : MonoBehaviour
         }
         inputDir = GetNextDirection(inputDir);
         outputDir = GetNextDirection(outputDir);
-        Debug.Log(inputDir + " " + outputDir + " ||| " + _index.x + " " + _index.y);
+        //Debug.Log(inputDir + " " + outputDir + " ||| " + _index.x + " " + _index.y);
         _clickable = true;
     }
-    public IEnumerator inflation(float time, float frames)
+    public IEnumerator FillThis(float time, float frames)
     {
         _clickable = false;
         for (int i = 0; i < frames; i++)
@@ -55,24 +54,33 @@ public class Tile : MonoBehaviour
             _tubeContent.fillAmount = 1f / frames * (i+1);
             yield return new WaitForSeconds(time / frames);
         }
-        Debug.Log("inflated: " + _index.x + " " + _index.y);
-        GridManager.instance.InflateNextTile(_index, outputDir);
+        Debug.Log("filled: " + _index.x + " " + _index.y);
+        GridManager.instance.FillNextTile(_index, outputDir);
     }
     void rotationRandomize()
     {
         int rand = Random.Range(0, 4);
         for (int i = 0; i < rand; i++)
         {
-            _tube.Rotate(new Vector3(0, 0, -90));
-            inputDir = GetNextDirection(inputDir);
-            outputDir = GetNextDirection(outputDir);            
+            rotationOnce();                    
         }
         _clickable = true;
     }
+    public void rotationOnce()
+    {
+        _tube.Rotate(new Vector3(0, 0, -90));
+        inputDir = GetNextDirection(inputDir);
+        outputDir = GetNextDirection(outputDir);
+    }
+    public void ResetThisTile()
+    {
+        _tubeContent.fillAmount = 0;
+        _clickable = true;
+        rotationRandomize();
+    }
 
-    public virtual void StartInflate() { }
-
-    public bool CheckInputDirectionValid(Direction input)
+    public virtual void StartFilling() { }
+    public virtual bool CheckInputDirectionValid(Direction input)
     {
         if (inputDir == input) return true;
         else if(outputDir == input)

@@ -7,17 +7,22 @@ using UnityEngine.UI;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private Tile[] _tilePrefab;
-    [SerializeField] private float _tileSize;
+    private float _tileSize;
     [SerializeField] private float _tileOffset;
     [SerializeField] private float _endOffset;
     [SerializeField] private int _tileCount;
     [SerializeField] private RectTransform _parentSprite;
 
     [Header("DestinationSettings")]
+    [SerializeField] private float _onStartDelay;
     [SerializeField] private Vector2 _startPoint;
     [SerializeField] private Vector2 _endPoint;
     [SerializeField] private Direction _startInput;
     [SerializeField] private Direction _endOutput;
+
+    [Header("MapSettings")]
+    [SerializeField] bool _generateWithData = false;
+    private int[] _data6; 
 
     private Dictionary<Vector2, Tile> _tiles;
     public static GridManager instance;
@@ -28,6 +33,13 @@ public class GridManager : MonoBehaviour
     }
     private void Start()
     {
+        _data6 = new int[36]
+        {0,1,0,1,0,0,
+        0,1,0,0,0,1,
+        0,0,0,1,0,1,
+        0,1,1,0,0,1,
+        1,1,0,0,1,1,
+        0,1,1,1,1,0};
         _tileSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_endOffset * 2) - (_tileOffset * (_tileCount - 1))) / _tileCount;
         GenerateGrid();
     }
@@ -38,7 +50,7 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < _tileCount; y++)
             {
-                var spawnedTile = Instantiate(_tilePrefab[Random.Range(0,_tilePrefab.Length)], _parentSprite);
+                var spawnedTile = Instantiate(_tilePrefab[_generateWithData ? _data6[x*_tileCount+y] :Random.Range(0,_tilePrefab.Length)], _parentSprite);
                 spawnedTile.name = $"Tile {x} {y}";
                 spawnedTile.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * (_tileSize + _tileOffset) + _endOffset, y * (_tileSize + _tileOffset) + _endOffset);
                 spawnedTile.Init(_tileSize, new Vector2(x,y));
@@ -49,19 +61,29 @@ public class GridManager : MonoBehaviour
         }
         Debug.Log("State::GenerateGrid");
 
-        Tile nextTile = GetNextTile(_startPoint, _startInput);
-        nextTile.StartInflate();
+        ResetFillProgress();
+        StartCoroutine(StartFilling(_onStartDelay));
     }
-
-    public Tile GetTileAtPosition(Vector2 pos)
+    void ResetFillProgress()
     {
-        if (_tiles.TryGetValue(pos, out var tile)) return tile;
-        return null;
+        for (int x = 0; x < _tileCount; x++)
+        {
+            for (int y = 0; y < _tileCount; y++)
+            {
+                _tiles[new Vector2(x, y)].ResetThisTile();
+            }
+        }
     }
-    public void InflateNextTile(Vector2 pos, Direction output)
+    IEnumerator StartFilling(float time)
+    {
+        yield return new WaitForSeconds(time);
+        FillNextTile(_startPoint, _startInput);
+    }
+    public void FillNextTile(Vector2 pos, Direction output)
     {
         Tile nextTile = GetNextTile(pos, output);
-        nextTile.StartInflate();
+        if (nextTile == null) return;
+        nextTile.StartFilling();
     }
     public Tile GetNextTile(Vector2 pos, Direction output)
     {
@@ -92,9 +114,9 @@ public class GridManager : MonoBehaviour
                 Debug.Log("Exception direction find");
                 break;
         }
-        if (pos == _endPoint)
+        if (nextPos == _endPoint)
         {
-            Debug.Log("win");
+            Win();
             return null;
         }
         if (_tiles.TryGetValue(nextPos, out var tile))
@@ -106,18 +128,32 @@ public class GridManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("critical damage... (next tile doesnt have this direction)");
+                Debug.Log($"next tile doesnt have this direction: {nextTile.inputDir}, {nextTile.outputDir}; excepted: {nextInput}");
+                Debug.Log($"position excepted: {nextPos.x}, {nextPos.y}");
+                Loose();
                 return null;
             }
         }
         else
-        {
-            Debug.Log("critical damage... (next tile undefined)");
+        {            
+            Debug.Log($"next tile undefined by position; excepted: {nextPos.x}, {nextPos.y}");
+            Loose();
             return null;
         }
         
     }
-
+    void Win()
+    {
+        Debug.Log("win");
+        ResetFillProgress();
+        StartCoroutine(StartFilling(_onStartDelay));
+    }
+    void Loose()
+    {
+        Debug.Log("loose");
+        ResetFillProgress();
+        StartCoroutine(StartFilling(_onStartDelay));
+    }
     public void PrintTouched(Vector2 pos)
     {
         if (_tiles.TryGetValue(pos, out var tile))
@@ -125,6 +161,11 @@ public class GridManager : MonoBehaviour
         else
             Debug.Log("Tile find error");
         
+    }
+    public Tile GetTileAtPosition(Vector2 pos)
+    {
+        if (_tiles.TryGetValue(pos, out var tile)) return tile;
+        return null;
     }
 
 }

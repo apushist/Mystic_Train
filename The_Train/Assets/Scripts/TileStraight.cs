@@ -5,63 +5,23 @@ using UnityEngine.UI;
 
 public class TileStraight : Tile
 {
-    public override void StartInflate()
+    public override void StartFilling()
     {
-        if (inputDir == Direction.right)
+        _tubeContent.fillOrigin = (int)Image.OriginHorizontal.Left;
+        StartCoroutine(FillThis(_fillTime, _fillFrames));
+    }
+    public override bool CheckInputDirectionValid(Direction input)
+    {
+        if (inputDir == input) return true;
+        else if (outputDir == input)
         {
-            if (outputDir == Direction.up)
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.TopRight;
-                _tubeContent.fillClockwise = true;
-            }
-            else
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.BottomRight;
-                _tubeContent.fillClockwise = false;
-            }
-        }
-        else if (inputDir == Direction.down)
-        {
-            if (outputDir == Direction.right)
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.BottomRight;
-                _tubeContent.fillClockwise = true;
-            }
-            else
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.BottomLeft;
-                _tubeContent.fillClockwise = false;
-            }
-
-        }
-        else if (inputDir == Direction.left)
-        {
-            if (outputDir == Direction.down)
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.BottomLeft;
-                _tubeContent.fillClockwise = true;
-            }
-            else
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.TopLeft;
-                _tubeContent.fillClockwise = false;
-            }
-
+            rotationOnce();
+            rotationOnce();
+            return true;
         }
         else
         {
-            if (outputDir == Direction.left)
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.TopLeft;
-                _tubeContent.fillClockwise = true;
-            }
-            else
-            {
-                _tubeContent.fillOrigin = (int)Image.Origin90.TopRight;
-                _tubeContent.fillClockwise = false;
-            }
-
+            return false;
         }
-        StartCoroutine(inflation(_inflationTime, _inflationFrames));
     }
 }

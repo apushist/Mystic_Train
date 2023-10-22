@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TileCurve : Tile
 {
-    public override void StartInflate()
+    public override void StartFilling()
     {
         if (inputDir == Direction.right && outputDir == Direction.down ||
            inputDir == Direction.down && outputDir == Direction.left ||
@@ -18,6 +18,21 @@ public class TileCurve : Tile
         {
             _tubeContent.fillClockwise = true;
         }
-        StartCoroutine(inflation(_inflationTime, _inflationFrames));
+        StartCoroutine(FillThis(_fillTime, _fillFrames));
+    }
+    public override bool CheckInputDirectionValid(Direction input)
+    {
+        if (inputDir == input) return true;
+        else if (outputDir == input)
+        {
+            Direction toSwap = inputDir;
+            inputDir = outputDir;
+            outputDir = toSwap;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
