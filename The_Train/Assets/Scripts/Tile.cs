@@ -41,8 +41,7 @@ public class Tile : MonoBehaviour
             _tube.Rotate(new Vector3(0, 0, -90 / frames));
             yield return new WaitForSeconds(time / frames);
         }
-        inputDir = GetNextDirection(inputDir);
-        outputDir = GetNextDirection(outputDir);
+        ChangeDirection();
         //Debug.Log(inputDir + " " + outputDir + " ||| " + _index.x + " " + _index.y);
         _clickable = true;
     }
@@ -62,15 +61,14 @@ public class Tile : MonoBehaviour
         int rand = Random.Range(0, 4);
         for (int i = 0; i < rand; i++)
         {
-            rotationOnce();                    
+            rotationOnce();
+            ChangeDirection();
         }
         _clickable = true;
     }
     public void rotationOnce()
     {
         _tube.Rotate(new Vector3(0, 0, -90));
-        inputDir = GetNextDirection(inputDir);
-        outputDir = GetNextDirection(outputDir);
     }
     public void ResetThisTile()
     {
@@ -94,6 +92,11 @@ public class Tile : MonoBehaviour
         {
             return false;
         }
+    }
+    public void ChangeDirection()
+    {
+        inputDir = GetNextDirection(inputDir);
+        outputDir = GetNextDirection(outputDir);
     }
     Direction GetNextDirection(Direction cur)
     {

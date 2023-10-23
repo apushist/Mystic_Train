@@ -12,6 +12,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private float _endOffset;
     [SerializeField] private int _tileCount;
     [SerializeField] private RectTransform _parentSprite;
+    [SerializeField] private RectTransform _startTile;
+    [SerializeField] private RectTransform _endTile;
 
     [Header("DestinationSettings")]
     [SerializeField] private float _onStartDelay;
@@ -59,10 +61,52 @@ public class GridManager : MonoBehaviour
             }
 
         }
+        InitStartEnd();
         Debug.Log("State::GenerateGrid");
 
         ResetFillProgress();
         StartCoroutine(StartFilling(_onStartDelay));
+    }
+    void InitStartEnd()
+    {
+        _startTile.localScale = new Vector2(_tileSize, _tileSize) / (_startTile.offsetMax.x - _startTile.offsetMin.x);
+        _endTile.localScale = new Vector2(_tileSize, _tileSize) / (_endTile.offsetMax.x - _endTile.offsetMin.x);
+        _startTile.anchoredPosition = new Vector2(_startPoint.x * (_tileSize + _tileOffset) + _endOffset, _startPoint.y * (_tileSize + _tileOffset) + _endOffset);
+        _endTile.anchoredPosition = new Vector2(_endPoint.x * (_tileSize + _tileOffset) + _endOffset, _endPoint.y * (_tileSize + _tileOffset) + _endOffset);
+        switch (_startInput)
+        {
+            case Direction.up:
+                _startTile.Rotate(new Vector3(0, 0, -90));
+                break;
+            case Direction.right:
+                _startTile.Rotate(new Vector3(0, 0, 0));
+                break;
+            case Direction.down:
+                _startTile.Rotate(new Vector3(0, 0, 90));
+                break;
+            case Direction.left:
+                _startTile.Rotate(new Vector3(0, 0, 180));
+                break;
+            default:
+                break;
+        }
+        switch (_endOutput)
+        {
+            case Direction.up:
+                _startTile.Rotate(new Vector3(0, 0, -90));
+                break;
+            case Direction.right:
+                _startTile.Rotate(new Vector3(0, 0, -180));
+                break;
+            case Direction.down:
+                _startTile.Rotate(new Vector3(0, 0, -270));
+                break;
+            case Direction.left:
+                _startTile.Rotate(new Vector3(0, 0, 0));
+                break;
+            default:
+                break;
+        }
     }
     void ResetFillProgress()
     {
