@@ -15,8 +15,11 @@ public class TileStraight : Tile
         if (inputDir == input) return true;
         else if (outputDir == input)
         {
-            rotationOnce();
-            rotationOnce();
+            _tubeContent.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, 180));
+            ChangeDirection();
+            ChangeDirection();
+            //rotationOnce();
+            //rotationOnce();
             return true;
         }
         else
