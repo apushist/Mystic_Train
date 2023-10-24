@@ -7,12 +7,20 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public Rigidbody2D rb;
     private Vector2 moveDirection;
+    public float stepSoundRate = 0.5F;
+    public AudioSource StepSound;
+
+    private float nextStep = 0.0F;
+
     // Update is called once per frame
     void Update()
     {
         // Processing Inputs
         ProcessInputs();
+
+        
     }
+
     /// <summary>
     /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
     /// </summary>
@@ -20,14 +28,23 @@ public class PlayerMovement : MonoBehaviour
     {
         // Physics Calculations
         Move();
-    }
+	}
+
     void ProcessInputs()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector2(moveX, moveY).normalized; 
-    }
+        moveDirection = new Vector2(moveX, moveY).normalized;
+
+		if (Time.time > nextStep && (moveX != 0 || moveY != 0))
+		{
+			nextStep = Time.time + stepSoundRate;
+            StepSound.pitch = Random.Range(0.9f, 1.1f);
+			StepSound.Play();
+		}
+	}
+
     void Move()
     {
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
