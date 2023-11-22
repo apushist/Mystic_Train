@@ -8843,8 +8843,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.7702713, y: -1.7460135}
-  m_Size: {x: 0.8736248, y: 0.9692757}
+  m_Offset: {x: 1.7645581, y: -1.8252642}
+  m_Size: {x: 0.73649645, y: 0.8107743}
   m_Direction: 0
 --- !u!1 &1216439991
 GameObject:
@@ -9172,7 +9172,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.1895003, y: -0.022043705}
+  m_Offset: {x: -3.1895003, y: -0.22352827}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9183,7 +9183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7257223, y: 0.9085665}
+  m_Size: {x: 0.7257223, y: 0.50559735}
   m_EdgeRadius: 0
 --- !u!4 &1378024103
 Transform:
@@ -9213,7 +9213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a18a80d3da37c542ac9115d2b087e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrefab: {fileID: 1472699966}
+  doorManager: {fileID: 0}
   isLocked: 0
 --- !u!1 &1472699966
 GameObject:

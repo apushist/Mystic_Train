@@ -4,38 +4,29 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-	public GameObject doorPrefab;
+	public GameObject doorManager;
 	public bool isLocked;
 	private Animator anim;
 
 	// Start is called before the first frame update
 	void Start()
     {
-        anim = doorPrefab.GetComponent<Animator>();
+        anim = doorManager.GetComponent<Animator>();
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (!isLocked)
 		{
-			anim.Play("OpenDoor");
+			anim.SetBool("IsPlayerNear", true);
 		}
 	}
-
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		if (!isLocked)
-		{
-			anim.Play("Opened");
-		}
-	}
-
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (!isLocked)
 		{
-			anim.Play("CloseDoor");
+			anim.SetBool("IsPlayerNear", false);
 		}
 	}
 }
