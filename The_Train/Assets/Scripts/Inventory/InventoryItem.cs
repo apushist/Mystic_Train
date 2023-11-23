@@ -51,7 +51,7 @@ public class InventoryItem : MonoBehaviour
     }
     public void MouseClick()
     {
-        Inventory.instance.HideMoreInfoItem(this);
+        Debug.Log("Item Entered");
     }
 
 }
