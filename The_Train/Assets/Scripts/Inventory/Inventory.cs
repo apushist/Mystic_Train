@@ -38,20 +38,6 @@ public class Inventory : MonoBehaviour
         _itemSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_itemEndOffset * 2) - (_itemOffset * (_itemCount - 1))) / _itemCount;
         GenerateGrid();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (isEnabled)
-            {
-                CloseInventory();
-            }
-            else
-            {
-                OpenInventory();
-            }
-        }
-    }
     public void AddItem(int ident)
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
@@ -113,13 +99,23 @@ public class Inventory : MonoBehaviour
 
         }
     }
-
+    public bool PressKeyInventory()
+    {
+        if (isEnabled)
+        {
+            CloseInventory();
+        }
+        else
+        {
+            OpenInventory();
+        }
+        return isEnabled;
+    }
     public void OpenInventory()
     {
         _inventoryScreen.SetActive(true);
         isEnabled = true;
     }
-
     public void CloseInventory()
     {
         _inventoryScreen.SetActive(false);
