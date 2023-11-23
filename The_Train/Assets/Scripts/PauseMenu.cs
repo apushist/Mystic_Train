@@ -36,6 +36,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
+    public void LoadMenu()
+    {
+        Debug.Log("Load");
+        SceneManager.LoadScene("Menu");
+    }
     public void QuitGame()
     {
         Debug.Log("Quit");
