@@ -15,9 +15,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float _itemOffset;
     [SerializeField] private float _itemEndOffset;
     [SerializeField] int _itemCount;
-    [Header("")]
+    [Header("Item Changed Settings")]
     [SerializeField] private TextMeshProUGUI _itemDescriptionText;
     [SerializeField] private Image _itemBigImage;
+    [SerializeField] public Sprite _itemSpriteEmpty;
 
 
     List<InventoryItem> items = new List<InventoryItem>();
@@ -36,20 +37,6 @@ public class Inventory : MonoBehaviour
         CloseInventory();
         _itemSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_itemEndOffset * 2) - (_itemOffset * (_itemCount - 1))) / _itemCount;
         GenerateGrid();
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (isEnabled)
-            {
-                CloseInventory();
-            }
-            else
-            {
-                OpenInventory();
-            }
-        }
     }
     public void AddItem(int ident)
     {
@@ -75,7 +62,7 @@ public class Inventory : MonoBehaviour
     public void HideMoreInfoItem(InventoryItem item)
     {
         _itemDescriptionText.text = "";
-        _itemBigImage.sprite = null;
+        _itemBigImage.sprite = _itemSpriteEmpty;
     }
 
     public void GenerateGrid()
@@ -95,13 +82,40 @@ public class Inventory : MonoBehaviour
 
         }
     }
+    public void GenerateGrid2()
+    {
+        for (int y = 0; y < _itemCount; y++)
+        {
+            for (int x = 0; x < _itemCount; x++)
+            {
+                InventoryItem spawnedItem = _parentSprite.GetChild(y * _itemCount + x).GetComponent<InventoryItem>();
+                //spawnedItem.name = $"Tile {x} {y}";
+                var rect = spawnedItem.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(x * (_itemSize + _itemOffset) + _itemEndOffset, (_parentSprite.offsetMax.y * 2) - y * (_itemSize + _itemOffset) - _itemEndOffset);
+                rect.localScale = new Vector2(_itemSize, _itemSize) / (rect.offsetMax.x - rect.offsetMin.x);
+                itemsGrid.Add(spawnedItem);
+                spawnedItem.Init();
+            }
 
+        }
+    }
+    public bool PressKeyInventory()
+    {
+        if (isEnabled)
+        {
+            CloseInventory();
+        }
+        else
+        {
+            OpenInventory();
+        }
+        return isEnabled;
+    }
     public void OpenInventory()
     {
         _inventoryScreen.SetActive(true);
         isEnabled = true;
     }
-
     public void CloseInventory()
     {
         _inventoryScreen.SetActive(false);

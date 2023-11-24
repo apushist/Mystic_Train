@@ -15,7 +15,8 @@ public class InventoryItem : MonoBehaviour
 
     public void Init()
     {
-        _img = transform.GetChild(0).GetComponent<Image>();
+        _img = GetComponent<Image>();
+        _itemImage = Inventory.instance._itemSpriteEmpty;
     }
     public void SetNewItem(InventoryItem item, bool isEmpty)
     {
@@ -30,7 +31,8 @@ public class InventoryItem : MonoBehaviour
         {
             _id = 0;
             _name = "";
-            _itemImage = null;
+            _itemImage = Inventory.instance._itemSpriteEmpty;
+            _description = "";
             empty = true;
         }
         UpdateImage();
@@ -49,7 +51,7 @@ public class InventoryItem : MonoBehaviour
     }
     public void MouseClick()
     {
-        Inventory.instance.HideMoreInfoItem(this);
+        Debug.Log("Item Entered");
     }
 
 }

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float nextStep = 0.0F;
 
+    bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
     // Update is called once per frame
     void Update()
     {
@@ -31,18 +32,25 @@ public class PlayerMovement : MonoBehaviour
 
     void ProcessInputs()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        if (canMove)
+        {
+            float moveX = Input.GetAxisRaw("Horizontal");
+            float moveY = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector2(moveX, moveY).normalized;
+            moveDirection = new Vector2(moveX, moveY).normalized;
 
-		if (Time.time > nextStep && (moveX != 0 || moveY != 0))
-		{
-			nextStep = Time.time + stepSoundRate;
-            stepSound.pitch = Random.Range(0.4f, 1.0f);
-			stepSound.Play();
-		}
-	}
+            if (Time.time > nextStep && (moveX != 0 || moveY != 0))
+            {
+                nextStep = Time.time + stepSoundRate;
+                stepSound.pitch = Random.Range(0.4f, 1.0f);
+                stepSound.Play();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            canMove = !Inventory.instance.PressKeyInventory();
+        }
+    }
 
     void Move()
     {
