@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldItem : MonoBehaviour
 {
     [SerializeField] private int _id;
+    [SerializeField] private GameObject _effect;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,6 +13,14 @@ public class WorldItem : MonoBehaviour
         {
             Inventory.instance.AddItem(_id);
             gameObject.SetActive(false);
+            PlayEffect();
         }
+    }
+    void PlayEffect()
+    {
+        var ef = Instantiate(_effect, transform.position, Quaternion.identity);
+        ef.GetComponent<ParticleSystem>().Play();
+        Destroy(ef, 5);
+
     }
 }
