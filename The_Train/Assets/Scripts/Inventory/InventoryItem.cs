@@ -51,7 +51,7 @@ public class InventoryItem : MonoBehaviour
     }
     public void MouseClick()
     {
-        Debug.Log("Item Entered");
+        Inventory.instance.TrySetItemInteractable(this);
     }
 
 }
