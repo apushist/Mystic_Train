@@ -18677,6 +18677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 187846563}
   dialogueText: {fileID: 580600802}
+  animator: {fileID: 2029761938}
 --- !u!213 &1781154030
 Sprite:
   m_ObjectHideFlags: 0
