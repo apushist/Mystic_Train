@@ -8290,8 +8290,6 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 1066333451}
   settingsUI: {fileID: 1891834966}
   mixer: {fileID: 24300002, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
-  Normal: {fileID: 24500006, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
-  InMenu: {fileID: -824389257616685875, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
 --- !u!114 &367096773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20951,7 +20949,7 @@ Transform:
   m_GameObject: {fileID: 802296734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5949626, y: -2.997002, z: -10}
+  m_LocalPosition: {x: -6.615612, y: -2.997002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21278,8 +21276,6 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 1066333451}
   settingsUI: {fileID: 1891834966}
   mixer: {fileID: 24300002, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
-  Normal: {fileID: 24500006, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
-  InMenu: {fileID: 6027712648863336328, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
 --- !u!1 &1079952158
 GameObject:
   m_ObjectHideFlags: 0
@@ -22235,7 +22231,7 @@ Transform:
   m_GameObject: {fileID: 1329856509}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5949626, y: -2.997002, z: -10}
+  m_LocalPosition: {x: -6.615612, y: -2.997002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31086,10 +31082,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1329856512}
+  - {fileID: 1216439993}
   - {fileID: 802296737}
   - {fileID: 114593677}
   - {fileID: 1209370068}
-  - {fileID: 1216439993}
   - {fileID: 1583229442}
   - {fileID: 367096776}
   - {fileID: 738176502}
