@@ -7797,7 +7797,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -33559,8 +33559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120.42749, y: -51.485138}
-  m_SizeDelta: {x: 190.855, y: 46.9703}
+  m_AnchoredPosition: {x: -213, y: -106}
+  m_SizeDelta: {x: 292.783, y: 80.946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1797490254
 MonoBehaviour:
@@ -33638,7 +33638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6997c007da0089f439b98cffcd1b5f91, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bc9974c794fa264b9e6da5790fc97c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
