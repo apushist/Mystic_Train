@@ -29,4 +29,10 @@ public class Door : MonoBehaviour
 			anim.SetBool("IsPlayerNear", false);
 		}
 	}
+	public void SetDoorLock(bool isOn)
+    {
+		isLocked = isOn;
+		GetComponent<Collider2D>().enabled = false;
+		GetComponent<Collider2D>().enabled = true;
+	}
 }

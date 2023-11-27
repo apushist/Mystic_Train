@@ -15,7 +15,7 @@ public class InventoryItem : MonoBehaviour
 
     public void Init()
     {
-        _img = GetComponent<Image>();
+        _img = transform.GetChild(0).GetComponent<Image>();
         _itemImage = Inventory.instance._itemSpriteEmpty;
     }
     public void SetNewItem(InventoryItem item, bool isEmpty)

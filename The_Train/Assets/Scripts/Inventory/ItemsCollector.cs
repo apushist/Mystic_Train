@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemsCollector : MonoBehaviour
 {
     [SerializeField] public InventoryItem _neededItem;
+    [SerializeField] public Door _attachedDoor;
 
     public bool TrySetItem(InventoryItem item)
     {

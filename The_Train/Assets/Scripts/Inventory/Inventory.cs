@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject _inventoryScreen;
     [SerializeField] GameObject _changedItemView;
     [SerializeField] GameObject _neededItemView;
+    [SerializeField] GameObject _supportTextView;
     [SerializeField] public Sprite _itemSpriteEmpty;
     [SerializeField] InventoryItem _inventoryItemDefault;
 
@@ -47,6 +48,7 @@ public class Inventory : MonoBehaviour
         _itemSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_itemEndOffset * 2) - (_itemOffset * (_itemCount - 1))) / _itemCount;
         GenerateGrid();
         ChangeInventoryView(true);
+        UpdateSupportInteractTextView(false);
     }
     public void AddItem(int ident)
     {
@@ -57,7 +59,6 @@ public class Inventory : MonoBehaviour
             if (itemsGrid[i].empty)
             {
                 itemsGrid[i].SetNewItem(item, false);
-                Debug.Log(i);
                 return;
             }
         }
@@ -135,11 +136,13 @@ public class Inventory : MonoBehaviour
         {
             currentInteraction = col;
             nearInteractionObject = true;
+            UpdateSupportInteractTextView(true);
         }
         else
         {
             currentInteraction = null;
             nearInteractionObject = false;
+            UpdateSupportInteractTextView(false);
         }
     }
     public void TrySetItemInteractable(InventoryItem item)
@@ -147,12 +150,21 @@ public class Inventory : MonoBehaviour
         if(nearInteractionObject && currentInteraction != null)
         {
             bool successed = currentInteraction.TrySetItem(item);
+            if (successed)
+            {
+                currentInteraction._attachedDoor.SetDoorLock(false);
+                Destroy(currentInteraction.gameObject, 0.1f);
+            }
             UpdateNeededItemSpriteView(successed);
         }
         else
         {
             Debug.Log("error item interact set");
         }
+    }
+    void UpdateSupportInteractTextView(bool enabl)
+    {
+        _supportTextView.SetActive(enabl);
     }
     public void UpdateNeededItemSpriteView(bool succeed)
     {
