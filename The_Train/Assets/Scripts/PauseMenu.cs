@@ -12,8 +12,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
 	public GameObject settingsUI;
     public AudioMixerGroup mixer;
-    public AudioMixerSnapshot Normal;
-    public AudioMixerSnapshot InMenu;
 
 	void Update()
     {
@@ -30,24 +28,21 @@ public class PauseMenu : MonoBehaviour
         }
     }
     public void Resume()
-    {
-        pauseMenuUI.SetActive(false);
+	{
+		pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-		Normal.TransitionTo(0.5f);
 	}
     public void Pause()
-    {
-        pauseMenuUI.SetActive(true);
+	{
+		pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        InMenu.TransitionTo(0.5f);
-    }
+	}
     public void QuitGame()
     {
-        Debug.Log("Quit");
-        Application.Quit();
-    }
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+	}
 
     public void Settings()
     {
