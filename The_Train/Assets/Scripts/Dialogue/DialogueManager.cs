@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 	public TextMeshProUGUI nameText;
 	public TextMeshProUGUI dialogueText;
     public Animator animator;
+    public PlayerController playerController;
 
 	private Queue<string> sentences;
 
@@ -19,7 +20,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-		Time.timeScale = 0f;
+		playerController.canMove = false;
 		animator.SetBool("IsOpen", true);
         nameText.text = dialogue.name;
 
@@ -58,7 +59,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
 	{
-		Time.timeScale = 1f;
+        playerController.canMove = true;
 		animator.SetBool("IsOpen", false);
     }
 

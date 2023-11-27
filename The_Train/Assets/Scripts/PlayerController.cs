@@ -46,7 +46,9 @@ public class PlayerController : MonoBehaviour
                 stepSound.Play();
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        else
+            moveDirection = new Vector2(0, 0);
+		if (Input.GetKeyDown(KeyCode.E))
         {
             canMove = !Inventory.instance.PressKeyInventory();
         }
