@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -46,13 +47,11 @@ public class PauseMenu : MonoBehaviour
 
     public void Settings()
     {
-        pauseMenuUI.SetActive(false);
         settingsUI.SetActive(true);
     }
 
     public void Back()
     {
-		pauseMenuUI.SetActive(true);
 		settingsUI.SetActive(false);
 	}
 

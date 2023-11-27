@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float nextStep = 0.0F;
 
-    bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
+     public bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
     // Update is called once per frame
     void Update()
     {

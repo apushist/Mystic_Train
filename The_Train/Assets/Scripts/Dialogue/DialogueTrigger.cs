@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
-    public GameObject dialogueObject;
-    public bool destroyObjectAfter;
+	public GameObject dialogueObject;
+	public bool destroyObjectAfter;
+	public Dialogue dialogue;
+    
+   
 
     public void TriggerDialogue()
     {
@@ -15,13 +17,10 @@ public class DialogueTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (dialogueObject != null)
+        TriggerDialogue();
+        if(destroyObjectAfter)
         {
-            TriggerDialogue();
-            if(destroyObjectAfter)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
 	}
 }
