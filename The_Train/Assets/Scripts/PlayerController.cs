@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float nextStep = 0.0F;
 
      public bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
+
+    public static event Action Epressed;
     // Update is called once per frame
     void Update()
     {
@@ -42,7 +45,7 @@ public class PlayerController : MonoBehaviour
             if (Time.time > nextStep && (moveX != 0 || moveY != 0))
             {
                 nextStep = Time.time + stepSoundRate;
-                stepSound.pitch = Random.Range(0.4f, 1.0f);
+                stepSound.pitch = UnityEngine.Random.Range(0.4f, 1.0f);
                 stepSound.Play();
             }
         }
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
             moveDirection = new Vector2(0, 0);
 		if (Input.GetKeyDown(KeyCode.E))
         {
-            canMove = !Inventory.instance.PressKeyInventory();
+            Epressed?.Invoke();
         }
     }
 
