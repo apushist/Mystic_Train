@@ -55,7 +55,11 @@ public class PuzzlesContoller : MonoBehaviour
     {
         Debug.Log("win 1");
         Inventory.instance.AddItem(currentInteraction._winItem._id);
-        currentInteraction.AfterUse();
+        bool destroyed = currentInteraction.AfterUse();
+        if (destroyed)
+        {
+            InteractWithObject();//reset last interaction if it destroyed
+        }
     }
     public void Loose()
     {

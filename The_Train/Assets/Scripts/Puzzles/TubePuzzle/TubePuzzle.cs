@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TubePuzzle : PuzzleBase
 {
@@ -15,9 +16,10 @@ public class TubePuzzle : PuzzleBase
     [SerializeField] private RectTransform _parentSprite;
     [SerializeField] private RectTransform _startTile;
     [SerializeField] private RectTransform _endTile;
+    [SerializeField] private TextMeshProUGUI _startTimeCounter;
 
     [Header("DestinationSettings")]
-    [SerializeField] private float _onStartDelay;
+    [SerializeField] private int _onStartDelay;
     [SerializeField] private Vector2 _startPoint;
     [SerializeField] private Vector2 _endPoint;
     [SerializeField] private Direction _startInput;
@@ -42,12 +44,13 @@ public class TubePuzzle : PuzzleBase
         1,1,0,0,1,1,
         0,1,1,1,1,0};
         _tileSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_endOffset * 2) - (_tileOffset * (_tileCount - 1))) / _tileCount;
-        GenerateGrid();
+        
     }
     public override void StartPuzzle()
     {
         EnableThisPuzzle(true);        
-        InitStartEnd();      
+        InitStartEnd();
+        GenerateGrid();
         StartCoroutine(StartFilling(_onStartDelay));
     }
 
@@ -122,14 +125,21 @@ public class TubePuzzle : PuzzleBase
             {
                 if(_tiles.TryGetValue(new Vector2(x, y), out var tile))
                 {
-                    tile.Init(_tileSize, new Vector2(x, y));
+                    Destroy(tile.gameObject);
                 }
             }
         }
+        _tiles.Clear();
     }
-    IEnumerator StartFilling(float time)
+    IEnumerator StartFilling(int time)
     {
-        yield return new WaitForSeconds(time);
+        for(int i = time; i > 0; i--)
+        {
+            _startTimeCounter.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+            Debug.Log(i);
+        }
+        _startTimeCounter.text = "!!!";
         FillNextTile(_startPoint, _startInput);
     }
     public void FillNextTile(Vector2 pos, Direction output)
