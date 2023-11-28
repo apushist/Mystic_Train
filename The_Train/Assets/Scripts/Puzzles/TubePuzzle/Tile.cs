@@ -16,6 +16,8 @@ public class Tile : MonoBehaviour
     [SerializeField] internal Direction inputDir;
     [SerializeField] internal Direction outputDir;
 
+    internal bool inRotate = false;
+
     public void Init(float _tileSize, Vector2 ind)
     {
         var rect = GetComponent<RectTransform>();
@@ -36,14 +38,16 @@ public class Tile : MonoBehaviour
     IEnumerator rotationLerp(float time, float frames)
     {
         _clickable = false;
+        inRotate = true;
         for(int i = 0; i < frames; i++)
         {
             _tube.Rotate(new Vector3(0, 0, -90 / frames));
             yield return new WaitForSeconds(time / frames);
         }
         ChangeDirection();
-        //Debug.Log(inputDir + " " + outputDir + " ||| " + _index.x + " " + _index.y);
+
         _clickable = true;
+        inRotate = false;
     }
     public IEnumerator FillThis(float time, float frames)
     {

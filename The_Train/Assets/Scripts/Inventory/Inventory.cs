@@ -40,6 +40,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        PlayerController.Epressed += PressKeyInventory;
     }
     private void Start()
     {
@@ -93,17 +94,22 @@ public class Inventory : MonoBehaviour
 
         }
     }
-    public bool PressKeyInventory()
+    public void PressKeyInventory()
     {
-        if (isEnabled)
+        if (!PuzzlesContoller.instance.nearInteractionObject)
         {
-            CloseInventory();
+            var p = FindObjectOfType<PlayerController>();
+            if (isEnabled)
+            {
+                CloseInventory();
+                p.canMove = true;
+            }
+            else
+            {
+                OpenInventory();
+                p.canMove = false;
+            }
         }
-        else
-        {
-            OpenInventory();
-        }
-        return isEnabled;
     }
     public void OpenInventory()
     {

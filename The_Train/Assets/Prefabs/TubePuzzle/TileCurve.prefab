@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationTime: 0.2
   _rotationFrames: 30
-  _fillTime: 2
+  _fillTime: 1
   _fillFrames: 100
   _clickable: 1
   _tube: {fileID: 5035904145517777873}

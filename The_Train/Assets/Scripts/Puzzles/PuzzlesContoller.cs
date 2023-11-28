@@ -10,12 +10,15 @@ public class PuzzlesContoller : MonoBehaviour
     public static PuzzlesContoller instance;
 
     InteractiveZone currentInteraction;
-    bool nearInteractionObject = false;
+    PlayerController pl;
+    internal bool nearInteractionObject = false;
 
     private void Awake()
     {
         instance = this;
+        pl = FindObjectOfType<PlayerController>();
         UpdateSupportInteractTextView(false);
+        PlayerController.Epressed += StartPuzzleLogic;
     }
 
     public void InteractWithObject(InteractiveZone col = null)
@@ -33,13 +36,14 @@ public class PuzzlesContoller : MonoBehaviour
             UpdateSupportInteractTextView(false);
         }
     }
-    /*public void StartPuzzleLogic()
+    public void StartPuzzleLogic()
     {
-        if (nearInteractionObject && Input.GetButtonDown("Q"))
-        {
+        if (nearInteractionObject)
+        {            
+            pl.canMove = false;
             currentInteraction._puzzle.StartPuzzle();
         }
-    }*/
+    }
     private void Update()
     {
         if (nearInteractionObject && Input.GetKeyDown(KeyCode.Q))
@@ -54,10 +58,17 @@ public class PuzzlesContoller : MonoBehaviour
     public void Win()
     {
         Debug.Log("win 1");
-        currentInteraction.AfterUse();
+        Inventory.instance.AddItem(currentInteraction._winItem._id);
+        bool destroyed = currentInteraction.AfterUse();
+        if (destroyed)
+        {
+            InteractWithObject();//reset last interaction if it destroyed
+        }
+        pl.canMove = true;
     }
     public void Loose()
     {
         Debug.Log("loose 1");
+        pl.canMove = true;
     }
 }
