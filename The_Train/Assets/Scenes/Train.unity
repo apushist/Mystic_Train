@@ -9013,6 +9013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 437532306}
   - component: {fileID: 437532307}
+  - component: {fileID: 437532308}
   m_Layer: 0
   m_Name: playerTexture
   m_TagString: Untagged
@@ -9028,7 +9029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437532305}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.753, y: -1.708, z: -0.007407114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9087,6 +9088,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!95 &437532308
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437532305}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee92de21eef9b054697bc5ad43dd85d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &477731705
 GameObject:
   m_ObjectHideFlags: 0
@@ -14335,6 +14357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterTexture: {fileID: 794307489}
+  controller: {fileID: 0}
 --- !u!61 &820587809
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15537,7 +15560,7 @@ Transform:
   m_GameObject: {fileID: 1209370067}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.29, y: 1.12, z: 0}
+  m_LocalPosition: {x: -8.241, y: 1.168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30247,7 +30270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07bca86ce153c14d9649d27fb104bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helpPanel: {fileID: 610676045}
 --- !u!1 &1790769792
 GameObject:
   m_ObjectHideFlags: 0
