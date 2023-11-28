@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
     bool isEnabled;
     bool nearInteractionObject;
-    ItemsCollector currentInteraction;
+    InteractiveZone currentInteraction;
     float _itemSize;
     public static Inventory instance;
 
@@ -130,7 +130,7 @@ public class Inventory : MonoBehaviour
         _changedItemView.SetActive(b);
         _neededItemView.SetActive(!b);
     }
-    public void InteractWithObject(ItemsCollector col = null)
+    public void InteractWithObject(InteractiveZone col = null)
     {
         if (col!=null)
         {
@@ -150,12 +150,16 @@ public class Inventory : MonoBehaviour
         if(nearInteractionObject && currentInteraction != null)
         {
             bool successed = currentInteraction.TrySetItem(item);
+            UpdateNeededItemSpriteView(successed);
             if (successed)
             {
                 currentInteraction._attachedDoor.SetDoorLock(false);
-                Destroy(currentInteraction.gameObject, 0.1f);
-            }
-            UpdateNeededItemSpriteView(successed);
+                bool destroyed = currentInteraction.AfterUse();
+                if (destroyed)
+                {
+                    InteractWithObject();//reset last interaction if it destroyed
+                }
+            }          
         }
         else
         {
