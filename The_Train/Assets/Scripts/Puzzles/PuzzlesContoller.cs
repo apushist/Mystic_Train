@@ -10,13 +10,20 @@ public class PuzzlesContoller : MonoBehaviour
     public static PuzzlesContoller instance;
 
     InteractiveZone currentInteraction;
-    PlayerController pl;
     internal bool nearInteractionObject = false;
+    internal bool isOpened;
+
+    //support fields
+    PlayerController pl;
+    DialogueManager dm;
+    PauseMenu pm;
 
     private void Awake()
     {
         instance = this;
         pl = FindObjectOfType<PlayerController>();
+        dm = FindObjectOfType<DialogueManager>();
+        pm = FindObjectOfType<PauseMenu>();
         UpdateSupportInteractTextView(false);
         PlayerController.Epressed += StartPuzzleLogic;
     }
@@ -38,8 +45,9 @@ public class PuzzlesContoller : MonoBehaviour
     }
     public void StartPuzzleLogic()
     {
-        if (nearInteractionObject)
-        {            
+        if (nearInteractionObject && !dm.isOpened && !pm.isOpened && !isOpened)
+        {
+            isOpened = true;
             pl.canMove = false;
             currentInteraction._puzzle.StartPuzzle();
         }
@@ -57,6 +65,7 @@ public class PuzzlesContoller : MonoBehaviour
     }
     public void Win()
     {
+        isOpened = false;
         Debug.Log("win 1");
         Inventory.instance.AddItem(currentInteraction._winItem._id);
         bool destroyed = currentInteraction.AfterUse();
@@ -68,6 +77,7 @@ public class PuzzlesContoller : MonoBehaviour
     }
     public void Loose()
     {
+        isOpened = false;
         Debug.Log("loose 1");
         pl.canMove = true;
     }

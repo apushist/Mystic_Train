@@ -14,6 +14,8 @@ public class PauseMenu : MonoBehaviour
 	public GameObject settingsUI;
     public AudioMixerGroup mixer;
 
+	internal bool isOpened;
+
 	void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -30,12 +32,14 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
 	{
+		isOpened = false;
 		pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
 	}
     public void Pause()
 	{
+		isOpened = true;
 		pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
