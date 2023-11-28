@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0414\u0430\u043B\u0435\u0435 >>"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
+  m_sharedMaterial: {fileID: -5995095352726336161, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.40307617, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -269,8 +269,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -57.5664, y: 26.775}
-  m_SizeDelta: {x: 81.1326, y: 21.5499}
+  m_AnchoredPosition: {x: -63.208862, y: 26.774998}
+  m_SizeDelta: {x: 92.4175, y: 21.5499}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4268367805288705527
 CanvasRenderer:
@@ -401,10 +401,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u0442\u0435\u043A\u0441\u0442\u0442\u0435\u043A\u0441\u0442\u0442\u0435\u043A\u0441\u0442"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
+  m_sharedMaterial: {fileID: -5995095352726336161, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -535,10 +535,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u0418\u041C\u042F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
+  m_sharedMaterial: {fileID: -5995095352726336161, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -656,3 +656,4 @@ MonoBehaviour:
   nameText: {fileID: 1651264546390737313}
   dialogueText: {fileID: 1347367894599317903}
   animator: {fileID: 8809093552426301932}
+  playerController: {fileID: 0}

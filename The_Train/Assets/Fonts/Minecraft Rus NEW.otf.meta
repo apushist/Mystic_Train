@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d1fb252863bf4f459d240ffc299403a
+guid: dd08a5ee538d24b4e967868fd8ee90eb
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Darkmode
+  - ascii
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

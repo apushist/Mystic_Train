@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 2
-  _name: Key
-  _description: It's just a key
+  _name: "\u041A\u043B\u044E\u0447"
+  _description: "\u041A\u043B\u044E\u0447 \u043E\u0442 \u0447\u0435\u0433\u043E-\u0442\u043E"
   _itemImage: {fileID: 21300000, guid: 1b8ee687ae50b2c4fa58adbbd39343a2, type: 3}
   empty: 0
 --- !u!1 &6642449088243179232
