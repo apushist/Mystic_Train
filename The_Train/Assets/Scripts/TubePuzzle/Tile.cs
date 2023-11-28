@@ -53,8 +53,7 @@ public class Tile : MonoBehaviour
             _tubeContent.fillAmount = 1f / frames * (i+1);
             yield return new WaitForSeconds(time / frames);
         }
-        Debug.Log("filled: " + _index.x + " " + _index.y);
-        GridManager.instance.FillNextTile(_index, outputDir);
+        TubePuzzle.instance.FillNextTile(_index, outputDir);
     }
     void rotationRandomize()
     {
