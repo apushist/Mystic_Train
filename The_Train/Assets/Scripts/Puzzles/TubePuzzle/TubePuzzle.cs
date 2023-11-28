@@ -34,9 +34,6 @@ public class TubePuzzle : PuzzleBase
     {
         instance = this;
         EnableThisPuzzle(false);
-    }
-    public override void StartPuzzle()
-    {
         _data6 = new int[36]
         {0,1,0,1,0,0,
         0,1,0,0,0,1,
@@ -45,10 +42,12 @@ public class TubePuzzle : PuzzleBase
         1,1,0,0,1,1,
         0,1,1,1,1,0};
         _tileSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_endOffset * 2) - (_tileOffset * (_tileCount - 1))) / _tileCount;
-        EnableThisPuzzle(true);
         GenerateGrid();
-        InitStartEnd();
-        ResetFillProgress();
+    }
+    public override void StartPuzzle()
+    {
+        EnableThisPuzzle(true);        
+        InitStartEnd();      
         StartCoroutine(StartFilling(_onStartDelay));
     }
 
@@ -121,7 +120,10 @@ public class TubePuzzle : PuzzleBase
         {
             for (int y = 0; y < _tileCount; y++)
             {
-                _tiles[new Vector2(x, y)].ResetThisTile();
+                if(_tiles.TryGetValue(new Vector2(x, y), out var tile))
+                {
+                    tile.Init(_tileSize, new Vector2(x, y));
+                }
             }
         }
     }
@@ -173,7 +175,7 @@ public class TubePuzzle : PuzzleBase
         if (_tiles.TryGetValue(nextPos, out var tile))
         {
             nextTile = tile;
-            if (nextTile.CheckInputDirectionValid(nextInput))
+            if (nextTile.CheckInputDirectionValid(nextInput) && !nextTile.inRotate)
             {
                 return nextTile;
             }
