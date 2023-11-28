@@ -31,15 +31,22 @@ public class Inventory : MonoBehaviour
     
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
-    bool isEnabled;
+    bool isOpened;
     bool nearInteractionObject;
     InteractiveZone currentInteraction;
     float _itemSize;
     public static Inventory instance;
 
+    //support fields
+    PlayerController pl;
+    DialogueManager dm;
+    PauseMenu pm;
     private void Awake()
     {
         instance = this;
+        pl = FindObjectOfType<PlayerController>();
+        dm = FindObjectOfType<DialogueManager>();
+        pm = FindObjectOfType<PauseMenu>();
         PlayerController.Epressed += PressKeyInventory;
     }
     private void Start()
@@ -96,25 +103,24 @@ public class Inventory : MonoBehaviour
     }
     public void PressKeyInventory()
     {
-        if (!PuzzlesContoller.instance.nearInteractionObject)
+        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened)
         {
-            var p = FindObjectOfType<PlayerController>();
-            if (isEnabled)
+            if (isOpened)
             {
                 CloseInventory();
-                p.canMove = true;
+                pl.canMove = true;
             }
             else
             {
                 OpenInventory();
-                p.canMove = false;
+                pl.canMove = false;
             }
         }
     }
     public void OpenInventory()
     {
         _inventoryScreen.SetActive(true);
-        isEnabled = true;
+        isOpened = true;
         if (nearInteractionObject)
         {
             ChangeInventoryView(false);
@@ -128,7 +134,7 @@ public class Inventory : MonoBehaviour
     public void CloseInventory()
     {
         _inventoryScreen.SetActive(false);
-        isEnabled = false;
+        isOpened = false;
     }
 
     void ChangeInventoryView(bool b)
