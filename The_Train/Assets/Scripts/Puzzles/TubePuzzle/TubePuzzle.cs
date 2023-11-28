@@ -197,14 +197,12 @@ public class TubePuzzle : PuzzleBase
     }
     public override void WinPuzzle()
     {
-        Debug.Log("win");
         ResetFillProgress();
         EnableThisPuzzle(false);
         PuzzlesContoller.instance.Win();
     }
     public override void LoosePuzzle()
     {
-        Debug.Log("loose");
         ResetFillProgress();
         EnableThisPuzzle(false);
         PuzzlesContoller.instance.Loose();

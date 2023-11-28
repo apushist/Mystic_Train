@@ -54,6 +54,7 @@ public class PuzzlesContoller : MonoBehaviour
     public void Win()
     {
         Debug.Log("win 1");
+        Inventory.instance.AddItem(currentInteraction._winItem._id);
         currentInteraction.AfterUse();
     }
     public void Loose()
