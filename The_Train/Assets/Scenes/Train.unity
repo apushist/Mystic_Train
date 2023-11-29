@@ -9937,8 +9937,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "W, A, S, D \u0438\u043B\u0438 \u0441\u0442\u0440\u0435\u043B\u043A\u0438
-    - \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0435 \\n E - \u0438\u0432\u0435\u043D\u0442\u0430\u0440\u044C
-    \\n Ecs - \u043F\u0430\u0443\u0437\u0430"
+    - \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0435 \\nE - \u0438\u0432\u0435\u043D\u0442\u0430\u0440\u044C
+    \\nEcs - \u043F\u0430\u0443\u0437\u0430 \\n\\n\u041D\u0430 \u043C\u043E\u043C\u0435\u043D\u0442
+    \u043D\u0443\u043B\u0435\u0432\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\u0438
+    \u0440\u0435\u0430\u043B\u0438\u0437\u043E\u0432\u0430\u043D \u043C\u0438\u043D\u0438-\u043A\u0432\u0435\u0441\u0442
+    \u0441 1 \u0437\u0430\u043F\u0435\u0440\u0442\u043E\u0439 \u0434\u0432\u0435\u0440\u044C\u044E
+    \u0438 1 \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u043E\u0439.
+    \u0413\u0430\u0439\u0434 \u043F\u043E \u043D\u0435\u043C\u0443 \u0431\u0443\u0434\u0435\u0442
+    \u0440\u0430\u0437\u043C\u0435\u0449\u0435\u043D \u0432 \u043D\u0430\u0448\u0435\u043C
+    readme."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
   m_sharedMaterial: {fileID: -5995095352726336161, guid: 877977cfcbd442146a1ea133e624e948, type: 2}
@@ -36322,7 +36329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afbb03334fc64649ad646aa4729b51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPuzzle: {fileID: 0}
+  _currentPuzzle: {fileID: 9162454613442034151}
   _supportTextView: {fileID: 5437826906590638914}
 --- !u!114 &5893188132990985144
 MonoBehaviour:
