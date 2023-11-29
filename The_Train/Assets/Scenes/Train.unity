@@ -14268,7 +14268,7 @@ Transform:
   m_GameObject: {fileID: 802296734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.6534104, y: -0.4673345, z: -10}
+  m_LocalPosition: {x: -6.6044106, y: -0.41933453, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15611,6 +15611,7 @@ MonoBehaviour:
   rb: {fileID: 1209370069}
   stepSoundRate: 0.4
   stepSound: {fileID: 18383121}
+  playerTexture: {fileID: 437532305}
   canMove: 1
 --- !u!60 &1209370072
 PolygonCollider2D:
@@ -16266,7 +16267,7 @@ Transform:
   m_GameObject: {fileID: 1329856509}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.6534104, y: -0.4673345, z: -10}
+  m_LocalPosition: {x: -6.6044106, y: -0.41933453, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
