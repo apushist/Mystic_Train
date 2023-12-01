@@ -16,6 +16,11 @@ public class PauseMenu : MonoBehaviour
 
 	internal bool isOpened;
 
+	private void Start()
+	{
+		Resume();
+	}
+
 	void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
