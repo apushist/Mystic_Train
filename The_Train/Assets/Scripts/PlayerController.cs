@@ -60,7 +60,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         else
-            moveDirection = new Vector2(0, 0);
+        {
+			moveDirection = new Vector2(0, 0);
+            StopAnimation();
+		}
 		if (Input.GetKeyDown(KeyCode.E))
         {
             Epressed?.Invoke();
@@ -76,10 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         if(moveX == 0 && moveY == 0)
         {
-			animator.SetBool("IsBack", false);
-			animator.SetBool("IsStraight", false);
-			animator.SetBool("IsLeft", false);
-			animator.SetBool("IsRight", false);
+			StopAnimation();
 		}
         else
         {
@@ -119,5 +119,13 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 		
+	}
+
+    void StopAnimation()
+    {
+		animator.SetBool("IsBack", false);
+		animator.SetBool("IsStraight", false);
+		animator.SetBool("IsLeft", false);
+		animator.SetBool("IsRight", false);
 	}
 }
