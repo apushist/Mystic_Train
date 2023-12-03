@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
+    [Header("ItemSettings")]
     [SerializeField] public int _id;
     [SerializeField] public string _name;
     [SerializeField] public string _description;
     [SerializeField] public Sprite _itemImage;
+    [Header("ObjectSettings")]
     [SerializeField] public bool empty = true;
     //[SerializeField] private bool _isStackable = false;
-    Image _img;
+    [SerializeField] Image _objectImage;
+    [SerializeField] GameObject _overlayImage;
 
     public void Init()
     {
-        _img = transform.GetChild(0).GetComponent<Image>();
         _itemImage = Inventory.instance._itemSpriteEmpty;
+        _overlayImage.SetActive(false);
     }
     public void SetNewItem(InventoryItem item, bool isEmpty)
     {
@@ -39,19 +42,27 @@ public class InventoryItem : MonoBehaviour
     }
     public void UpdateImage()
     {
-        _img.sprite = _itemImage;
+        _objectImage.sprite = _itemImage;
     }
     public void MouseEnter()
     {
-        Inventory.instance.ShowMoreInfoItem(this);
+        if (!empty && !Inventory.instance.movingItem) {
+            _overlayImage.SetActive(true);
+            Inventory.instance.ShowMoreInfoItem(this);
+        }
+        if (Inventory.instance.movingItem)
+        {
+            _overlayImage.SetActive(true);
+        }
     }
     public void MouseExit()
     {
+        _overlayImage.SetActive(false);
         Inventory.instance.HideMoreInfoItem(this);
     }
     public void MouseClick()
     {
-        Inventory.instance.TrySetItemInteractable(this);
+        Inventory.instance.OnMouseItemClick(this);
     }
 
 }

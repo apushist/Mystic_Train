@@ -16,7 +16,8 @@ public class Inventory : MonoBehaviour
 
     [Header("Item Needed Settings")]
     [SerializeField] Image _neededItemSpriteEmpty;
-    [SerializeField] Image _neededItemSpriteFull;  
+    [SerializeField] Image _neededItemSpriteFull;
+    [SerializeField] GameObject _neededItemOver;
     [SerializeField] private TextMeshProUGUI _itemNeededCounter;
 
     [Header("Item Scale Settings")]
@@ -26,13 +27,15 @@ public class Inventory : MonoBehaviour
     [SerializeField] int _itemCount;
 
     [Header("Item Changed Settings")]
+    [SerializeField] private TextMeshProUGUI _itemNameText;
     [SerializeField] private TextMeshProUGUI _itemDescriptionText;
     [SerializeField] private Image _itemBigImage;
-    
+
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
     bool isOpened;
     bool nearInteractionObject;
+    internal bool movingItem;
     InteractiveZone currentInteraction;
     float _itemSize;
     public static Inventory instance;
@@ -41,6 +44,8 @@ public class Inventory : MonoBehaviour
     PlayerController pl;
     DialogueManager dm;
     PauseMenu pm;
+    InventoryItem moveItem = null;
+    InventoryItem startMoveItem = null;
     private void Awake()
     {
         instance = this;
@@ -51,12 +56,13 @@ public class Inventory : MonoBehaviour
     }
     private void Start()
     {
-        
+
         CloseInventory();
         _itemSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_itemEndOffset * 2) - (_itemOffset * (_itemCount - 1))) / _itemCount;
         GenerateGrid();
         ChangeInventoryView(true);
         UpdateSupportInteractTextView(false);
+        MouseExitItemNeeded();
     }
     public void AddItem(int ident)
     {
@@ -75,11 +81,13 @@ public class Inventory : MonoBehaviour
 
     public void ShowMoreInfoItem(InventoryItem item)
     {
+        _itemNameText.text = item._name;
         _itemDescriptionText.text = item._description;
         _itemBigImage.sprite = item._itemImage;
     }
     public void HideMoreInfoItem(InventoryItem item)
     {
+        _itemNameText.text = "";
         _itemDescriptionText.text = "";
         _itemBigImage.sprite = _itemSpriteEmpty;
     }
@@ -93,7 +101,7 @@ public class Inventory : MonoBehaviour
                 var spawnedItem = Instantiate(_inventoryItemDefault, _parentSprite);
                 spawnedItem.name = $"Tile {x} {y}";
                 var rect = spawnedItem.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(x * (_itemSize + _itemOffset) + _itemEndOffset, (_parentSprite.offsetMax.y * 2) - y * (_itemSize + _itemOffset) - _itemEndOffset);                
+                rect.anchoredPosition = new Vector2(x * (_itemSize + _itemOffset) + _itemEndOffset, (_parentSprite.offsetMax.y * 2) - y * (_itemSize + _itemOffset) - _itemEndOffset);
                 rect.localScale = new Vector2(_itemSize, _itemSize) / (rect.offsetMax.x - rect.offsetMin.x);
                 itemsGrid.Add(spawnedItem);
                 spawnedItem.Init();
@@ -121,6 +129,8 @@ public class Inventory : MonoBehaviour
     {
         _inventoryScreen.SetActive(true);
         isOpened = true;
+        DeselectAllItems();
+        MouseExitItemNeeded();
         if (nearInteractionObject)
         {
             ChangeInventoryView(false);
@@ -133,10 +143,21 @@ public class Inventory : MonoBehaviour
     }
     public void CloseInventory()
     {
+        if (movingItem)
+        {
+            RevertMovedItem();           
+        }
         _inventoryScreen.SetActive(false);
         isOpened = false;
     }
 
+    void DeselectAllItems()
+    {
+        foreach(var i in itemsGrid)
+        {
+            i.MouseExit();
+        }
+    }
     void ChangeInventoryView(bool b)
     {
         _changedItemView.SetActive(b);
@@ -144,7 +165,7 @@ public class Inventory : MonoBehaviour
     }
     public void InteractWithObject(InteractiveZone col = null)
     {
-        if (col!=null)
+        if (col != null)
         {
             currentInteraction = col;
             nearInteractionObject = true;
@@ -157,26 +178,44 @@ public class Inventory : MonoBehaviour
             UpdateSupportInteractTextView(false);
         }
     }
-    public void TrySetItemInteractable(InventoryItem item)
+    public void TrySetItemInteractable()
     {
-        if(nearInteractionObject && currentInteraction != null)
+        if (nearInteractionObject && currentInteraction != null && movingItem)
         {
-            bool successed = currentInteraction.TrySetItem(item);
-            UpdateNeededItemSpriteView(successed);
+            bool successed = currentInteraction.TrySetItem(moveItem);
+            
             if (successed)
             {
+                UpdateNeededItemSpriteView(successed);
                 currentInteraction._attachedDoor.SetDoorLock(false);
+                DestroyMovedItem();
                 bool destroyed = currentInteraction.AfterUse();
                 if (destroyed)
                 {
                     InteractWithObject();//reset last interaction if it destroyed
                 }
-            }          
+            }
+            else
+            {
+                RevertMovedItem();
+            }
         }
         else
         {
             Debug.Log("error item interact set");
         }
+        MouseExitItemNeeded();
+    }
+    public void MouseEnterItemNeeded()
+    {
+        if (nearInteractionObject && currentInteraction != null && movingItem)
+        {
+            _neededItemOver.SetActive(true);
+        }
+    }
+    public void MouseExitItemNeeded()
+    {
+        _neededItemOver.SetActive(false);
     }
     void UpdateSupportInteractTextView(bool enabl)
     {
@@ -196,6 +235,68 @@ public class Inventory : MonoBehaviour
         {
             _itemNeededCounter.text = "0 / 1";
         }
-        
+
+    }
+    public void OnMouseItemClick(InventoryItem item)
+    {
+        if (movingItem)
+        {
+            if (item.empty)
+            {
+                //set
+                item.SetNewItem(moveItem, false);
+                DestroyMovedItem();
+            }
+            else
+            {
+                //swap
+                startMoveItem.SetNewItem(item, false);
+                item.SetNewItem(moveItem, false);
+                DestroyMovedItem();
+            }
+        }
+        else
+        {
+            if (!item.empty)
+            {
+                //startMove
+                moveItem = CopyItem(item);
+                item.SetNewItem(null, true);
+                startMoveItem = item;
+                movingItem = true;
+            }
+        }
+        item.MouseExit();
+        item.MouseEnter();
+    }
+
+    InventoryItem CopyItem(InventoryItem item)
+    {
+        var spawnedItem = Instantiate(_inventoryItemDefault, this.transform);
+        spawnedItem.name = "Tile move";
+        var rect = spawnedItem.GetComponent<RectTransform>();
+        rect.localScale =  new Vector2(_itemSize, _itemSize) / (rect.offsetMax.x - rect.offsetMin.x);
+        spawnedItem.Init();
+        spawnedItem.SetNewItem(item, false);
+
+        return spawnedItem;
+    }
+    void RevertMovedItem()
+    {
+        startMoveItem.SetNewItem(moveItem, false);
+        DestroyMovedItem();
+    }
+    void DestroyMovedItem()
+    {
+        Destroy(moveItem.gameObject);
+        moveItem = null;
+        movingItem = false;
+    }
+    private void Update()
+    {
+        if (movingItem)
+        {
+            moveItem.GetComponent<RectTransform>().position = Input.mousePosition + new Vector3(10, -10, 0);
+        }
     }
 }
