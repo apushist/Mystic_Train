@@ -19,7 +19,16 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
     }
 
-    public void StartDialogue(Dialogue dialogue)
+	void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isOpened == true)
+        {
+            DisplayNextSentence();
+        }
+    }
+
+
+	public void StartDialogue(Dialogue dialogue)
     {
         isOpened = true;
 		playerController.canMove = false;
