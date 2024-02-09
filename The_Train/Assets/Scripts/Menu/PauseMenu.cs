@@ -18,6 +18,11 @@ public class PauseMenu : MonoBehaviour
 
 	private void Start()
 	{
+		foreach(Slider slider in settingsUI.GetComponentsInChildren<Slider>())
+		{
+			slider.value = PlayerPrefs.GetFloat(slider.name,1);
+		}
+		
 		Resume();
 	}
 
@@ -74,6 +79,7 @@ public class PauseMenu : MonoBehaviour
 			mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-60, 20, volume));
 		else
 			mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-80, 80, volume));
+		PlayerPrefs.SetFloat("MasterVolume", volume);
 	}
 
 	public void ChangeMusicVolume(float volume)
@@ -84,6 +90,7 @@ public class PauseMenu : MonoBehaviour
 			mixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-60, 20, volume));
 		else
 			mixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-80, 80, volume));
+		PlayerPrefs.SetFloat("MusicVolume", volume);
 	}
 
 	public void ChangeEffectsVolume(float volume)
@@ -94,5 +101,6 @@ public class PauseMenu : MonoBehaviour
 			mixer.audioMixer.SetFloat("EffectsVolume", Mathf.Lerp(-60, 20, volume));
 		else
 			mixer.audioMixer.SetFloat("EffectsVolume", Mathf.Lerp(-80, 80, volume));
+		PlayerPrefs.SetFloat("EffectsVolume", volume);
 	}
 }
