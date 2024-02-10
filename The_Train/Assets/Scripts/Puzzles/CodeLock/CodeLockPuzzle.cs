@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class CodeLockPuzzle : PuzzleBase
 {
-    [SerializeField] private GameObject _puzzleScreen;
+    [SerializeField] private int[] _lockPassword;
+    
     public static CodeLockPuzzle instance;
 
     [Header("CodeSettings")]
+    [SerializeField] private GameObject _puzzleScreen;
     [SerializeField] private Transform[] _codeLines;
     [SerializeField] private Transform[] _interactiveField;
     [SerializeField] private int[] _currentCodeStates;
@@ -16,24 +18,22 @@ public class CodeLockPuzzle : PuzzleBase
     [SerializeField] private float _codeTextHorizontalOffset;
     [SerializeField] private float _codeTextSize;
     [SerializeField] private float _codeMoveTime;
+    [SerializeField] private RectTransform _leftRightTarget;
     private int _codeTextCount = 10;
 
     bool inMove = false;
 
-    private float _codeLineHorizontalSize;
 
     private void Awake()
     {
         instance = this;        
-        _codeLineHorizontalSize = (_codeTextCount * 2) * (_codeTextHorizontalOffset + _codeTextSize) - _codeTextHorizontalOffset;
-        
+        GenerateGrid();
         StartPuzzle();
-        //EnableThisPuzzle(false);
+        EnableThisPuzzle(false);
     }
     public override void StartPuzzle()
     {
         EnableThisPuzzle(true);
-        GenerateGrid();
     }
 
     private void EnableThisPuzzle(bool isOn)
@@ -53,7 +53,7 @@ public class CodeLockPuzzle : PuzzleBase
             }
 
         }
-        //if (_currentCodeStates == null)
+        if (_currentCodeStates == null)
         {
             _currentCodeStates = new int[4] { 10, 10, 10, 10 };
         }
@@ -75,30 +75,22 @@ public class CodeLockPuzzle : PuzzleBase
     public void SetCodeState(int line, int state)
     {
         if(state > 15)
-        {
             state -= 10;
-        }
         else if(state < 5)
-        {
             state += 10;
-
-        }
         _currentCodeStates[line] = state;
         _codeLines[line].GetComponent<RectTransform>().anchoredPosition = new Vector2(-state * (_codeTextSize + _codeTextHorizontalOffset), 0);
-    }
-    public void PressLeftButtonLine(int line)
-    {
-        SetCodeState(line, _currentCodeStates[line]-1);
-    }
-    public void PressRightButtonLine(int line)
-    {
-        SetCodeState(line, _currentCodeStates[line] + 1);
+
+        if (CheckPassword())
+        {
+            WinPuzzle();
+        }
     }
     public void PressButtonLine(int line)
     {
         if (!inMove)
         {
-            if (Input.mousePosition.x < _codeLines[0].GetComponent<RectTransform>().anchoredPosition.x)
+            if (Input.mousePosition.x < _leftRightTarget.position.x)
             {
                 StartCoroutine(moveCodeTile(_currentCodeStates[line], _currentCodeStates[line] - 1, line, false));
             }
@@ -121,11 +113,25 @@ public class CodeLockPuzzle : PuzzleBase
             SetCodeState(line, _currentCodeStates[line] + 1);
         else
             SetCodeState(line, _currentCodeStates[line] - 1);
-        inMove = false;
+        inMove = false;        
+    }
+    bool CheckPassword()
+    {
+        for(int i = 0; i < 4; ++i)
+        {
+            if (_lockPassword[i] != _currentCodeStates[i] % 10)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void BackButton()
+    {
+        LoosePuzzle();
     }
     public override void WinPuzzle()
     {
-
         EnableThisPuzzle(false);
         PuzzlesContoller.instance.Win();
     }
