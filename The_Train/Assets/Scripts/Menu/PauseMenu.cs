@@ -71,36 +71,31 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
     }
 
-	public void ChangeMasterVolume(float volume)
+	private float CalculateVolume(float volume)
 	{
 		if (volume > 0.5f)
-			mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-40, 0, volume));
+			return Mathf.Lerp(-40, 0, volume);
 		else if (volume > 0.25f)
-			mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-60, 20, volume));
+			return Mathf.Lerp(-60, 20, volume);
 		else
-			mixer.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-80, 80, volume));
+			return Mathf.Lerp(-80, 80, volume);
+	}
+
+	public void ChangeMasterVolume(float volume)
+	{
+		mixer.audioMixer.SetFloat("MasterVolume", CalculateVolume(volume));
 		PlayerPrefs.SetFloat("MasterVolume", volume);
 	}
 
 	public void ChangeMusicVolume(float volume)
 	{
-		if (volume > 0.5f)
-			mixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-40, 0, volume));
-		else if (volume > 0.25f)
-			mixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-60, 20, volume));
-		else
-			mixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-80, 80, volume));
+		mixer.audioMixer.SetFloat("MusicVolume", CalculateVolume(volume));
 		PlayerPrefs.SetFloat("MusicVolume", volume);
 	}
 
 	public void ChangeEffectsVolume(float volume)
 	{
-		if (volume > 0.5f)
-			mixer.audioMixer.SetFloat("EffectsVolume", Mathf.Lerp(-40, 0, volume));
-		else if (volume > 0.25f)
-			mixer.audioMixer.SetFloat("EffectsVolume", Mathf.Lerp(-60, 20, volume));
-		else
-			mixer.audioMixer.SetFloat("EffectsVolume", Mathf.Lerp(-80, 80, volume));
+		mixer.audioMixer.SetFloat("EffectsVolume", CalculateVolume(volume));
 		PlayerPrefs.SetFloat("EffectsVolume", volume);
 	}
 }
