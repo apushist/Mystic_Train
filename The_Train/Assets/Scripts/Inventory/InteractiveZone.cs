@@ -7,12 +7,14 @@ public class InteractiveZone : MonoBehaviour
     [SerializeField] public InteractionType _currentInterType;
     [SerializeField] bool _destroyScriptAfterUse = true;
     [SerializeField] bool _destroyObjectAfterUse = false;
+    [SerializeField] GameObject _attachedObjectToDestroy;
     [Header("Puzzle")]
     [SerializeField] public PuzzleBase _puzzle;
     [SerializeField] public InventoryItem _winItem;
     [Header("Door")]
     [SerializeField] public InventoryItem _neededItem;
     [SerializeField] public Door _attachedDoor;
+
 
     public bool TrySetItem(InventoryItem item)
     {
@@ -53,6 +55,7 @@ public class InteractiveZone : MonoBehaviour
     {
         if (_destroyScriptAfterUse) Destroy(this, delay);
         if (_destroyObjectAfterUse) Destroy(gameObject, delay);
+        if(_attachedObjectToDestroy != null) Destroy(_attachedObjectToDestroy, delay);
 
         if (_destroyObjectAfterUse || _destroyScriptAfterUse) return true;
         else return false;
