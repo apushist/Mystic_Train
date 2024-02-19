@@ -116,17 +116,16 @@ public class Inventory : MonoBehaviour
             if (isOpened)
             {
                 CloseInventory();
-                pl.canMove = true;
             }
             else
             {
                 OpenInventory();
-                pl.canMove = false;
             }
         }
     }
     public void OpenInventory()
     {
+        pl.canMove = false;
         _inventoryScreen.SetActive(true);
         isOpened = true;
         DeselectAllItems();
@@ -147,6 +146,7 @@ public class Inventory : MonoBehaviour
         {
             RevertMovedItem();           
         }
+        pl.canMove = true;
         _inventoryScreen.SetActive(false);
         isOpened = false;
     }
@@ -194,6 +194,7 @@ public class Inventory : MonoBehaviour
                 {
                     InteractWithObject();//reset last interaction if it destroyed
                 }
+                CloseInventory();
             }
             else
             {

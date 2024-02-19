@@ -66,7 +66,6 @@ public class PuzzlesContoller : MonoBehaviour
     public void Win()
     {
         isOpened = false;
-        Debug.Log("win 1");
         Inventory.instance.AddItem(currentInteraction._winItem._id);
         bool destroyed = currentInteraction.AfterUse();
         if (destroyed)
@@ -78,7 +77,6 @@ public class PuzzlesContoller : MonoBehaviour
     public void Loose()
     {
         isOpened = false;
-        Debug.Log("loose 1");
         pl.canMove = true;
     }
 }
