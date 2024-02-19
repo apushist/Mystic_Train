@@ -32,7 +32,6 @@ public class GearTarget : MonoBehaviour
     }
     public void SetGearToThis()
     {
-        Debug.Log("SetGear");
         gear = Instantiate(GearPuzzle.instance.GetCurrentGear(), GearPuzzle.instance._parentSprite);
         SetGearPositionToThis();
         GearPuzzle.instance.DestroyGearInHand();
