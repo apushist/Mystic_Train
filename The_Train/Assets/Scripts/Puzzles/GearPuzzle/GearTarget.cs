@@ -5,7 +5,6 @@ using UnityEngine;
 public class GearTarget : MonoBehaviour
 {
     [SerializeField] public Gear gear;
-    [SerializeField] public bool inPlayZone = true;
 
     private void Start()
     {
@@ -18,7 +17,6 @@ public class GearTarget : MonoBehaviour
         {
             gear = null;
         }
-        GearPuzzle.instance._gearList.Add(this);
     }
     public void ClickGear()
     {
@@ -45,7 +43,7 @@ public class GearTarget : MonoBehaviour
     }
     public void GetGearOfThis()
     {
-        gear.EnableRotation(false);
+        gear.SetEnableRotation(false);
         GearPuzzle.instance.SetGearToHand(gear);
         Destroy(gear.gameObject);
         gear = null;

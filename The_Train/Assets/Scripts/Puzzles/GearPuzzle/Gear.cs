@@ -5,34 +5,39 @@ using UnityEngine;
 public class Gear : MonoBehaviour
 {
     [SerializeField] public bool isTouchable = true;
-    [SerializeField] internal bool isSetted;
+    internal bool isSetted;
     [SerializeField] internal bool rotationRight;
-    [SerializeField] internal bool ableRotate;
+    [SerializeField] private bool ableRotate;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float radiusMult;
 
-    int rMultiplier = 1;
+    int rotateMult = 1;
     RectTransform rt;
-    public float radius;
-    private void Start()
+    internal float radius;
+    private void Awake()
     {
         rt = GetComponent<RectTransform>();
-        radius = (rt.sizeDelta.x) / 2 * rt.localScale.x;// * radiusMult;
+        radius = (rt.sizeDelta.x) / 2 * rt.localScale.x * radiusMult;
+        UpdateRotationDir(rotationRight);
     }
     public void UpdateRotationDir(bool r)
     {
         rotationRight = r;
-        rMultiplier = rotationRight ? 1 : -1;
+        rotateMult = rotationRight ? 1 : -1;
     }
-    public void EnableRotation(bool en)
+    public void SetEnableRotation(bool en)
     {
         ableRotate = en;
+    }
+    public bool GetEnableRotation()
+    {
+        return ableRotate;
     }
     private void FixedUpdate()
     {
         if (ableRotate)
         {
-            transform.Rotate(new Vector3(0, 0, rotationSpeed * rMultiplier));
+            transform.Rotate(new Vector3(0, 0, rotationSpeed * rotateMult));
         }
     }
 }
