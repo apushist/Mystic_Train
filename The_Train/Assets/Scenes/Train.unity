@@ -174,7 +174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &31022531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37042,8 +37042,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.09949994, y: 0.28579998, z: 0}
-    m_Extent: {x: 2.5523, y: 1.9445, z: 0}
+    m_Center: {x: -0.09759998, y: 0.28410006, z: 0}
+    m_Extent: {x: 2.5499, y: 1.9449, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -48971,7 +48971,7 @@ Camera:
   far clip plane: 1000
   field of view: 15
   orthographic: 1
-  orthographic size: 1.5
+  orthographic size: 1.5340909
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -51651,6 +51651,7 @@ MonoBehaviour:
   - {fileID: 8041164019666381302, guid: 476977f04fd148f4c8afcdca2936bfc3, type: 3}
   - {fileID: 2649596368252819258, guid: 5f0f3ec8db154544687331a20882e09c, type: 3}
   - {fileID: 2649596368252819258, guid: 9e158064bec25a545a2b7ce885034d50, type: 3}
+  - {fileID: 2649596368252819258, guid: 09d505760b3ec1d4e9d1c3020d60d1e7, type: 3}
 --- !u!1 &2068400155
 GameObject:
   m_ObjectHideFlags: 0
