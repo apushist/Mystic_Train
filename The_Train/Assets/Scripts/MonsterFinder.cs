@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,21 +9,39 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] Transform _playerTarget;
     [SerializeField] bool _seePlayerAllTime = false;
     [SerializeField] bool _seePlayerNow = false;
+    [SerializeField] bool _usePatrolPaths = true;
     [SerializeField] Transform[] _patrolPoints;
 
+    [Header ("FoundSettings")]
+    [SerializeField] float _angleFound = 60;
+    [SerializeField] float _rangeFound = 2;
+    [SerializeField] float _absoluteRangeFound = 0.5f;
+    [SerializeField] int _rayCountFound = 5;
 
+
+    private Rigidbody2D _rig;
     private Transform _currentPatrolPoint;
     private int _currentPatrolIndex = 0;
+
+    private bool _isStanding = false;
 
     private NavMeshAgent _agent;
 
     void Start()
     {
+        _rig = GetComponent<Rigidbody2D>(); 
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
 
-        _currentPatrolPoint = _patrolPoints[_currentPatrolIndex];
+        if (_patrolPoints.Length == 0)
+        {
+            _usePatrolPaths = false;
+        }
+        else
+        {
+            _currentPatrolPoint = _patrolPoints[_currentPatrolIndex];
+        }
     }
 
     void Update()
@@ -37,19 +56,82 @@ public class MonsterFinder : MonoBehaviour
         }
         else
         {
-            if (!_agent.pathPending)
+            if (TrySeePlayer())
             {
-                if (_agent.remainingDistance <= _agent.stoppingDistance)
+                _seePlayerNow = true;
+            }
+            else if (_usePatrolPaths)
+            {
+                if(!_isStanding)
                 {
-                    if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                    _agent.SetDestination(_currentPatrolPoint.position);
+                    if (ReachedDestination())
                     {
                         _currentPatrolIndex++;
                         _currentPatrolPoint = _patrolPoints[_currentPatrolIndex % _patrolPoints.Length];
+                        StartCoroutine(StayAtPoint(1));
+                        
                     }
+                }           
+            }
+        }       
+    }
+
+    bool ReachedDestination()
+    {
+        if (!_agent.pathPending)
+        {
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                {
+                    return true;
                 }
             }
-            _agent.SetDestination(_currentPatrolPoint.position);
         }
+        return false;
+    }
+
+    bool TrySeePlayer()
+    {
+        RaycastHit2D preHit = Physics2D.Raycast(transform.position, _playerTarget.position - transform.position, _absoluteRangeFound);
+        //Debug.DrawLine(transform.position, transform.position + (_playerTarget.position - transform.position).normalized * _absoluteRangeFound, Color.red);/////////////
+        if (preHit)
+        {
+            if (preHit.collider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        float baseAngle = Mathf.Atan2(_agent.desiredVelocity.y, _agent.desiredVelocity.x) * Mathf.Rad2Deg - (_angleFound / 2);
+        for (int i = 0; i < _rayCountFound; i++)
+        {
+            float curAngle = (baseAngle + _angleFound / (_rayCountFound - 1) * i) * Mathf.Deg2Rad;
+            
+            Vector2 curDir = new Vector2(Mathf.Cos(curAngle), Mathf.Sin(curAngle));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, curDir, _rangeFound);
+            //Debug.DrawLine(transform.position, transform.position + (new Vector3(curDir.x, curDir.y, 0)).normalized * _rangeFound);////////////////
+            if (hit)
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    Vector2 ToV2(Vector3 v)
+    {
+        return new Vector2(v.x, v.y);
+    }
+    IEnumerator StayAtPoint(float t)
+    {
+        _isStanding = true;
+        yield return new WaitForSeconds(t);
+        _isStanding = false;
     }
 
 }
