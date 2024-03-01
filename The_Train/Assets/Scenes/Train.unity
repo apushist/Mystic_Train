@@ -827,9 +827,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1095,9 +1103,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1200,9 +1216,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1346,9 +1370,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1425,6 +1457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VDoor1
       objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6906247400341874789, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: isLocked
       value: 1
@@ -1433,6 +1469,10 @@ PrefabInstance:
       propertyPath: doorManager
       value: 
       objectReference: {fileID: 172303818}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
       value: 0.48781347
@@ -1973,7 +2013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 229068151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarriageDoors2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2840,7 +2880,7 @@ GameObject:
   - component: {fileID: 340306453}
   - component: {fileID: 340306455}
   - component: {fileID: 340306454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: walkable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3661,9 +3701,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4128,7 +4176,7 @@ GameObject:
   - component: {fileID: 458989736}
   - component: {fileID: 458989735}
   - component: {fileID: 458989734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10959,6 +11007,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VDoor1
       objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
       value: 0.48781347
@@ -10994,7 +11050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 462240546}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11184,9 +11240,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11250,9 +11314,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11778,9 +11850,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ' vDoor2'
       objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6906247400341874789, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: isLocked
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
@@ -11818,7 +11898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 592568402}
   - component: {fileID: 592568403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GridObst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12122,7 +12202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 623307746}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12538,9 +12618,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ' vDoor2'
       objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6906247400341874789, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: isLocked
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
@@ -20143,7 +20231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754090417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarriageDoors5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20497,9 +20585,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20765,7 +20861,7 @@ GameObject:
   - component: {fileID: 810524985}
   - component: {fileID: 810524987}
   - component: {fileID: 810524986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: playerTexture
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -22506,7 +22602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 903914876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarriageDoors1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22950,9 +23046,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ' vDoor2'
       objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6906247400341874789, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: isLocked
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
@@ -28049,7 +28153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085493754}
   - component: {fileID: 1085493753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28847,9 +28951,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29467,9 +29579,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29825,6 +29945,14 @@ PrefabInstance:
     - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Name
       value: VDoor1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
@@ -30319,7 +30447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1289952999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarriageDoors3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30698,7 +30826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1328319996}
   - component: {fileID: 1328319997}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StepSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36024,7 +36152,7 @@ GameObject:
   - component: {fileID: 1410096038}
   - component: {fileID: 1410096035}
   - component: {fileID: 1410096037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -41211,9 +41339,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43022,9 +43158,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48401,8 +48545,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.10335004, y: 0.27040005, z: 0}
-    m_Extent: {x: 2.5553498, y: 1.9433, z: 0}
+    m_Center: {x: -0.09200001, y: 0.2776, z: 0}
+    m_Extent: {x: 2.5511, y: 1.9389999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -49209,7 +49353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1638300705}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50064,7 +50208,7 @@ GameObject:
   - component: {fileID: 1700995387}
   - component: {fileID: 1700995386}
   - component: {fileID: 1700995385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: interiorWalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51476,9 +51620,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51546,6 +51698,14 @@ PrefabInstance:
     - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Name
       value: VDoor1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
@@ -55429,9 +55589,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55504,9 +55672,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55751,9 +55927,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62436,7 +62620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1880749461}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CarriageDoors4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62815,7 +62999,7 @@ Camera:
   far clip plane: 1000
   field of view: 15
   orthographic: 1
-  orthographic size: 1.5340909
+  orthographic size: 1.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -63489,7 +63673,7 @@ GameObject:
   - component: {fileID: 1962510706}
   - component: {fileID: 1962510705}
   - component: {fileID: 1962510704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NavigationSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64051,9 +64235,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -64083,7 +64275,7 @@ GameObject:
   - component: {fileID: 2011695331}
   - component: {fileID: 2011695330}
   - component: {fileID: 2011695329}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: decor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65267,9 +65459,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66293,9 +66493,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66364,9 +66572,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ' vDoor2'
       objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6906247400341874789, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: isLocked
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x
@@ -66932,9 +67148,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432301207040016000, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481941675861891629, guid: 0fe5fbe3a35964b49a3eccefee0987f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -67312,7 +67536,7 @@ GameObject:
   - component: {fileID: 2085319978}
   m_Layer: 0
   m_Name: MonsterPathFinder
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67327,11 +67551,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.17
-  m_Speed: 1
+  m_Speed: 0.7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -67348,7 +67572,7 @@ Transform:
   m_GameObject: {fileID: 2085319974}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.1, y: -3.77, z: 0.00035637454}
+  m_LocalPosition: {x: 4.19, y: -3.77, z: 0.00035637454}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -67371,13 +67595,18 @@ MonoBehaviour:
   _seePlayerAllTime: 0
   _seePlayerNow: 0
   _usePatrolPaths: 1
+  _baseSpeed: 0.7
   _patrolPoints:
   - {fileID: 1638300705}
   - {fileID: 462240546}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _angleFound: 60
-  _rangeFound: 2
-  _absoluteRangeFound: 0.5
+  _rangeFound: 3
+  _absoluteRangeFound: 1
   _rayCountFound: 5
+  _rageSpeed: 1.5
 --- !u!50 &2085319978
 Rigidbody2D:
   serializedVersion: 4
@@ -67412,7 +67641,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085319974}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -67995,7 +68224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138122801}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MonsterPatrolPaths
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68070,6 +68299,14 @@ PrefabInstance:
     - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Name
       value: VDoor1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537441994087850165, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756578377723652824, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9105089514038168982, guid: e739a76a86ea4cf45847324170b48fea, type: 3}
       propertyPath: m_Size.x

@@ -10,13 +10,16 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] bool _seePlayerAllTime = false;
     [SerializeField] bool _seePlayerNow = false;
     [SerializeField] bool _usePatrolPaths = true;
+    [SerializeField] float _baseSpeed;
     [SerializeField] Transform[] _patrolPoints;
 
-    [Header ("FoundSettings")]
+    [Header("FoundSettings")]
+    [SerializeField] LayerMask _layerMask;
     [SerializeField] float _angleFound = 60;
     [SerializeField] float _rangeFound = 2;
     [SerializeField] float _absoluteRangeFound = 0.5f;
     [SerializeField] int _rayCountFound = 5;
+    [SerializeField] float _rageSpeed;
 
 
     private Rigidbody2D _rig;
@@ -33,6 +36,7 @@ public class MonsterFinder : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
+        _agent.speed = _seePlayerAllTime ? _rageSpeed : _baseSpeed;
 
         if (_patrolPoints.Length == 0)
         {
@@ -59,6 +63,7 @@ public class MonsterFinder : MonoBehaviour
             if (TrySeePlayer())
             {
                 _seePlayerNow = true;
+                _agent.speed = _rageSpeed;
             }
             else if (_usePatrolPaths)
             {
@@ -94,12 +99,13 @@ public class MonsterFinder : MonoBehaviour
 
     bool TrySeePlayer()
     {
-        RaycastHit2D preHit = Physics2D.Raycast(transform.position, _playerTarget.position - transform.position, _absoluteRangeFound);
-        //Debug.DrawLine(transform.position, transform.position + (_playerTarget.position - transform.position).normalized * _absoluteRangeFound, Color.red);/////////////
+        RaycastHit2D preHit = Physics2D.Raycast(transform.position, _playerTarget.position - transform.position, _absoluteRangeFound, _layerMask);
+        Debug.DrawLine(transform.position, transform.position + (_playerTarget.position - transform.position).normalized * _absoluteRangeFound, Color.red);/////////////
         if (preHit)
         {
             if (preHit.collider.CompareTag("Player"))
             {
+                Debug.Log("found length");
                 return true;
             }
         }
@@ -109,13 +115,14 @@ public class MonsterFinder : MonoBehaviour
             float curAngle = (baseAngle + _angleFound / (_rayCountFound - 1) * i) * Mathf.Deg2Rad;
             
             Vector2 curDir = new Vector2(Mathf.Cos(curAngle), Mathf.Sin(curAngle));
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, curDir, _rangeFound);
-            //Debug.DrawLine(transform.position, transform.position + (new Vector3(curDir.x, curDir.y, 0)).normalized * _rangeFound);////////////////
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, curDir, _rangeFound, _layerMask);
+            Debug.DrawLine(transform.position, transform.position + (new Vector3(curDir.x, curDir.y, 0)).normalized * _rangeFound);////////////////
             if (hit)
             {
                 if (hit.collider.CompareTag("Player"))
                 {
-                    return true;
+                    Debug.Log("found view");
+                    return true;                   
                 }
             }
         }
