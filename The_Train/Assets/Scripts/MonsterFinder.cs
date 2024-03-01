@@ -130,10 +130,6 @@ public class MonsterFinder : MonoBehaviour
         return false;
     }
 
-    Vector2 ToV2(Vector3 v)
-    {
-        return new Vector2(v.x, v.y);
-    }
     IEnumerator StayAtPoint(float t)
     {
         _isStanding = true;
