@@ -132,7 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: 4753dc927af16234da96bb37627a969f, type: 3}
+    - texture: {fileID: 2800000, guid: 90801b712c56e2b47a3f1878dae2dea4, type: 3}
       name: _NormalMap
     nameFileIdTable: {}
   mipmapLimitGroupName: 
