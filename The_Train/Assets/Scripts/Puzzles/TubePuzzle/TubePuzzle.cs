@@ -213,6 +213,7 @@ public class TubePuzzle : PuzzleBase
     }
     public override void LoosePuzzle()
     {
+        StopAllCoroutines();
         ResetFillProgress();
         EnableThisPuzzle(false);
         PuzzlesContoller.instance.Loose();
