@@ -10,6 +10,7 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] public string _name;
     [SerializeField] public string _description;
     [SerializeField] public Sprite _itemImage;
+    [SerializeField] public int _itemUseCount = 0;
     [Header("ObjectSettings")]
     [SerializeField] public bool empty = true;
     //[SerializeField] private bool _isStackable = false;
@@ -25,6 +26,7 @@ public class InventoryItem : MonoBehaviour
     {
         if (!isEmpty) {
             _id = item._id;
+            _itemUseCount = item._itemUseCount;
             _name = item._name;
             _itemImage = item._itemImage;
             _description = item._description;
@@ -33,6 +35,7 @@ public class InventoryItem : MonoBehaviour
         else
         {
             _id = 0;
+            _itemUseCount = 0;
             _name = "";
             _itemImage = Inventory.instance._itemSpriteEmpty;
             _description = "";

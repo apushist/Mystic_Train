@@ -188,7 +188,14 @@ public class Inventory : MonoBehaviour
             {
                 UpdateNeededItemSpriteView(successed);
                 currentInteraction._attachedDoor.SetDoorLock(false);
-                DestroyMovedItem();
+                if (moveItem._itemUseCount > 0)
+                {
+                    moveItem._itemUseCount--;
+                    RevertMovedItem();//multiple use
+                }
+                else
+                    DestroyMovedItem();//only one use
+
                 bool destroyed = currentInteraction.AfterUse();
                 if (destroyed)
                 {
