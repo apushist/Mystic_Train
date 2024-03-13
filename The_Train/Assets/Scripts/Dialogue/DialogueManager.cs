@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
     public PlayerController playerController;
     internal bool isOpened;
+    bool canUseDialogue = true;
 
 	private Queue<string> sentences;
 
@@ -21,7 +22,7 @@ public class DialogueManager : MonoBehaviour
 
 	void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOpened == true)
+        if (Input.GetKeyDown(KeyCode.Space) && isOpened == true && canUseDialogue)
         {
             DisplayNextSentence();
         }
@@ -30,6 +31,8 @@ public class DialogueManager : MonoBehaviour
 
 	public void StartDialogue(Dialogue dialogue)
     {
+        if (!canUseDialogue) return;
+
         isOpened = true;
 		playerController.canMove = false;
 		animator.SetBool("IsOpen", true);
@@ -73,6 +76,12 @@ public class DialogueManager : MonoBehaviour
         isOpened = false;
         playerController.canMove = true;
 		animator.SetBool("IsOpen", false);
+    }
+
+    public void BlockDialogue()
+    {
+        canUseDialogue = false;
+        EndDialogue();
     }
 
 }

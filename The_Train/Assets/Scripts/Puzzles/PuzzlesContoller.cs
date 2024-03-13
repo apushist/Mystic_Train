@@ -18,6 +18,7 @@ public class PuzzlesContoller : MonoBehaviour
     DialogueManager dm;
     PauseMenu pm;
 
+    bool canPuzzleInteract = true;
     private void Awake()
     {
         instance = this;
@@ -45,7 +46,7 @@ public class PuzzlesContoller : MonoBehaviour
     }
     public void StartPuzzleLogic()
     {
-        if (nearInteractionObject && !dm.isOpened && !pm.isOpened && !isOpened)
+        if (nearInteractionObject && !dm.isOpened && !pm.isOpened && !isOpened && canPuzzleInteract)
         {
             isOpened = true;
             pl.canMove = false;
@@ -62,6 +63,12 @@ public class PuzzlesContoller : MonoBehaviour
     void UpdateSupportInteractTextView(bool enabl)
     {
         _supportTextView.SetActive(enabl);
+    }
+    public void BlockInteraction()
+    {
+        canPuzzleInteract = false;
+        if (isOpened) Loose();
+        UpdateSupportInteractTextView(false);
     }
     public void Win()
     {

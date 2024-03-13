@@ -33,6 +33,7 @@ public class Inventory : MonoBehaviour
 
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
+    bool canUseInventory = true;
     bool isOpened;
     bool nearInteractionObject;
     internal bool movingItem;
@@ -111,7 +112,7 @@ public class Inventory : MonoBehaviour
     }
     public void PressKeyInventory()
     {
-        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened)
+        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened && canUseInventory)
         {
             if (isOpened)
             {
@@ -299,6 +300,13 @@ public class Inventory : MonoBehaviour
         Destroy(moveItem.gameObject);
         moveItem = null;
         movingItem = false;
+    }
+
+    public void BlockInventory()
+    {
+        canUseInventory = false;
+        if(isOpened) CloseInventory();
+        UpdateSupportInteractTextView(false);
     }
     private void Update()
     {
