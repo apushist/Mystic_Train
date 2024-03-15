@@ -6,11 +6,11 @@ using UnityEngine.Rendering.Universal;
 
 public class Transfer : MonoBehaviour
 {
-	[SerializeField] public float newX;
-	[SerializeField] public float newY;
-	[SerializeField] public GameObject animationTexture;
-	[SerializeField] public float animationLength;
-	[SerializeField] public GameObject lightObject;
+	public float newX;
+	public float newY;
+	public GameObject animationTexture;
+	public float animationLength;
+	public GameObject lightObject;
 	public PlayerController playerController;
 
 	private Animator animator;
