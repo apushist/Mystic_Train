@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public enum ActionType { Flicker, Change };
+public enum ActionType { Flicker, Change, Candle };
 
 public class Lights : MonoBehaviour
 {
@@ -13,14 +13,22 @@ public class Lights : MonoBehaviour
 	[Header("Change")]
 	[SerializeField] public GameObject lightOff;
 	[SerializeField] public GameObject lightOn;
+	[Header("Candle")]
+	[SerializeField] public GameObject candleLightObject;
+	[SerializeField] public float frequency;
 
 	private bool safeModeOn;
 	private Light2D flickerlight;
+	private Light2D candlelight;
 
 	private void Start()
 	{
 		safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
-		
+		if(type == ActionType.Candle)
+		{
+			candlelight = candleLightObject.GetComponent<Light2D>();
+			StartCoroutine(candle());
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -73,5 +81,14 @@ public class Lights : MonoBehaviour
 		light1.enabled = false;
 		light2.enabled = true;
 		
+	}
+
+	IEnumerator candle()
+	{
+		while(true) {
+			candlelight.intensity = Random.Range(0.8f, 1.2f);
+			yield return new WaitForSeconds(frequency);
+		}
+
 	}
 }

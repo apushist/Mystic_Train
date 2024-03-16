@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
 
 	void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOpened == true)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) && isOpened == true)
         {
             DisplayNextSentence();
         }
