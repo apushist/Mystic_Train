@@ -13577,8 +13577,8 @@ Tilemap:
   - first: {x: 69, y: -37, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 23
-      m_TileSpriteIndex: 24
+      m_TileIndex: 39
+      m_TileSpriteIndex: 34
       m_TileMatrixIndex: 0
       m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
@@ -30344,7 +30344,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 96a670a51f195a24bbea8d46d87ae1ac, type: 2}
   - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: 9907066a65c7d5e43b8f4eea35276c83, type: 2}
-  - m_RefCount: 16
+  - m_RefCount: 15
     m_Data: {fileID: 11400000, guid: 1062d861e87c7cb4782abde747c8fcc9, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 2a2cbe387accf3542b7e8d94ad92a59c, type: 2}
@@ -30376,7 +30376,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 5418290a9a0ce654e9c924b9af328973, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: f9194aee6118e6e49ab8d83ef32297f0, type: 2}
-  - m_RefCount: 11
+  - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: 5b1e7919ffe2a22478bb38e0b86855db, type: 2}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 18106f78ef35d2e4aa6503494b59d431, type: 2}
@@ -30471,7 +30471,7 @@ Tilemap:
     m_Data: {fileID: -810501493, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
   - m_RefCount: 12
     m_Data: {fileID: 1408163253, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
-  - m_RefCount: 16
+  - m_RefCount: 15
     m_Data: {fileID: 90696041, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 474116595, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
@@ -30491,7 +30491,7 @@ Tilemap:
     m_Data: {fileID: 646683897, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
   - m_RefCount: 18
     m_Data: {fileID: -1300571188, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
-  - m_RefCount: 11
+  - m_RefCount: 12
     m_Data: {fileID: -396868771, guid: 93f0edd1d6a97de41925d523d19c670f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 5b5025db8ecfa094f8829ef66deb3c5d, type: 3}
@@ -99436,7 +99436,7 @@ Transform:
   m_GameObject: {fileID: 1895767426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 71.105194, y: -41.551003, z: -10}
+  m_LocalPosition: {x: -7.4548063, y: -0.13100183, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99587,7 +99587,7 @@ Camera:
   far clip plane: 1000
   field of view: 15
   orthographic: 1
-  orthographic size: 1.565625
+  orthographic size: 0
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -100909,7 +100909,7 @@ Transform:
   m_GameObject: {fileID: 2002729286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 71.105194, y: -41.551003, z: -10}
+  m_LocalPosition: {x: -7.4548063, y: -0.13100183, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
