@@ -128,13 +128,4 @@ public class PlayerController : MonoBehaviour
 		animator.SetBool("IsLeft", false);
 		animator.SetBool("IsRight", false);
 	}
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("DeathZone"))
-        {
-            Debug.Log("death");
-            Death.instance.OnDeathTrigger();
-        }
-    }
 }

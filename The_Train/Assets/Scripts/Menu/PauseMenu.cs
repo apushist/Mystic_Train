@@ -15,7 +15,6 @@ public class PauseMenu : MonoBehaviour
     public AudioMixerGroup mixer;
 
 	internal bool isOpened;
-	bool canUseMenu = true;
 
 	private void Start()
 	{
@@ -23,28 +22,28 @@ public class PauseMenu : MonoBehaviour
 		{
 			slider.value = PlayerPrefs.GetFloat(slider.name,1);
 		}
+		
 		Resume();
 	}
 
 	void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && canUseMenu)
-        {
-			if (GameIsPaused)
-			{
-				Resume();
-			}
-			else
-			{
-				Pause();
-			}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
         }
     }
     public void Resume()
 	{
 		isOpened = false;
 		pauseMenuUI.SetActive(false);
-        settingsUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
 	}
@@ -57,10 +56,8 @@ public class PauseMenu : MonoBehaviour
 	}
     public void QuitGame()
     {
-		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-		Death.instance.BlockAll();
-        SceneLoader.SwitchToScene("Menu");
-    }
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+	}
 
     public void Settings()
     {
@@ -70,7 +67,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Back()
     {
-        settingsUI.SetActive(false);
+		settingsUI.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
 
@@ -100,11 +97,5 @@ public class PauseMenu : MonoBehaviour
 	{
 		mixer.audioMixer.SetFloat("EffectsVolume", CalculateVolume(volume));
 		PlayerPrefs.SetFloat("EffectsVolume", volume);
-	}
-
-	public void BlockPauseMenu()
-	{
-		canUseMenu = false;
-		Resume();
 	}
 }
