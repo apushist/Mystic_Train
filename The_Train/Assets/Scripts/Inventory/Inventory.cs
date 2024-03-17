@@ -41,6 +41,8 @@ public class Inventory : MonoBehaviour
     float _itemSize;
     public static Inventory instance;
 
+    private AudioSource _audioSource;
+
     //support fields
     PlayerController pl;
     DialogueManager dm;
@@ -54,6 +56,7 @@ public class Inventory : MonoBehaviour
         dm = FindObjectOfType<DialogueManager>();
         pm = FindObjectOfType<PauseMenu>();
         PlayerController.Epressed += PressKeyInventory;
+        _audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -69,6 +72,7 @@ public class Inventory : MonoBehaviour
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
         items.Add(item);
+        _audioSource.Play();
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
             if (itemsGrid[i].empty)
@@ -76,7 +80,7 @@ public class Inventory : MonoBehaviour
                 itemsGrid[i].SetNewItem(item, false);
                 return;
             }
-        }
+        }      
         Debug.Log("Full Inventory!");
     }
 
