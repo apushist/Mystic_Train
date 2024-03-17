@@ -12,7 +12,7 @@ public class Transfer : MonoBehaviour
 	public float animationLength;
 	public GameObject lightObject;
 	public PlayerController playerController;
-	public AudioSource newStepSound;
+	public int newStepSound;
 
 	private Animator animator;
 
@@ -45,7 +45,7 @@ public class Transfer : MonoBehaviour
 			collision.transform.position = new Vector3(newX, newY, 0);
 			yield return new WaitForSeconds(0.5f);
 			light.intensity = 0.9f;
-			playerController.stepSound = newStepSound;
+			playerController.SetSound(newStepSound);
 			playerController.canMove = true;
 		}
 	}
