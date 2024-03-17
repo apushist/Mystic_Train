@@ -10,11 +10,14 @@ public class Fog : MonoBehaviour
     [SerializeField] Transform _startPos;
     [SerializeField] GameObject _fogPrefab;
     [SerializeField] int _fillDelay = 1;
+    [SerializeField] int _deathColActivateDelay = 1;
 
     private HashSet<Vector3Int> _poses;
+    private UnityEngine.Vector3 _gridOffset;
     Vector3Int startCell;
     void Start()
     {
+        _gridOffset = GetComponentInChildren<Grid>().transform.GetChild(0).transform.position;
         _poses = new HashSet<Vector3Int>();
         startCell = _tm.WorldToCell(_startPos.position);
         if (!_tm.GetTile(startCell))
@@ -75,8 +78,18 @@ public class Fog : MonoBehaviour
 
     void InstantFogPoint(Vector3Int vector)
     {
-        var ins = Instantiate(_fogPrefab, this.transform);
-        ins.transform.position = new UnityEngine.Vector3(vector.x + 0.5f, vector.y + 0.5f, vector.z);
+        var ins = Instantiate(_fogPrefab);
+        ins.transform.position = new UnityEngine.Vector3(vector.x + 0.5f, vector.y + 0.5f, vector.z) + _gridOffset;
+        var deathCol = ins.GetComponent<Collider2D>();
+        deathCol.enabled = false;
+        StartCoroutine(ActivateDeathCollider(deathCol));
+
+    }
+
+    IEnumerator ActivateDeathCollider(Collider2D col)
+    {
+        yield return new WaitForSeconds(_deathColActivateDelay);
+        col.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
