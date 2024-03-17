@@ -9,20 +9,23 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveDirection;
     public float stepSoundRate = 0.5F;
-    public AudioSource stepSound;
+    public AudioSource stepSoundSource;
     public GameObject playerTexture;
-
-    private Animator animator;
-
-    private float nextStep = 0.0F;
-
     public bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
+	public AudioClip[] stepSounds;
 
-    public static event Action Epressed;
+
+	private Animator animator;
+	private float nextStep = 0.0F;
+	public static event Action Epressed;
 
 	private void Start()
 	{
 		animator = playerTexture.GetComponent<Animator>();
+        if(stepSoundSource.clip == null && stepSounds.Length > 0)
+        {
+			stepSoundSource.clip = stepSounds[0];
+		}
 	}
 
 	// Update is called once per frame
@@ -55,8 +58,8 @@ public class PlayerController : MonoBehaviour
             if (Time.time > nextStep && (moveX != 0 || moveY != 0))
             {
                 nextStep = Time.time + stepSoundRate;
-                stepSound.pitch = UnityEngine.Random.Range(0.4f, 1.0f);
-                stepSound.Play();
+                stepSoundSource.pitch = UnityEngine.Random.Range(0.4f, 1.0f);
+                stepSoundSource.Play();
             }
         }
         else
@@ -136,5 +139,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log("death");
             Death.instance.OnDeathTrigger();
         }
+    }
+
+    public void SetSound(int soundNumber)
+    {
+        if(soundNumber >= 0 && soundNumber < stepSounds.Length)
+        {
+			stepSoundSource.clip = stepSounds[soundNumber];
+		}
     }
 }
