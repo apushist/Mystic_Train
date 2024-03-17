@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip[] stepSounds;
 
 
+    private int currentSoundNumber;
 	private Animator animator;
 	private float nextStep = 0.0F;
 	public static event Action Epressed;
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
 		animator = playerTexture.GetComponent<Animator>();
         if(stepSoundSource.clip == null && stepSounds.Length > 0)
         {
-			stepSoundSource.clip = stepSounds[0];
+            SetSound(0);
 		}
 	}
 
@@ -146,6 +147,9 @@ public class PlayerController : MonoBehaviour
         if(soundNumber >= 0 && soundNumber < stepSounds.Length)
         {
 			stepSoundSource.clip = stepSounds[soundNumber];
+            currentSoundNumber = soundNumber;
 		}
     }
+
+    public int GetSoundNumber() { return currentSoundNumber;}
 }
