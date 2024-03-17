@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour
 
 	}
 
-
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
     void FixedUpdate()
     {
         // Physics Calculations
@@ -126,4 +128,13 @@ public class PlayerController : MonoBehaviour
 		animator.SetBool("IsLeft", false);
 		animator.SetBool("IsRight", false);
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeathZone"))
+        {
+            Debug.Log("death");
+            Death.instance.OnDeathTrigger();
+        }
+    }
 }
