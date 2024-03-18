@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEditor.PackageManager.Requests;
 
 public class SaveSystemObject : MonoBehaviour
 {
     public PlayerController controller;
     public Inventory inventory;
+	public bool isLoading_useWhileEditing;
 
 	private void Start()
 	{
-		if(PlayerPrefs.GetInt("IsLoading",0) == 1 && File.Exists(SaveSystem.GetPath()))
+		if(isLoading_useWhileEditing &&PlayerPrefs.GetInt("IsLoading",0) == 1 && File.Exists(SaveSystem.GetPath()))
 		{
 			Loading();
 		}
