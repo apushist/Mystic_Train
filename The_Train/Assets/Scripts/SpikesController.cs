@@ -12,6 +12,10 @@ public class SpikesController : MonoBehaviour
     void Start()
     {
         animators = GetComponentsInChildren<Animator>();
+		if (IsActivated)
+		{
+			Activate();
+		}
     }
 
     public void Activate()
@@ -19,7 +23,7 @@ public class SpikesController : MonoBehaviour
         foreach(var anim in animators)
         {
             anim.SetBool("IsActivated", true);
-            
+			tag = "DeathZone";
         }
 		IsActivated = true;
 	}
@@ -29,7 +33,7 @@ public class SpikesController : MonoBehaviour
 		foreach (var anim in animators)
 		{
 			anim.SetBool("IsActivated", false);
-
+			tag = "Untagged";
 		}
 		IsActivated = false;
 	}

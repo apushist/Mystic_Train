@@ -31,7 +31,7 @@ public class LeverController : MonoBehaviour
 			case AttachedItemType.markedWall:
 				{
 					attachedAnim = attachedItem.GetComponent<Animator>();
-					attachedAnim.SetBool("IsActive", true);
+					attachedAnim.SetBool("IsActivated", true);
 
 					break; 
 				}
@@ -55,7 +55,7 @@ public class LeverController : MonoBehaviour
 				switch (type)
 				{
 					case AttachedItemType.markedWall:
-						attachedAnim.SetBool("IsActive", false); break;
+						attachedAnim.SetBool("IsActivated", false); break;
 					case AttachedItemType.spike:
 						spikesController.Activate();
 						break;
@@ -67,7 +67,7 @@ public class LeverController : MonoBehaviour
 				switch (type)
 				{
 					case AttachedItemType.markedWall:
-						attachedAnim.SetBool("IsActive", true); break;
+						attachedAnim.SetBool("IsActivated", true); break;
 					case AttachedItemType.spike:
 						spikesController.Disactivate();
 						break;
