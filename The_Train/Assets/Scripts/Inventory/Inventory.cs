@@ -319,4 +319,9 @@ public class Inventory : MonoBehaviour
             moveItem.GetComponent<RectTransform>().position = Input.mousePosition + new Vector3(10, -10, 0);
         }
     }
+
+    public List<InventoryItem> GetItems()
+    {
+        return items;
+    }
 }

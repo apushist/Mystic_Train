@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     }
     public void ExitGame()
     {
-        Debug.Log("The game is closed");
+        //Debug.Log("The game is closed");
         Application.Quit();
     }
 }
