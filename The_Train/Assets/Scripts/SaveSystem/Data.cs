@@ -15,7 +15,13 @@ public class Data
         playerPosition[0] = controller.transform.position.x;
 		playerPosition[1] = controller.transform.position.y;
 
-        inventoryItemsIDs = new int[0];//нужен метод для получения списка вещей в инвентаре
+		List<InventoryItem> items = inventory.GetItems();
+
+		inventoryItemsIDs = new int[items.Count];//нужен метод для получения списка вещей в инвентаре
+        for(int i = 0; i < items.Count; i++)
+        {
+            inventoryItemsIDs[i] = items[i]._id;
+        }
 
         stepSoundNumber = controller.GetSoundNumber();
 

@@ -4,10 +4,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem 
 {
+	public static string GetPath()
+	{
+		return Application.persistentDataPath + "/data.save";
+	}
+
     public static void Save(PlayerController controller, Inventory inventory)
     {
 		BinaryFormatter formatter = new BinaryFormatter();
-		string path = Application.persistentDataPath + "/data.save";
+		string path = GetPath();
 		FileStream fileStream = new FileStream(path, FileMode.Create);
 
 		Data data = new Data(controller, inventory);
@@ -18,7 +23,7 @@ public static class SaveSystem
 
 	public static Data Load()
 	{
-		string path = Application.persistentDataPath + "/data.save";
+		string path = GetPath();
 		if(File.Exists(path))
 		{
 
