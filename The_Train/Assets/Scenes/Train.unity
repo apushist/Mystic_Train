@@ -116091,7 +116091,7 @@ Transform:
   m_GameObject: {fileID: 1895767426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.412373, y: -23.201002, z: -10}
+  m_LocalPosition: {x: -7.579626, y: -0.2910018, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117703,7 +117703,7 @@ Transform:
   m_GameObject: {fileID: 2002729286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.412373, y: -23.201002, z: -10}
+  m_LocalPosition: {x: -7.579626, y: -0.2910018, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120943,6 +120943,7 @@ MonoBehaviour:
   - {fileID: 2649596368252819258, guid: 9e158064bec25a545a2b7ce885034d50, type: 3}
   - {fileID: 2649596368252819258, guid: 09d505760b3ec1d4e9d1c3020d60d1e7, type: 3}
   - {fileID: 2649596368252819258, guid: 0a309083b840e6741bb740660ba6ad0f, type: 3}
+  - {fileID: 2649596368252819258, guid: 8ecbbee6249895341a8f2241145d6388, type: 3}
 --- !u!82 &2063695116
 AudioSource:
   m_ObjectHideFlags: 0
