@@ -13,7 +13,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	private void Start()
 	{
-		if(isLoading_useWhileEditing &&PlayerPrefs.GetInt("IsLoading",0) == 1 && File.Exists(SaveSystem.GetPath()))
+		if(isLoading_useWhileEditing && PlayerPrefs.GetInt("IsLoading",0) == 1 && File.Exists(SaveSystem.GetPath()))
 		{
 			Loading();
 		}

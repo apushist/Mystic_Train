@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
             {
                 nextStep = Time.time + stepSoundRate;
                 stepSoundSource.pitch = UnityEngine.Random.Range(0.4f, 1.0f);
-                stepSoundSource.Play();
+                stepSoundSource.PlayOneShot(stepSoundSource.clip,0.5f);
             }
         }
         else

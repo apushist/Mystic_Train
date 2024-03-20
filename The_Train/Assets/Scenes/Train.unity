@@ -523,8 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ef73690387ae3418b9406afe6ed52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newX: 115
-  newY: -1
+  newX: 137
+  newY: 1
   animationTexture: {fileID: 1029493786}
   animationLength: 5
   lightObject: {fileID: 1085493752}
@@ -37745,6 +37745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 760734973}
   - component: {fileID: 760734972}
+  - component: {fileID: 760734974}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -37762,7 +37763,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7663635300416545868, guid: 42a809112769deb4690bf1d58284c05d, type: 2}
-  m_audioClip: {fileID: 8300000, guid: ad49a200a46ac55469ef291c1e175ba3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b84759df4e5fbbd41beafbea25e19bf7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -37863,6 +37864,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &760734974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760734971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923469e80c82c354a86518f8c61b6a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 760734972}
+  clips:
+  - {fileID: 8300000, guid: b84759df4e5fbbd41beafbea25e19bf7, type: 3}
+  - {fileID: 8300000, guid: ad49a200a46ac55469ef291c1e175ba3, type: 3}
+  clipVolumes:
+  - 0.75
+  - 0.17
 --- !u!1001 &780238884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82412,7 +82432,7 @@ MonoBehaviour:
   moveSpeed: 2
   rb: {fileID: 1410096036}
   stepSoundRate: 0.5
-  stepSoundSource: {fileID: 0}
+  stepSoundSource: {fileID: 1328319997}
   playerTexture: {fileID: 810524984}
   canMove: 1
   stepSounds:
@@ -121263,7 +121283,7 @@ Transform:
   m_GameObject: {fileID: 1895767426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.579626, y: -0.2910018, z: -10}
+  m_LocalPosition: {x: -7.6027875, y: -0.2910018, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121414,7 +121434,7 @@ Camera:
   far clip plane: 1000
   field of view: 15
   orthographic: 1
-  orthographic size: 1.596875
+  orthographic size: 1.540625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -122875,7 +122895,7 @@ Transform:
   m_GameObject: {fileID: 2002729286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.579626, y: -0.2910018, z: -10}
+  m_LocalPosition: {x: -7.6027875, y: -0.2910018, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
