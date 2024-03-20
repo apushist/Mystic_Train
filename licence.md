@@ -1,4 +1,4 @@
-https://spencer-yk.itch.io/free-sad-horror-game-music-pack-1
+﻿https://spencer-yk.itch.io/free-sad-horror-game-music-pack-1
 (Spencer Y.K. - Broken Dreams used as background music in game) 
 (Spencer Y.K. - Time's Running Out used as background music in main menu) 
 
@@ -14,3 +14,18 @@ Author: Penzilla
 
 https://szadiart.itch.io/rogue-fantasy-catacombs
 Author: Szadi art
+
+https://zvukipro.com/predmet/789-zvuki-svechi.html
+Author: Victor
+
+https://zvukipro.com/predmet/159-zvuki-kamney.html
+Author: Yokomoto
+
+https://zvukipro.com/audio/4015-zvuki-peremeschenija-v-prostranstve.html
+Author: Xenna
+
+https://zvukipro.com/transport/216-zvuki-poezda.html
+Author:  Waldoo
+
+
+
