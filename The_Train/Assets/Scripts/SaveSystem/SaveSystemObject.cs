@@ -9,6 +9,7 @@ public class SaveSystemObject : MonoBehaviour
 {
     public PlayerController controller;
     public Inventory inventory;
+	public BGMController bgmController;
 	public bool isLoading_useWhileEditing;
 
 	private void Start()
@@ -28,7 +29,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	public void SaveFunction()
     {
-        SaveSystem.Save(controller, inventory);
+        SaveSystem.Save(controller, inventory,bgmController);
     }
 
     public void LoadFunction()
@@ -52,6 +53,10 @@ public class SaveSystemObject : MonoBehaviour
 		{
 			inventory.AddItem(id);
 		}
+
+		bgmController.clipVolumes = data.bgmVolumes;
+
+		controller.virtualCamera.m_Lens.OrthographicSize = data.cameraOrthoSize;
 	}
 
     public void NewGame()

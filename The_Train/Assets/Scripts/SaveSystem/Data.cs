@@ -8,8 +8,10 @@ public class Data
     public float[] playerPosition;
     public int[] inventoryItemsIDs;
     public int stepSoundNumber;
+    public float[] bgmVolumes;
+    public float cameraOrthoSize;
 
-    public Data( PlayerController controller,Inventory inventory)
+    public Data(PlayerController controller, Inventory inventory, BGMController bgm)
     {
         playerPosition = new float[2];
         playerPosition[0] = controller.transform.position.x;
@@ -25,5 +27,10 @@ public class Data
 
         stepSoundNumber = controller.GetSoundNumber();
 
-    }
+        bgmVolumes = bgm.clipVolumes;
+
+        cameraOrthoSize = controller.virtualCamera.m_Lens.OrthographicSize;
+
+
+	}
 }
