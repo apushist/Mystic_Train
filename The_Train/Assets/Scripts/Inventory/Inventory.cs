@@ -4,21 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
 public class Inventory : MonoBehaviour
 {
     [Header("Main Settings")]
     [SerializeField] GameObject _inventoryScreen;
     [SerializeField] GameObject _changedItemView;
-    [SerializeField] GameObject _neededItemView;
+    [SerializeField] GameObject[] _neededItemView;
+    [SerializeField] GameObject _neededItemView3;
     [SerializeField] GameObject _supportTextView;
     [SerializeField] public Sprite _itemSpriteEmpty;
     [SerializeField] InventoryItem _inventoryItemDefault;
 
     [Header("Item Needed Settings")]
-    [SerializeField] Image _neededItemSpriteEmpty;
-    [SerializeField] Image _neededItemSpriteFull;
-    [SerializeField] GameObject _neededItemOver;
-    //[SerializeField] private TextMeshProUGUI _itemNeededCounter;
+    [SerializeField] Image[] _neededItemSpriteEmpty;
+    [SerializeField] Image[] _neededItemSpriteFull;
+    [SerializeField] GameObject[] _neededItemOver;
 
     [Header("Item Scale Settings")]
     [SerializeField] private RectTransform _parentSprite;
@@ -64,9 +66,12 @@ public class Inventory : MonoBehaviour
         CloseInventory();
         _itemSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_itemEndOffset * 2) - (_itemOffset * (_itemCount - 1))) / _itemCount;
         GenerateGrid();
-        ChangeInventoryView(true);
+        ChangeInventoryView(0);
         UpdateSupportInteractTextView(false);
-        MouseExitItemNeeded();
+        for (int i = 0; i < _neededItemView.Length; i++)
+        {
+            MouseExitItemNeeded(i);
+        }
     }
     public void AddItem(int ident)
     {
@@ -134,19 +139,43 @@ public class Inventory : MonoBehaviour
         _inventoryScreen.SetActive(true);
         isOpened = true;
         DeselectAllItems();
-        MouseExitItemNeeded();
+        for(int i = 0; i<_neededItemView.Length; i++)
+        {
+            MouseExitItemNeeded(i);
+        }
+        
         if (nearInteractionObject)
         {
-            ChangeInventoryView(false);
-            UpdateNeededItemSpriteView(false);
+            if (currentInteraction._currentInterType == InteractionType.lockedDoor)
+            {
+                ChangeInventoryView(1);
+                UpdateNeededItemSpriteView(false);
+            }
+            else if(currentInteraction._currentInterType == InteractionType.lock3Item)
+            {
+                ChangeInventoryView(2);
+                UpdateNeededItemSpriteView3(false, 1);
+                UpdateNeededItemSpriteView3(false, 2);
+                UpdateNeededItemSpriteView3(false, 3);
+            }
         }
         else
         {
-            ChangeInventoryView(true);
+            ChangeInventoryView(0);
         }
     }
     public void CloseInventory()
     {
+        if (currentInteraction!=null && currentInteraction._currentInterType == InteractionType.lock3Item)
+        {
+            for (int i = 0; i < currentInteraction._neededItem3.Length; i++)
+            {
+                if (currentInteraction._neededItem3setted[i])
+                {
+                    AddItem(currentInteraction._neededItem3[i]._id);
+                }
+            }
+        }
         if (movingItem)
         {
             RevertMovedItem();           
@@ -163,10 +192,11 @@ public class Inventory : MonoBehaviour
             i.MouseExit();
         }
     }
-    void ChangeInventoryView(bool b)
+    void ChangeInventoryView(int b)
     {
-        _changedItemView.SetActive(b);
-        _neededItemView.SetActive(!b);
+        _changedItemView.SetActive(b==0);
+        _neededItemView[0].SetActive(b==1);
+        _neededItemView3.SetActive(b==2);
     }
     public void InteractWithObject(InteractiveZone col = null)
     {
@@ -201,12 +231,7 @@ public class Inventory : MonoBehaviour
                 else
                     DestroyMovedItem();//only one use
 
-                bool destroyed = currentInteraction.AfterUse();
-                if (destroyed)
-                {
-                    InteractWithObject();//reset last interaction if it destroyed
-                }
-                CloseInventory();
+                StartCoroutine(CloseToGame());
             }
             else
             {
@@ -217,18 +242,46 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("error item interact set");
         }
-        MouseExitItemNeeded();
+        MouseExitItemNeeded(0);
     }
-    public void MouseEnterItemNeeded()
+    public void TrySetItemInteractable3(int i)
     {
         if (nearInteractionObject && currentInteraction != null && movingItem)
         {
-            _neededItemOver.SetActive(true);
+            bool successed = currentInteraction.TrySetItem3(moveItem, i-1);
+
+            if (successed)
+            {
+                UpdateNeededItemSpriteView3(successed, i);
+
+                DestroyMovedItem();//only one use
+                currentInteraction.AddItemNeeded(i-1);
+                if (currentInteraction.CheckAllItemNeededSetted())
+                {
+                    StartCoroutine(CloseToPuzzle());
+                }
+            }
+            else
+            {
+                RevertMovedItem();
+            }
+        }
+        else
+        {
+            Debug.Log("error item interact set");
+        }
+        MouseExitItemNeeded(0);
+    }
+    public void MouseEnterItemNeeded(int i)
+    {
+        if (nearInteractionObject && currentInteraction != null && movingItem)
+        {
+            _neededItemOver[i].SetActive(true);
         }
     }
-    public void MouseExitItemNeeded()
+    public void MouseExitItemNeeded(int i)
     {
-        _neededItemOver.SetActive(false);
+        _neededItemOver[i].SetActive(false);
     }
     void UpdateSupportInteractTextView(bool enabl)
     {
@@ -236,11 +289,19 @@ public class Inventory : MonoBehaviour
     }
     public void UpdateNeededItemSpriteView(bool succeed)
     {
-        _neededItemSpriteEmpty.sprite = currentInteraction._neededItem._itemImage;
-        _neededItemSpriteFull.sprite = currentInteraction._neededItem._itemImage;
-        _neededItemSpriteEmpty.gameObject.SetActive(!succeed);
-        _neededItemSpriteFull.gameObject.SetActive(succeed);
+        _neededItemSpriteEmpty[0].sprite = currentInteraction._neededItem._itemImage;
+        _neededItemSpriteFull[0].sprite = currentInteraction._neededItem._itemImage;
+        _neededItemSpriteEmpty[0].gameObject.SetActive(!succeed);
+        _neededItemSpriteFull[0].gameObject.SetActive(succeed);
     }
+    public void UpdateNeededItemSpriteView3(bool succeed, int i)
+    {
+        _neededItemSpriteEmpty[i].sprite = currentInteraction._neededItem3[i - 1]._itemImage;
+        _neededItemSpriteFull[i].sprite = currentInteraction._neededItem3[i - 1]._itemImage;
+        _neededItemSpriteEmpty[i].gameObject.SetActive(!succeed);
+        _neededItemSpriteFull[i].gameObject.SetActive(succeed);
+    }
+
     public void OnMouseItemClick(InventoryItem item)
     {
         if (movingItem)
@@ -310,7 +371,24 @@ public class Inventory : MonoBehaviour
             moveItem.GetComponent<RectTransform>().position = Input.mousePosition + new Vector3(10, -10, 0);
         }
     }
-
+    IEnumerator CloseToPuzzle()
+    {
+        yield return new WaitForSeconds(1);
+        CloseInventory();
+        PuzzlesContoller.instance.InteractWithObject(currentInteraction);
+        PuzzlesContoller.instance.StartPuzzleLogic();
+        InteractWithObject();//reset inventory interaction
+    }
+    IEnumerator CloseToGame()
+    {
+        yield return new WaitForSeconds(1);
+        bool destroyed = currentInteraction.AfterUse();
+        if (destroyed)
+        {
+            InteractWithObject();//reset last interaction if it destroyed
+        }
+        CloseInventory();
+    }
     public List<InventoryItem> GetItems()
     {
         return items;

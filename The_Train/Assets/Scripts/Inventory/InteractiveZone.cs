@@ -20,20 +20,36 @@ public class InteractiveZone : MonoBehaviour
     [SerializeField] public PuzzleBase _puzzle;
     [SerializeField] public InventoryItem _winItem;
     [Header("Lock3Item")]
-    [SerializeField] public PuzzleBase _puzzle3;
-    [SerializeField] public InventoryItem _winItem3;
+    [SerializeField] public InventoryItem[] _neededItem3;
     [Header("Door")]
     [SerializeField] public InventoryItem _neededItem;
     [SerializeField] public Door _attachedDoor;
 
+    internal bool[] _neededItem3setted;
 
+    private void Start()
+    {
+        _neededItem3setted = new bool[3];
+    }
     public bool TrySetItem(InventoryItem item)
     {
         return item._id == _neededItem._id;
     }
-    public bool TrySetItem3(InventoryItem item)
+    public bool TrySetItem3(InventoryItem item, int i)
     {
-        return item._id == _neededItem._id;
+        return item._id == _neededItem3[i]._id;
+    }
+    public void AddItemNeeded(int i)
+    {
+        _neededItem3setted[i] = true;
+    }
+    public bool CheckAllItemNeededSetted()
+    {
+        for(int i = 0; i <  _neededItem3setted.Length; i++)
+        {
+            if (_neededItem3setted[i] == false) return false;
+        }
+        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,6 +63,9 @@ public class InteractiveZone : MonoBehaviour
                     break;
                 case InteractionType.puzzle:
                     PuzzlesContoller.instance.InteractWithObject(this);
+                    break;
+                case InteractionType.lock3Item:
+                    Inventory.instance.InteractWithObject(this);
                     break;
             }
         }
@@ -62,6 +81,9 @@ public class InteractiveZone : MonoBehaviour
                     break;
                 case InteractionType.puzzle:
                     PuzzlesContoller.instance.InteractWithObject();
+                    break;
+                case InteractionType.lock3Item:
+                    Inventory.instance.InteractWithObject();
                     break;
             }
         }

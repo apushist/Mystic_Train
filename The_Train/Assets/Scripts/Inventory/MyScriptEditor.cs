@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 
 [CustomEditor(typeof(InteractiveZone))]
@@ -37,6 +38,12 @@ public class MyScriptEditor : Editor
             EditorGUI.indentLevel++;
             myScript._puzzle = (PuzzleBase)EditorGUILayout.ObjectField("puzzle", myScript._puzzle, typeof(PuzzleBase), true);
             myScript._winItem = (InventoryItem)EditorGUILayout.ObjectField("winItem", myScript._winItem, typeof(InventoryItem), true);
+
+            SerializedProperty gameObjectsArray = serializedObject.FindProperty("_neededItem3");
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(gameObjectsArray, new GUIContent("neededItems"));
+            serializedObject.ApplyModifiedProperties();
+
             EditorGUI.indentLevel--;
         }
 
