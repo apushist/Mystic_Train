@@ -26,6 +26,7 @@ public class InteractiveZone : MonoBehaviour
     [SerializeField] public Door _attachedDoor;
 
     internal bool[] _neededItem3setted;
+    internal bool isLock3setted = false;
 
     private void Start()
     {
@@ -65,7 +66,14 @@ public class InteractiveZone : MonoBehaviour
                     PuzzlesContoller.instance.InteractWithObject(this);
                     break;
                 case InteractionType.lock3Item:
-                    Inventory.instance.InteractWithObject(this);
+                    if (isLock3setted)
+                    {
+                        PuzzlesContoller.instance.InteractWithObject(this);
+                    }
+                    else
+                    {
+                        Inventory.instance.InteractWithObject(this);
+                    }
                     break;
             }
         }
@@ -84,6 +92,7 @@ public class InteractiveZone : MonoBehaviour
                     break;
                 case InteractionType.lock3Item:
                     Inventory.instance.InteractWithObject();
+                    PuzzlesContoller.instance.InteractWithObject();
                     break;
             }
         }

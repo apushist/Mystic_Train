@@ -166,7 +166,7 @@ public class Inventory : MonoBehaviour
     }
     public void CloseInventory()
     {
-        if (currentInteraction!=null && currentInteraction._currentInterType == InteractionType.lock3Item)
+        if (currentInteraction!=null && currentInteraction._currentInterType == InteractionType.lock3Item && !currentInteraction.isLock3setted)
         {
             for (int i = 0; i < currentInteraction._neededItem3.Length; i++)
             {
@@ -246,7 +246,7 @@ public class Inventory : MonoBehaviour
     }
     public void TrySetItemInteractable3(int i)
     {
-        if (nearInteractionObject && currentInteraction != null && movingItem)
+        if (nearInteractionObject && currentInteraction != null && movingItem && !currentInteraction.CheckAllItemNeededSetted())
         {
             bool successed = currentInteraction.TrySetItem3(moveItem, i-1);
 
@@ -258,6 +258,7 @@ public class Inventory : MonoBehaviour
                 currentInteraction.AddItemNeeded(i-1);
                 if (currentInteraction.CheckAllItemNeededSetted())
                 {
+                    currentInteraction.isLock3setted = true;
                     StartCoroutine(CloseToPuzzle());
                 }
             }
@@ -374,10 +375,13 @@ public class Inventory : MonoBehaviour
     IEnumerator CloseToPuzzle()
     {
         yield return new WaitForSeconds(1);
+        
         CloseInventory();
-        PuzzlesContoller.instance.InteractWithObject(currentInteraction);
-        PuzzlesContoller.instance.StartPuzzleLogic();
+        var tt = currentInteraction;
         InteractWithObject();//reset inventory interaction
+        PuzzlesContoller.instance.InteractWithObject(tt);
+        PuzzlesContoller.instance.StartPuzzleLogic();
+        
     }
     IEnumerator CloseToGame()
     {
