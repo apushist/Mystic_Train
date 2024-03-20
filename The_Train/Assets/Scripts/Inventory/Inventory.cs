@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] Image _neededItemSpriteEmpty;
     [SerializeField] Image _neededItemSpriteFull;
     [SerializeField] GameObject _neededItemOver;
-    [SerializeField] private TextMeshProUGUI _itemNeededCounter;
+    //[SerializeField] private TextMeshProUGUI _itemNeededCounter;
 
     [Header("Item Scale Settings")]
     [SerializeField] private RectTransform _parentSprite;
@@ -240,15 +240,6 @@ public class Inventory : MonoBehaviour
         _neededItemSpriteFull.sprite = currentInteraction._neededItem._itemImage;
         _neededItemSpriteEmpty.gameObject.SetActive(!succeed);
         _neededItemSpriteFull.gameObject.SetActive(succeed);
-        if (succeed)
-        {
-            _itemNeededCounter.text = "1 / 1";
-        }
-        else
-        {
-            _itemNeededCounter.text = "0 / 1";
-        }
-
     }
     public void OnMouseItemClick(InventoryItem item)
     {

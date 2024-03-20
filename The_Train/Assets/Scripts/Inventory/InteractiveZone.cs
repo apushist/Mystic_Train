@@ -1,22 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+
+public class MyScript : MonoBehaviour
+{
+    public bool flag;
+    public int i = 1;
+}
+
 
 public class InteractiveZone : MonoBehaviour
 {
     [SerializeField] public InteractionType _currentInterType;
-    [SerializeField] bool _destroyScriptAfterUse = true;
-    [SerializeField] bool _destroyObjectAfterUse = false;
-    [SerializeField] GameObject _attachedObjectToDestroy;
+    [SerializeField] internal bool _destroyScriptAfterUse = true;
+    [SerializeField] internal bool _destroyObjectAfterUse = false;
+    [SerializeField] internal GameObject _attachedObjectToDestroy;
     [Header("Puzzle")]
     [SerializeField] public PuzzleBase _puzzle;
     [SerializeField] public InventoryItem _winItem;
+    [Header("Lock3Item")]
+    [SerializeField] public PuzzleBase _puzzle3;
+    [SerializeField] public InventoryItem _winItem3;
     [Header("Door")]
     [SerializeField] public InventoryItem _neededItem;
     [SerializeField] public Door _attachedDoor;
 
 
     public bool TrySetItem(InventoryItem item)
+    {
+        return item._id == _neededItem._id;
+    }
+    public bool TrySetItem3(InventoryItem item)
     {
         return item._id == _neededItem._id;
     }
@@ -62,4 +77,4 @@ public class InteractiveZone : MonoBehaviour
     }
 }
 
-public enum InteractionType { lockedDoor, puzzle }
+public enum InteractionType { lockedDoor, puzzle, lock3Item }
