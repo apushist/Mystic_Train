@@ -530,6 +530,9 @@ MonoBehaviour:
   lightObject: {fileID: 1085493752}
   playerController: {fileID: 1410096035}
   newStepSound: 0
+  newCameraOrthoSize: 1.5
+  bgmController: {fileID: 760734974}
+  toDangeon: 0
 --- !u!61 &32850167
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -82408,7 +82411,7 @@ Transform:
   m_GameObject: {fileID: 1410096033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.192, y: 1.14, z: 0}
+  m_LocalPosition: {x: -8.84, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -82438,6 +82441,7 @@ MonoBehaviour:
   stepSounds:
   - {fileID: 8300000, guid: bee81f59fadf8f4489028484990332da, type: 3}
   - {fileID: 8300000, guid: eb2d4b374a7956e439f3bcff3a57dab0, type: 3}
+  virtualCamera: {fileID: 2002729288}
 --- !u!50 &1410096036
 Rigidbody2D:
   serializedVersion: 4
@@ -100861,6 +100865,9 @@ MonoBehaviour:
   lightObject: {fileID: 1085493752}
   playerController: {fileID: 1410096035}
   newStepSound: 1
+  newCameraOrthoSize: 3
+  bgmController: {fileID: 760734974}
+  toDangeon: 1
 --- !u!1001 &1702542873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121283,7 +121290,7 @@ Transform:
   m_GameObject: {fileID: 1895767426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.6027875, y: -0.2910018, z: -10}
+  m_LocalPosition: {x: -7.2507873, y: -0.7410019, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -122629,6 +122636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1410096035}
   inventory: {fileID: 2063695114}
+  bgmController: {fileID: 760734974}
   isLoading_useWhileEditing: 0
 --- !u!4 &1986208061
 Transform:
@@ -122895,7 +122903,7 @@ Transform:
   m_GameObject: {fileID: 2002729286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.6027875, y: -0.2910018, z: -10}
+  m_LocalPosition: {x: -7.2507873, y: -0.7410019, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

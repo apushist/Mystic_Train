@@ -9,13 +9,13 @@ public static class SaveSystem
 		return Application.persistentDataPath + "/data.save";
 	}
 
-    public static void Save(PlayerController controller, Inventory inventory)
+    public static void Save(PlayerController controller, Inventory inventory, BGMController bgmController)
     {
 		BinaryFormatter formatter = new BinaryFormatter();
 		string path = GetPath();
 		FileStream fileStream = new FileStream(path, FileMode.Create);
 
-		Data data = new Data(controller, inventory);
+		Data data = new Data(controller, inventory,bgmController);
 		formatter.Serialize(fileStream, data);
 
 		fileStream.Close();

@@ -13,6 +13,9 @@ public class Transfer : MonoBehaviour
 	public GameObject lightObject;
 	public PlayerController playerController;
 	public int newStepSound;
+	public float newCameraOrthoSize;
+	public BGMController bgmController;
+	public bool toDangeon;
 
 	private Animator animator;
 
@@ -46,6 +49,13 @@ public class Transfer : MonoBehaviour
 			yield return new WaitForSeconds(0.5f);
 			light.intensity = 0.9f;
 			playerController.SetSound(newStepSound);
+			playerController.virtualCamera.m_Lens.OrthographicSize = newCameraOrthoSize;
+			if (toDangeon)
+			{
+				bgmController.SetVolume(1, 0f);
+			}
+			else
+				bgmController.SetVolume(1, 0.17f);
 			playerController.canMove = true;
 		}
 	}

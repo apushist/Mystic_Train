@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BGMConroller : MonoBehaviour
+public class BGMController : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip[] clips;

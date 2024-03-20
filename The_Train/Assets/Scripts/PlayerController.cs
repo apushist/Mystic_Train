@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject playerTexture;
     public bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
 	public AudioClip[] stepSounds;
+    public CinemachineVirtualCamera virtualCamera;
 
 
     private int currentSoundNumber;
