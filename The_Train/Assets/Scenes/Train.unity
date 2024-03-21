@@ -3245,7 +3245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &203597997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53379,8 +53379,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0017499924, y: 0.31265002, z: 0}
-    m_Extent: {x: 0.99955, y: 0.68765, z: 0}
+    m_Center: {x: 0.0052999854, y: 0.30144998, z: 0}
+    m_Extent: {x: 0.9981, y: 0.69264996, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -92851,7 +92851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a83fd9441a10a4cb87bb4f2d9eb8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentInterType: 1
+  _currentInterType: 0
   _destroyScriptAfterUse: 1
   _destroyObjectAfterUse: 1
   _attachedObjectToDestroy: {fileID: 0}
@@ -139637,7 +139637,7 @@ Camera:
   far clip plane: 1000
   field of view: 15
   orthographic: 1
-  orthographic size: 1.4151785
+  orthographic size: 1.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -149481,8 +149481,8 @@ MonoBehaviour:
   _neededItemSpriteEmpty:
   - {fileID: 835660460}
   - {fileID: 1659344126}
-  - {fileID: 1659344126}
-  - {fileID: 1659344126}
+  - {fileID: 585333481}
+  - {fileID: 1990089617}
   _neededItemSpriteFull:
   - {fileID: 862736750}
   - {fileID: 1430117757}
