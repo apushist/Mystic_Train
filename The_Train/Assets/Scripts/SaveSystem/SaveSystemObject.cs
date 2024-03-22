@@ -14,7 +14,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	private void Start()
 	{
-		if(isLoading_useWhileEditing && PlayerPrefs.GetInt("IsLoading",0) == 1 && File.Exists(SaveSystem.GetPath()))
+		if(isLoading_useWhileEditing && PlayerPrefs.GetInt("IsLoading",0) == 1 && SaveSystem.SaveFileExists())
 		{
 			Loading();
 		}
@@ -61,8 +61,7 @@ public class SaveSystemObject : MonoBehaviour
 
     public void NewGame()
     {
-		PlayerPrefs.SetInt("IsLoading", 0);
-		File.Delete(SaveSystem.GetPath());
+		SaveSystem.NewGame();
 
 		ReloadScene();
 	}
