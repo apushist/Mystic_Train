@@ -22,9 +22,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	private void ReloadScene()
 	{
-
-		Scene scene = SceneManager.GetActiveScene();
-		SceneManager.LoadScene(scene.buildIndex);
+		SceneLoader.SwitchToScene("Train");
 	}
 
 	public void SaveFunction()

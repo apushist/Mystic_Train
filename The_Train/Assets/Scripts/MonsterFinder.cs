@@ -22,7 +22,6 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] float _rageSpeed;
 
 
-    private Rigidbody2D _rig;
     private Transform _currentPatrolPoint;
     private int _currentPatrolIndex = 0;
 
@@ -30,13 +29,15 @@ public class MonsterFinder : MonoBehaviour
 
     private NavMeshAgent _agent;
 
+    private AudioSource _audioSource;
+
     void Start()
     {
-        _rig = GetComponent<Rigidbody2D>(); 
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _agent.speed = _seePlayerAllTime ? _rageSpeed : _baseSpeed;
+        _audioSource = GetComponent<AudioSource>();     
 
         if (_patrolPoints.Length == 0)
         {
@@ -50,6 +51,12 @@ public class MonsterFinder : MonoBehaviour
 
     void Update()
     {
+        if (ReachedDestination() && _audioSource.isPlaying)
+            PlayFootSteps(false);
+        else if(!ReachedDestination() && !_audioSource.isPlaying)
+            PlayFootSteps(true);
+
+
         if (_seePlayerAllTime)
         {
             _agent.SetDestination(_playerTarget.position);
@@ -135,6 +142,14 @@ public class MonsterFinder : MonoBehaviour
         _isStanding = true;
         yield return new WaitForSeconds(t);
         _isStanding = false;
+    }
+
+    void PlayFootSteps(bool p)
+    {
+        if (p)
+            _audioSource.UnPause();
+        else
+            _audioSource.Pause();
     }
 
 }
