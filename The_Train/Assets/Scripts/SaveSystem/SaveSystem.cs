@@ -24,7 +24,7 @@ public static class SaveSystem
 	public static Data Load()
 	{
 		string path = GetPath();
-		if(File.Exists(path))
+		if(SaveFileExists())
 		{
 
 			BinaryFormatter formatter = new BinaryFormatter();
@@ -39,5 +39,18 @@ public static class SaveSystem
 		{
 			return null;
 		}
+	}
+
+	public static void NewGame()
+	{
+		PlayerPrefs.SetInt("IsLoading", 0);
+		if(SaveFileExists()) 
+			File.Delete(GetPath());
+
+	}
+
+	public static bool SaveFileExists()
+	{
+		return File.Exists(GetPath());
 	}
 }
