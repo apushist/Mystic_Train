@@ -174,6 +174,7 @@ public class Inventory : MonoBehaviour
                 {
                     AddItem(currentInteraction._neededItem3[i]._id);
                 }
+                currentInteraction._neededItem3setted[i] = false;
             }
         }
         if (movingItem)
@@ -200,6 +201,7 @@ public class Inventory : MonoBehaviour
     }
     public void InteractWithObject(InteractiveZone col = null)
     {
+        if (col != null && col._currentInterType == InteractionType.lock3Item && col._isLock3Setted) return;
         if (col != null)
         {
             currentInteraction = col;
@@ -377,8 +379,10 @@ public class Inventory : MonoBehaviour
         yield return new WaitForSeconds(1);
         CloseInventory();
         var tt = currentInteraction;
+        InteractWithObject();//reset last interaction if it destroyed
         PuzzlesContoller.instance.InteractWithObject(tt);
         PuzzlesContoller.instance.StartPuzzleLogic();
+        
     }
     IEnumerator CloseToGame()
     {
