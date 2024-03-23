@@ -13,7 +13,8 @@ public class MonsterRunTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            _monster.gameObject.SetActive(true);
+            _monster.OnMonsterAlive();
+            gameObject.SetActive(false);
         }
     }
 }

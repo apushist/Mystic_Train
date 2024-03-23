@@ -12,6 +12,11 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] bool _usePatrolPaths = true;
     [SerializeField] float _baseSpeed;
     [SerializeField] Transform[] _patrolPoints;
+    [SerializeField] AudioSource _roarAudioSource;
+    [SerializeField] AudioClip _roarStartClip;
+    [SerializeField] AudioClip _roarEndClip;
+    [SerializeField] GameObject _deathEffect;
+
 
     [Header("FoundSettings")]
     [SerializeField] LayerMask _layerMask;
@@ -69,6 +74,7 @@ public class MonsterFinder : MonoBehaviour
         {
             if (TrySeePlayer())
             {
+                StartRoar();
                 _seePlayerNow = true;
                 _agent.speed = _rageSpeed;
             }
@@ -150,6 +156,25 @@ public class MonsterFinder : MonoBehaviour
             _audioSource.UnPause();
         else
             _audioSource.Pause();
+    }
+
+    public void OnMonsterAlive()
+    {
+        if((_seePlayerAllTime || _seePlayerNow)&& _roarAudioSource!=null && _roarStartClip!=null)
+            StartRoar();
+        gameObject.SetActive(true);
+    }
+    public void OnMonsterDeath()
+    {
+        if ((_seePlayerAllTime || _seePlayerNow) && _roarAudioSource != null && _roarStartClip != null)
+            _roarAudioSource.PlayOneShot(_roarEndClip);
+        var deathVFX = Instantiate(_deathEffect, transform.position, Quaternion.identity);
+        Destroy(deathVFX, 4);
+        gameObject.SetActive(false);
+    }
+    private void StartRoar()
+    {
+        _roarAudioSource.PlayOneShot(_roarStartClip);
     }
 
 }
