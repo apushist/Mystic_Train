@@ -7,11 +7,15 @@ public class MonsterCountTrigger : MonoBehaviour
 {
     [SerializeField] Transform[] _tpPositions;
     [SerializeField] MonsterFinder _monster;
+    [SerializeField] SaveSystemObject _saveSystemObject;
     bool[] _itemsCheck;
     int _lastItem;
+    bool _triggerMonster;
+
     void Start()
     {
         _itemsCheck = new bool[_tpPositions.Length];
+        _triggerMonster = false;
     }
     public void AddItem(int i)
     {
@@ -19,7 +23,8 @@ public class MonsterCountTrigger : MonoBehaviour
         _lastItem = i;
         if (CheckAll())
         {
-            TriggerMonster();
+            _saveSystemObject.SaveFunction();
+            _triggerMonster = true;
         }
     }
 
@@ -40,4 +45,12 @@ public class MonsterCountTrigger : MonoBehaviour
         }
         return true;
     }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        if (collision.CompareTag("Player") && _triggerMonster)
+        {
+			TriggerMonster();
+		}
+	}
 }
