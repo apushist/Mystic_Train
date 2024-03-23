@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEditor.PackageManager.Requests;
+using UnityEngine.Rendering.Universal;
 
 public class SaveSystemObject : MonoBehaviour
 {
     public PlayerController controller;
     public Inventory inventory;
 	public BGMController bgmController;
+	public Light2D globalLight;
+	public Light2D playerLight;
 	public bool isLoading_useWhileEditing;
 
 	private void Start()
