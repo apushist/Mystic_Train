@@ -12,8 +12,8 @@ public class ColorPanelsPuzzle : PuzzleBase
     [SerializeField] private RectTransform _parentSprite;
     [SerializeField] private RectTransform _dragSpace;
 
-    [SerializeField] private RectTransform[] _verticals; ////hide
-    [SerializeField] private RectTransform[] _gorizontals; //hide    
+    [HideInInspector] private RectTransform[] _verticals; ////hide
+    [HideInInspector] private RectTransform[] _gorizontals; //hide    
 
     [SerializeField] internal Sprite[] _itemsReference;
 
@@ -40,6 +40,7 @@ public class ColorPanelsPuzzle : PuzzleBase
     private void Awake()
     {
         instance = this;
+        EnableThisPuzzle(false);
     }
     private void Start()
     {
@@ -175,7 +176,7 @@ public class ColorPanelsPuzzle : PuzzleBase
         Destroy(_draggingPanel.gameObject);
         if (CheckForWin())
         {
-            Debug.Log("win");
+            WinPuzzle();
         }
     }
 
@@ -381,6 +382,25 @@ public class ColorPanelsPuzzle : PuzzleBase
             }
         }
         return true;
+    }
+    public override void WinPuzzle()
+    {
+        EnableThisPuzzle(false);
+        PuzzlesContoller.instance.Win();
+    }
+    public override void LoosePuzzle()
+    {
+        StopAllCoroutines();
+        EnableThisPuzzle(false);
+        PuzzlesContoller.instance.Loose();
+    }
+    private void EnableThisPuzzle(bool isOn)
+    {
+        _puzzleScreen.SetActive(isOn);
+    }
+    public override void StartPuzzle()
+    {
+        EnableThisPuzzle(true);
     }
     IEnumerator RotatePanelIE()
     {
