@@ -30,7 +30,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	public void SaveFunction()
     {
-        SaveSystem.Save(controller, inventory,bgmController);
+        SaveSystem.Save(controller, inventory,bgmController,globalLight,playerLight);
     }
 
     public void LoadFunction()
@@ -58,6 +58,14 @@ public class SaveSystemObject : MonoBehaviour
 		bgmController.clipVolumes = data.bgmVolumes;
 
 		controller.virtualCamera.m_Lens.OrthographicSize = data.cameraOrthoSize;
+
+		float[] gl = data.globalLight;
+		globalLight.intensity = gl[0];
+		globalLight.color = new Color(gl[1], gl[2], gl[3], gl[4]);
+
+		float[] pl = data.playerLight;
+		playerLight.intensity = pl[0];
+		playerLight.color = new Color(pl[1], pl[2], pl[3], pl[4]);
 	}
 
     public void NewGame()
