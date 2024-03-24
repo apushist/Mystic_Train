@@ -8,6 +8,7 @@ public class MonsterCountTrigger : MonoBehaviour
     [SerializeField] Transform[] _tpPositions;
     [SerializeField] MonsterFinder _monster;
     [SerializeField] SaveSystemObject _saveSystemObject;
+    [SerializeField] GameObject _monsterDeathTrigger;
     bool[] _itemsCheck;
     int _lastItem;
     bool _triggerMonster;
@@ -16,6 +17,7 @@ public class MonsterCountTrigger : MonoBehaviour
     {
         _itemsCheck = new bool[_tpPositions.Length];
         _triggerMonster = false;
+        _monsterDeathTrigger.SetActive(false);
     }
     public void AddItem(int i)
     {
@@ -23,8 +25,9 @@ public class MonsterCountTrigger : MonoBehaviour
         _lastItem = i;
         if (CheckAll())
         {
-            _saveSystemObject.SaveFunction();
             _triggerMonster = true;
+            _saveSystemObject.SaveFunction();
+            
         }
     }
 
@@ -32,6 +35,7 @@ public class MonsterCountTrigger : MonoBehaviour
     {
         _monster.transform.position = _tpPositions[_lastItem].position;
         _monster.StartMonsterRage();
+        _monsterDeathTrigger.SetActive(true);
     }
 
     public bool CheckAll()
@@ -51,6 +55,8 @@ public class MonsterCountTrigger : MonoBehaviour
         if (collision.CompareTag("Player") && _triggerMonster)
         {
 			TriggerMonster();
+            Debug.Log("Run!!!");
+            gameObject.SetActive(false);
 		}
 	}
 }

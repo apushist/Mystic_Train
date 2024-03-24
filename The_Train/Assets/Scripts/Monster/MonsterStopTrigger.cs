@@ -8,7 +8,7 @@ public class MonsterStopTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.transform.GetComponent<MonsterFinder>()!=null)
         {
             _monster.OnMonsterDeath();
             gameObject.SetActive(false);
