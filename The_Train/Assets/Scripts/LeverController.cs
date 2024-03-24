@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttachedItemType { markedWall, spike };
+public enum AttachedItemType { markedWall, spike, empty };
 
 public class LeverController : MonoBehaviour
 {
@@ -40,8 +40,9 @@ public class LeverController : MonoBehaviour
 					spikesController = attachedItem.GetComponent<SpikesController>();
 					break;
 				}
-
-		}
+            default:
+                break;
+        }
 	}
 
     // Update is called once per frame
@@ -59,7 +60,9 @@ public class LeverController : MonoBehaviour
 					case AttachedItemType.spike:
 						spikesController.Activate();
 						break;
-				}
+                    default:
+                        break;
+                }
 			}
             else
             {
@@ -71,7 +74,9 @@ public class LeverController : MonoBehaviour
 					case AttachedItemType.spike:
 						spikesController.Disactivate();
 						break;
-				}
+                    default:
+                        break;
+                }
 			}
 			IsRight = !IsRight;
 
