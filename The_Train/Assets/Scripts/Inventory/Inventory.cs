@@ -32,6 +32,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemNameText;
     [SerializeField] private TextMeshProUGUI _itemDescriptionText;
     [SerializeField] private Image _itemBigImage;
+    [SerializeField] GameObject _plank;
 
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
@@ -94,12 +95,14 @@ public class Inventory : MonoBehaviour
         _itemNameText.text = item._name;
         _itemDescriptionText.text = item._description;
         _itemBigImage.sprite = item._itemImage;
+        _plank.SetActive(true);
     }
     public void HideMoreInfoItem(InventoryItem item)
     {
         _itemNameText.text = "";
         _itemDescriptionText.text = "";
         _itemBigImage.sprite = _itemSpriteEmpty;
+        _plank.SetActive(false);
     }
 
     public void GenerateGrid()

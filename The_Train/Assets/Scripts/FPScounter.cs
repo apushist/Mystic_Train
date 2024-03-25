@@ -11,22 +11,19 @@ public class FPScounter : MonoBehaviour
     int fps = 0;
     void Awake()
     {
+        QualitySettings.vSyncCount = 0;
         switch (_lockState)
         {
-            case lockStates.lock30:
-                QualitySettings.vSyncCount = 0;  
+            case lockStates.lock30:              
                 Application.targetFrameRate = 30;
                 break;
             case lockStates.lock60:
-                QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = 60;
                 break;
             case lockStates.lock120:
-                QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = 120;
                 break;
             case lockStates.unlock:
-                QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = -1;
                 break;
         }

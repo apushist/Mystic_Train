@@ -137,7 +137,6 @@ public class TubePuzzle : PuzzleBase
         {
             _startTimeCounter.text = i.ToString();
             yield return new WaitForSeconds(1f);
-            Debug.Log(i);
         }
         _startTimeCounter.text = "!!!";
         FillNextTile(_startPoint, _startInput);
