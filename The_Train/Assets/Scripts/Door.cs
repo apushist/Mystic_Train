@@ -1,32 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+public enum DoorType { Door,Gate };
 
 public class Door : MonoBehaviour
 {
-	public GameObject doorManager;
+	public DoorType type;
 	public bool isLocked;
+	[Header("Door")]
+	public GameObject doorManager;
+	[Header("Gate")]
+	public GameObject objectToDestroy;
 	private Animator anim;
 	private AudioSource audioSource;
 
 	// Start is called before the first frame update
 	void Start()
-    {
-        anim = doorManager.GetComponent<Animator>();
+	{
 		audioSource = GetComponent<AudioSource>();
+		switch (type)
+		{
+			case DoorType.Door: {
+					anim = doorManager.GetComponent<Animator>();
+					break;
+				}
+			case DoorType.Gate:
+				{
+					anim = GetComponentInChildren<Animator>();
+					break ;
+				}
+		}
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (!isLocked)
 		{
-			anim.SetBool("IsPlayerNear", true);
+			switch (type)
+			{
+				case DoorType.Door: { anim.SetBool("IsPlayerNear", true); break; }
+				case DoorType.Gate: {
+					anim.SetTrigger("Open");
+					Destroy(objectToDestroy);
+					break;
+				}
+			}
+			
 		}
 	}
 
+
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (!isLocked)
+		if (!isLocked && type == DoorType.Door)
 		{
 			anim.SetBool("IsPlayerNear", false);
 		}
