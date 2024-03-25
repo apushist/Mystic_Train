@@ -8,6 +8,7 @@ public class LeverController : MonoBehaviour
 	[SerializeField] GameObject leverAnimationObject;
 	public AttachedItemType type;
 	public GameObject attachedItem;
+	
 
 	public bool IsRight;
 
@@ -18,12 +19,14 @@ public class LeverController : MonoBehaviour
 	private Animator anim;
 	private Animator attachedAnim = null;
 	private SpikesController spikesController;
+	private AudioSource audioSource;
 
 	// Start is called before the first frame update
 	void Start()
     {
 		_supportTextView.SetActive(false);
         anim = leverAnimationObject.GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 		switch (type)
 		{
 			case AttachedItemType.markedWall:
@@ -54,7 +57,9 @@ public class LeverController : MonoBehaviour
 				switch (type)
 				{
 					case AttachedItemType.markedWall:
-						attachedAnim.SetBool("IsActivated", false); break;
+						attachedAnim.SetBool("IsActivated", false);
+						audioSource.Play();
+						break;
 					case AttachedItemType.spike:
 						spikesController.Activate();
 						break;
@@ -68,6 +73,7 @@ public class LeverController : MonoBehaviour
 				switch (type)
 				{
 					case AttachedItemType.markedWall:
+						audioSource.Play();
 						attachedAnim.SetBool("IsActivated", true); break;
 					case AttachedItemType.spike:
 						spikesController.Disactivate();
