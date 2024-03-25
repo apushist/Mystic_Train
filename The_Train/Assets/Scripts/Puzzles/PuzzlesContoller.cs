@@ -71,7 +71,7 @@ public class PuzzlesContoller : MonoBehaviour
     public void Win()
     {
         isOpened = false;
-        Inventory.instance.AddItem(currentInteraction._winItem._id);
+        if(currentInteraction._winItem!=null) Inventory.instance.AddItem(currentInteraction._winItem._id);
         bool destroyed = currentInteraction.AfterUse();
         if (destroyed)
         {
