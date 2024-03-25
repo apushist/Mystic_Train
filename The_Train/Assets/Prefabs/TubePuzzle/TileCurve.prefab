@@ -146,10 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efce7431374f882488d33ea683dcccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationTime: 0.2
-  _rotationFrames: 30
-  _fillTime: 1
-  _fillFrames: 100
+  _rotationFrames: 10
+  _fillFrames: 40
   _clickable: 1
   _tube: {fileID: 5035904145517777873}
   _tubeContent: {fileID: 8014047504402106370}
