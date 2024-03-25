@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,20 +10,25 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveDirection;
     public float stepSoundRate = 0.5F;
-    public AudioSource stepSound;
+    public AudioSource stepSoundSource;
     public GameObject playerTexture;
-
-    private Animator animator;
-
-    private float nextStep = 0.0F;
-
     public bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
+	public AudioClip[] stepSounds;
+    public CinemachineVirtualCamera virtualCamera;
 
-    public static event Action Epressed;
+
+    private int currentSoundNumber;
+	private Animator animator;
+	private float nextStep = 0.0F;
+	public static event Action Epressed;
 
 	private void Start()
 	{
 		animator = playerTexture.GetComponent<Animator>();
+        if(stepSoundSource.clip == null && stepSounds.Length > 0)
+        {
+            SetSound(0);
+		}
 	}
 
 	// Update is called once per frame
@@ -55,8 +61,8 @@ public class PlayerController : MonoBehaviour
             if (Time.time > nextStep && (moveX != 0 || moveY != 0))
             {
                 nextStep = Time.time + stepSoundRate;
-                stepSound.pitch = UnityEngine.Random.Range(0.4f, 1.0f);
-                stepSound.Play();
+                stepSoundSource.pitch = UnityEngine.Random.Range(0.4f, 1.0f);
+                stepSoundSource.PlayOneShot(stepSoundSource.clip,0.5f);
             }
         }
         else
@@ -128,4 +134,24 @@ public class PlayerController : MonoBehaviour
 		animator.SetBool("IsLeft", false);
 		animator.SetBool("IsRight", false);
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeathZone"))
+        {
+            Debug.Log("death");
+            Death.instance.OnDeathTrigger();
+        }
+    }
+
+    public void SetSound(int soundNumber)
+    {
+        if(soundNumber >= 0 && soundNumber < stepSounds.Length)
+        {
+			stepSoundSource.clip = stepSounds[soundNumber];
+            currentSoundNumber = soundNumber;
+		}
+    }
+
+    public int GetSoundNumber() { return currentSoundNumber;}
 }

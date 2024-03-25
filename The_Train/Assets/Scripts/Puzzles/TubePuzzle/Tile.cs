@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class Tile : MonoBehaviour
 {
     internal Vector2 _index;
-    [SerializeField] private float _rotationTime;
     [SerializeField] private float _rotationFrames;
-    [SerializeField] internal float _fillTime;
     [SerializeField] internal float _fillFrames;
     [SerializeField] internal bool _clickable = true;
     [SerializeField] private RectTransform _tube;
@@ -31,31 +29,31 @@ public class Tile : MonoBehaviour
     {
         if (_clickable)
         {
-            StartCoroutine(rotationLerp(_rotationTime, _rotationFrames));
+            StartCoroutine(rotationLerp(_rotationFrames));
         }
     }
 
-    IEnumerator rotationLerp(float time, float frames)
+    IEnumerator rotationLerp(float frames)
     {
         _clickable = false;
         inRotate = true;
         for(int i = 0; i < frames; i++)
         {
             _tube.Rotate(new Vector3(0, 0, -90 / frames));
-            yield return new WaitForSeconds(time / frames);
+            yield return new WaitForFixedUpdate();
         }
         ChangeDirection();
 
         _clickable = true;
         inRotate = false;
     }
-    public IEnumerator FillThis(float time, float frames)
+    public IEnumerator FillThis(float frames)
     {
         _clickable = false;
         for (int i = 0; i < frames; i++)
         {
             _tubeContent.fillAmount = 1f / frames * (i+1);
-            yield return new WaitForSeconds(time / frames);
+            yield return new WaitForFixedUpdate();
         }
         TubePuzzle.instance.FillNextTile(_index, outputDir);
     }

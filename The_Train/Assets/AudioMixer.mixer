@@ -143,6 +143,7 @@ AudioMixerController:
     - 89afc051baf98954d9aa71fa04d866f5
     - 03f643225e9581e41809382a47632a79
     - a32d4a701d8c52147b4a717e8e24038e
+    - 692a6ab5407242c4dbd41ba72038d831
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -225,6 +226,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -4191866050170357938}
   - {fileID: 8730780566699113086}
+  - {fileID: 7156246864322269853}
   m_Volume: 61fe0c2061976d44aa8befe7dee1f3b2
   m_Pitch: a887de0f69fbb5b45ab126fb53d152e1
   m_Send: 00000000000000000000000000000000
@@ -249,6 +251,25 @@ AudioMixerSnapshotController:
     6f0bde1c6d9e98f40b2c359df94857ae: -0.27209902
     1c28c17f6a0c2974ca10d270f03e446a: 0
   m_TransitionOverrides: {}
+--- !u!243 &7156246864322269853
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Scares
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 692a6ab5407242c4dbd41ba72038d831
+  m_Children: []
+  m_Volume: 25a6d1042a97a02438c7030d0bc49861
+  m_Pitch: 8613da774ee0e054f845107272fef80d
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 9043176554943984617}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &7229010833670847182
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -304,3 +325,17 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &9043176554943984617
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 27f22bc4c112bc14bbfca0f84d0b2904
+  m_EffectName: Attenuation
+  m_MixLevel: 2808c8897d9003f458817a305f070afc
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

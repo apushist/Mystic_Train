@@ -4,21 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
 public class Inventory : MonoBehaviour
 {
     [Header("Main Settings")]
     [SerializeField] GameObject _inventoryScreen;
     [SerializeField] GameObject _changedItemView;
-    [SerializeField] GameObject _neededItemView;
+    [SerializeField] GameObject[] _neededItemView;
+    [SerializeField] GameObject _neededItemView3;
     [SerializeField] GameObject _supportTextView;
     [SerializeField] public Sprite _itemSpriteEmpty;
     [SerializeField] InventoryItem _inventoryItemDefault;
 
     [Header("Item Needed Settings")]
-    [SerializeField] Image _neededItemSpriteEmpty;
-    [SerializeField] Image _neededItemSpriteFull;
-    [SerializeField] GameObject _neededItemOver;
-    [SerializeField] private TextMeshProUGUI _itemNeededCounter;
+    [SerializeField] Image[] _neededItemSpriteEmpty;
+    [SerializeField] Image[] _neededItemSpriteFull;
+    [SerializeField] GameObject[] _neededItemOver;
 
     [Header("Item Scale Settings")]
     [SerializeField] private RectTransform _parentSprite;
@@ -30,15 +32,19 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemNameText;
     [SerializeField] private TextMeshProUGUI _itemDescriptionText;
     [SerializeField] private Image _itemBigImage;
+    [SerializeField] GameObject _plank;
 
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
+    bool canUseInventory = true;
     bool isOpened;
     bool nearInteractionObject;
     internal bool movingItem;
     InteractiveZone currentInteraction;
     float _itemSize;
     public static Inventory instance;
+
+    private AudioSource _audioSource;
 
     //support fields
     PlayerController pl;
@@ -53,6 +59,7 @@ public class Inventory : MonoBehaviour
         dm = FindObjectOfType<DialogueManager>();
         pm = FindObjectOfType<PauseMenu>();
         PlayerController.Epressed += PressKeyInventory;
+        _audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -60,14 +67,18 @@ public class Inventory : MonoBehaviour
         CloseInventory();
         _itemSize = ((_parentSprite.offsetMax.x - _parentSprite.offsetMin.x) - (_itemEndOffset * 2) - (_itemOffset * (_itemCount - 1))) / _itemCount;
         GenerateGrid();
-        ChangeInventoryView(true);
+        ChangeInventoryView(0);
         UpdateSupportInteractTextView(false);
-        MouseExitItemNeeded();
+        for (int i = 0; i < _neededItemView.Length; i++)
+        {
+            MouseExitItemNeeded(i);
+        }
     }
     public void AddItem(int ident)
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
         items.Add(item);
+        _audioSource.Play();
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
             if (itemsGrid[i].empty)
@@ -75,7 +86,7 @@ public class Inventory : MonoBehaviour
                 itemsGrid[i].SetNewItem(item, false);
                 return;
             }
-        }
+        }      
         Debug.Log("Full Inventory!");
     }
 
@@ -84,12 +95,14 @@ public class Inventory : MonoBehaviour
         _itemNameText.text = item._name;
         _itemDescriptionText.text = item._description;
         _itemBigImage.sprite = item._itemImage;
+        _plank.SetActive(true);
     }
     public void HideMoreInfoItem(InventoryItem item)
     {
         _itemNameText.text = "";
         _itemDescriptionText.text = "";
         _itemBigImage.sprite = _itemSpriteEmpty;
+        _plank.SetActive(false);
     }
 
     public void GenerateGrid()
@@ -111,7 +124,7 @@ public class Inventory : MonoBehaviour
     }
     public void PressKeyInventory()
     {
-        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened)
+        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened && canUseInventory)
         {
             if (isOpened)
             {
@@ -129,19 +142,44 @@ public class Inventory : MonoBehaviour
         _inventoryScreen.SetActive(true);
         isOpened = true;
         DeselectAllItems();
-        MouseExitItemNeeded();
+        for(int i = 0; i<_neededItemView.Length; i++)
+        {
+            MouseExitItemNeeded(i);
+        }
+        
         if (nearInteractionObject)
         {
-            ChangeInventoryView(false);
-            UpdateNeededItemSpriteView(false);
+            if (currentInteraction._currentInterType == InteractionType.lockedDoor)
+            {
+                ChangeInventoryView(1);
+                UpdateNeededItemSpriteView(false);
+            }
+            else if(currentInteraction._currentInterType == InteractionType.lock3Item)
+            {
+                ChangeInventoryView(2);
+                UpdateNeededItemSpriteView3(false, 1);
+                UpdateNeededItemSpriteView3(false, 2);
+                UpdateNeededItemSpriteView3(false, 3);
+            }
         }
         else
         {
-            ChangeInventoryView(true);
+            ChangeInventoryView(0);
         }
     }
     public void CloseInventory()
     {
+        if (currentInteraction!=null && currentInteraction._currentInterType == InteractionType.lock3Item && !currentInteraction._isLock3Setted)
+        {
+            for (int i = 0; i < currentInteraction._neededItem3.Length; i++)
+            {
+                if (currentInteraction._neededItem3setted[i])
+                {
+                    AddItem(currentInteraction._neededItem3[i]._id);
+                }
+                currentInteraction._neededItem3setted[i] = false;
+            }
+        }
         if (movingItem)
         {
             RevertMovedItem();           
@@ -158,13 +196,15 @@ public class Inventory : MonoBehaviour
             i.MouseExit();
         }
     }
-    void ChangeInventoryView(bool b)
+    void ChangeInventoryView(int b)
     {
-        _changedItemView.SetActive(b);
-        _neededItemView.SetActive(!b);
+        _changedItemView.SetActive(b==0);
+        _neededItemView[0].SetActive(b==1);
+        _neededItemView3.SetActive(b==2);
     }
     public void InteractWithObject(InteractiveZone col = null)
     {
+        if (col != null && col._currentInterType == InteractionType.lock3Item && col._isLock3Setted) return;
         if (col != null)
         {
             currentInteraction = col;
@@ -188,13 +228,15 @@ public class Inventory : MonoBehaviour
             {
                 UpdateNeededItemSpriteView(successed);
                 currentInteraction._attachedDoor.SetDoorLock(false);
-                DestroyMovedItem();
-                bool destroyed = currentInteraction.AfterUse();
-                if (destroyed)
+                if (moveItem._itemUseCount > 0)
                 {
-                    InteractWithObject();//reset last interaction if it destroyed
+                    moveItem._itemUseCount--;
+                    RevertMovedItem();//multiple use
                 }
-                CloseInventory();
+                else
+                    DestroyMovedItem();//only one use
+
+                StartCoroutine(CloseToGame());
             }
             else
             {
@@ -205,18 +247,47 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("error item interact set");
         }
-        MouseExitItemNeeded();
+        MouseExitItemNeeded(0);
     }
-    public void MouseEnterItemNeeded()
+    public void TrySetItemInteractable3(int i)
+    {
+        if (nearInteractionObject && currentInteraction != null && movingItem && !currentInteraction.CheckAllItemNeededSetted())
+        {
+            bool successed = currentInteraction.TrySetItem3(moveItem, i-1);
+
+            if (successed)
+            {
+                UpdateNeededItemSpriteView3(successed, i);
+
+                DestroyMovedItem();//only one use
+                currentInteraction.AddItemNeeded(i-1);
+                if (currentInteraction.CheckAllItemNeededSetted())
+                {
+                    currentInteraction._isLock3Setted = true;
+                    StartCoroutine(CloseToPuzzle());
+                }
+            }
+            else
+            {
+                RevertMovedItem();
+            }
+        }
+        else
+        {
+            Debug.Log("error item interact set");
+        }
+        MouseExitItemNeeded(0);
+    }
+    public void MouseEnterItemNeeded(int i)
     {
         if (nearInteractionObject && currentInteraction != null && movingItem)
         {
-            _neededItemOver.SetActive(true);
+            _neededItemOver[i].SetActive(true);
         }
     }
-    public void MouseExitItemNeeded()
+    public void MouseExitItemNeeded(int i)
     {
-        _neededItemOver.SetActive(false);
+        _neededItemOver[i].SetActive(false);
     }
     void UpdateSupportInteractTextView(bool enabl)
     {
@@ -224,20 +295,19 @@ public class Inventory : MonoBehaviour
     }
     public void UpdateNeededItemSpriteView(bool succeed)
     {
-        _neededItemSpriteEmpty.sprite = currentInteraction._neededItem._itemImage;
-        _neededItemSpriteFull.sprite = currentInteraction._neededItem._itemImage;
-        _neededItemSpriteEmpty.gameObject.SetActive(!succeed);
-        _neededItemSpriteFull.gameObject.SetActive(succeed);
-        if (succeed)
-        {
-            _itemNeededCounter.text = "1 / 1";
-        }
-        else
-        {
-            _itemNeededCounter.text = "0 / 1";
-        }
-
+        _neededItemSpriteEmpty[0].sprite = currentInteraction._neededItem._itemImage;
+        _neededItemSpriteFull[0].sprite = currentInteraction._neededItem._itemImage;
+        _neededItemSpriteEmpty[0].gameObject.SetActive(!succeed);
+        _neededItemSpriteFull[0].gameObject.SetActive(succeed);
     }
+    public void UpdateNeededItemSpriteView3(bool succeed, int i)
+    {
+        _neededItemSpriteEmpty[i].sprite = currentInteraction._neededItem3[i - 1]._itemImage;
+        _neededItemSpriteFull[i].sprite = currentInteraction._neededItem3[i - 1]._itemImage;
+        _neededItemSpriteEmpty[i].gameObject.SetActive(!succeed);
+        _neededItemSpriteFull[i].gameObject.SetActive(succeed);
+    }
+
     public void OnMouseItemClick(InventoryItem item)
     {
         if (movingItem)
@@ -293,11 +363,42 @@ public class Inventory : MonoBehaviour
         moveItem = null;
         movingItem = false;
     }
+
+    public void BlockInventory()
+    {
+        canUseInventory = false;
+        if(isOpened) CloseInventory();
+        UpdateSupportInteractTextView(false);
+    }
     private void Update()
     {
         if (movingItem)
         {
             moveItem.GetComponent<RectTransform>().position = Input.mousePosition + new Vector3(10, -10, 0);
         }
+    }
+    IEnumerator CloseToPuzzle()
+    {
+        yield return new WaitForSeconds(1);
+        CloseInventory();
+        var tt = currentInteraction;
+        InteractWithObject();//reset last interaction if it destroyed
+        PuzzlesContoller.instance.InteractWithObject(tt);
+        PuzzlesContoller.instance.StartPuzzleLogic();
+        
+    }
+    IEnumerator CloseToGame()
+    {
+        yield return new WaitForSeconds(1);
+        bool destroyed = currentInteraction.AfterUse();
+        if (destroyed)
+        {
+            InteractWithObject();//reset last interaction if it destroyed
+        }
+        CloseInventory();
+    }
+    public List<InventoryItem> GetItems()
+    {
+        return items;
     }
 }

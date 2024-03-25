@@ -89,10 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dbcbf2c93f604841902f19c2cc0ab87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 3
-  _name: "\u041A\u043B\u044E\u0447"
+  _id: 52
+  _name: "\u0421\u0435\u0440\u0435\u0431\u0440\u044F\u043D\u044B\u0439 \u043A\u043B\u044E\u0447"
   _description: "\u041A\u043B\u044E\u0447 \u043E\u0442 \u0447\u0435\u0433\u043E-\u0442\u043E"
   _itemImage: {fileID: 21300000, guid: 8a1972b5860b227429110ec3b0faa44a, type: 3}
+  _itemUseCount: 0
   empty: 0
   _objectImage: {fileID: 0}
   _overlayImage: {fileID: 0}

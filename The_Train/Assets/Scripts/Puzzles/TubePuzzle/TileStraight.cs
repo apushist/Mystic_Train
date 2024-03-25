@@ -8,7 +8,7 @@ public class TileStraight : Tile
     public override void StartFilling()
     {
         _tubeContent.fillOrigin = (int)Image.OriginHorizontal.Left;
-        StartCoroutine(FillThis(_fillTime, _fillFrames));
+        StartCoroutine(FillThis(_fillFrames));
     }
     public override bool CheckInputDirectionValid(Direction input)
     {
