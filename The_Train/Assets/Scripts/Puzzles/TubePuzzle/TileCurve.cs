@@ -18,7 +18,7 @@ public class TileCurve : Tile
         {
             _tubeContent.fillClockwise = true;
         }
-        StartCoroutine(FillThis(_fillTime, _fillFrames));
+        StartCoroutine(FillThis(_fillFrames));
     }
     public override bool CheckInputDirectionValid(Direction input)
     {
