@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -8,6 +7,7 @@ public enum ActionType { Flicker, Change, Candle };
 public class Lights : MonoBehaviour
 {
 	[SerializeField] public ActionType type;
+	public GameObject objectToDestroy;
 	[Header("Flicker")]
 	[SerializeField] public GameObject lightObject;
 	[Header("Change")]
@@ -23,7 +23,7 @@ public class Lights : MonoBehaviour
 
 	private void Start()
 	{
-		safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
+		//safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
 		if(type == ActionType.Candle)
 		{
 			candlelight = candleLightObject.GetComponent<Light2D>();
@@ -40,11 +40,13 @@ public class Lights : MonoBehaviour
 				case ActionType.Change:
 					{
 						StartCoroutine(changeLight());
+						Destroy(objectToDestroy);
 						break;
 					}
 				case ActionType.Flicker:
 					{
 						StartCoroutine(flickerLight());
+						Destroy(objectToDestroy);
 						break;
 
 					}
@@ -69,6 +71,7 @@ public class Lights : MonoBehaviour
 			}
 			if(leaveOn)
 				flickerlight.intensity = 0.9f;
+			
 		}
 	}
 
@@ -80,7 +83,6 @@ public class Lights : MonoBehaviour
 		Light2D light2 = lightOn.GetComponent<Light2D>();
 		light1.enabled = false;
 		light2.enabled = true;
-		
 	}
 
 	IEnumerator candle()

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 using UnityEngine.Rendering.Universal;
 
 public class Transfer : MonoBehaviour
@@ -10,7 +8,8 @@ public class Transfer : MonoBehaviour
 	public float newY;
 	public GameObject animationTexture;
 	public float animationLength;
-	public GameObject lightObject;
+	public Light2D playerLight;
+	public Light2D globalLight;
 	public PlayerController playerController;
 	public int newStepSound;
 	public float newCameraOrthoSize;
@@ -40,22 +39,26 @@ public class Transfer : MonoBehaviour
 	{
 		if (!safeModeOn)
 		{
-			Light2D light = lightObject.GetComponent<Light2D>();
-			animator.SetTrigger("ActivateMonster");//Todo добавить название триггера
+			float ogPlayerIntensity = playerLight.intensity;
+			animator.SetTrigger("");//Todo добавить название триггера
 			yield return new WaitForSeconds(animationLength);
-			light.intensity = 0;
+			playerLight.intensity = 0;
 			playerController.canMove = false;			
 			collision.transform.position = new Vector3(newX, newY, 0);
 			yield return new WaitForSeconds(0.5f);
-			light.intensity = 0.9f;
 			playerController.SetSound(newStepSound);
 			playerController.virtualCamera.m_Lens.OrthographicSize = newCameraOrthoSize;
 			if (toDangeon)
 			{
 				bgmController.SetVolume(1, 0f);
+				playerLight.intensity = ogPlayerIntensity;
 			}
 			else
+			{
 				bgmController.SetVolume(1, 0.17f);
+				globalLight.color = new Color(208, 255, 224);
+				globalLight.intensity = 0.6f;
+			}
 			playerController.canMove = true;
 		}
 	}

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.IO;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine.Rendering.Universal;
 
 public class SaveSystemObject : MonoBehaviour
