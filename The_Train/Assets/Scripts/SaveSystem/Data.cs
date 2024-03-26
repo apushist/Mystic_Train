@@ -45,7 +45,7 @@ public class Data
 
 
 
-		playerLight = new float[4];
+		playerLight = new float[5];
         playerLight[0] = pLight.intensity;
         Color pc = pLight.color;
         playerLight[1] = pc.r;
