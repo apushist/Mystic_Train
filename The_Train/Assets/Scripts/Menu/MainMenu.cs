@@ -31,5 +31,6 @@ public class MainMenu : MonoBehaviour
     public void LoadGame()
 	{
 		PlayerPrefs.SetInt("IsLoading", 1);
+		SceneLoader.SwitchToScene("Train");
 	}
 }

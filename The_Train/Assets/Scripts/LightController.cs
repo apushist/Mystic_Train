@@ -46,7 +46,7 @@ public class Lights : MonoBehaviour
 				case ActionType.Flicker:
 					{
 						StartCoroutine(flickerLight());
-						Destroy(objectToDestroy,3f);
+						Destroy(objectToDestroy,3.2f);
 						break;
 
 					}
