@@ -14,8 +14,6 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] AudioClip _roarStartClip;
     [SerializeField] AudioClip _roarEndClip;
     [SerializeField] GameObject _deathEffect;
-
-
     [Header("FoundSettings")]
     [SerializeField] LayerMask _layerMask;
     [SerializeField] float _angleFound = 60;
@@ -24,7 +22,7 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] int _rayCountFound = 5;
     [SerializeField] float _rageSpeed;
 
-
+    private Animator animator;
     private Transform _currentPatrolPoint;
     private int _currentPatrolIndex = 0;
 
@@ -50,15 +48,15 @@ public class MonsterFinder : MonoBehaviour
         {
             _currentPatrolPoint = _patrolPoints[_currentPatrolIndex];
         }
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (ReachedDestination() && _audioSource.isPlaying)
             PlayFootSteps(false);
-        else if(!ReachedDestination() && !_audioSource.isPlaying)
+        else if (!ReachedDestination() && !_audioSource.isPlaying)
             PlayFootSteps(true);
-
 
         if (_seePlayerAllTime)
         {
@@ -68,7 +66,7 @@ public class MonsterFinder : MonoBehaviour
                 OnMonsterDeath();
             }
         }
-        else if(_seePlayerNow)
+        else if (_seePlayerNow)
         {
             _agent.SetDestination(_playerTarget.position);
             if (ReachedDestination())
@@ -81,10 +79,32 @@ public class MonsterFinder : MonoBehaviour
             if (TrySeePlayer())
             {
                 StartMonsterRage();
+                // Установка параметров анимации в зависимости от направления движения монстра
+                Vector3 direction = _playerTarget.position - transform.position;
+                float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
+
+                StopAnimation();
+
+                if (angle >= -45 && angle < 45)
+                {
+                    animator.SetBool("IsStraight", true);
+                }
+                else if (angle >= 45 && angle < 135)
+                {
+                    animator.SetBool("IsRight", true);
+                }
+                else if (angle >= -135 && angle < -45)
+                {
+                    animator.SetBool("IsLeft", true);
+                }
+                else
+                {
+                    animator.SetBool("IsBack", true);
+                }
             }
             else if (_usePatrolPaths)
             {
-                if(!_isStanding)
+                if (!_isStanding)
                 {
                     _agent.SetDestination(_currentPatrolPoint.position);
                     if (ReachedDestination())
@@ -92,12 +112,20 @@ public class MonsterFinder : MonoBehaviour
                         _currentPatrolIndex++;
                         _currentPatrolPoint = _patrolPoints[_currentPatrolIndex % _patrolPoints.Length];
                         StartCoroutine(StayAtPoint(1));
-                        
                     }
-                }           
+                }
             }
-        }       
+        }
     }
+
+    void StopAnimation()
+    {
+        animator.SetBool("IsBack", false);
+        animator.SetBool("IsStraight", false);
+        animator.SetBool("IsLeft", false);
+        animator.SetBool("IsRight", false);
+    }
+
 
     bool ReachedDestination()
     {
@@ -147,11 +175,13 @@ public class MonsterFinder : MonoBehaviour
         return false;
     }
 
-    IEnumerator StayAtPoint(float t)
+    IEnumerator StayAtPoint(float seconds)
     {
         _isStanding = true;
-        yield return new WaitForSeconds(t);
+        animator.SetBool("IsStanding", true);
+        yield return new WaitForSeconds(seconds);
         _isStanding = false;
+        animator.SetBool("IsStanding", false);
     }
 
     void PlayFootSteps(bool p)
@@ -182,6 +212,7 @@ public class MonsterFinder : MonoBehaviour
     }
     public void StartMonsterRage()
     {
+        animator.SetBool("IsRaging", true);
         StartRoar();
         _seePlayerNow = true;
         _agent.speed = _rageSpeed;
