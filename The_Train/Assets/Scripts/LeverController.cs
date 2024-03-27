@@ -61,8 +61,11 @@ public class LeverController : MonoBehaviour
 						audioSource.Play();
 						break;
 					case AttachedItemType.spike:
-						spikesController.Activate();
-						break;
+						if(spikesController.IsActivated)
+							spikesController.Disactivate();
+						else
+                            spikesController.Activate();
+                        break;
                     default:
                         break;
                 }
@@ -76,8 +79,11 @@ public class LeverController : MonoBehaviour
 						audioSource.Play();
 						attachedAnim.SetBool("IsActivated", true); break;
 					case AttachedItemType.spike:
-						spikesController.Disactivate();
-						break;
+                        if (spikesController.IsActivated)
+                            spikesController.Disactivate();
+                        else
+                            spikesController.Activate();                
+                        break;
                     default:
                         break;
                 }
