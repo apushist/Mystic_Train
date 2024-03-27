@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PuzzlesContoller : MonoBehaviour
 {
-    //[SerializeField] PuzzleBase _currentPuzzle; хз нужно ли вообще это поле
     [SerializeField] GameObject _supportTextView;
 
     public static PuzzlesContoller instance;
