@@ -40,13 +40,12 @@ public class Lights : MonoBehaviour
 				case ActionType.Change:
 					{
 						StartCoroutine(changeLight());
-						Destroy(objectToDestroy,1f);
+						
 						break;
 					}
 				case ActionType.Flicker:
 					{
 						StartCoroutine(flickerLight());
-						Destroy(objectToDestroy,3.2f);
 						break;
 
 					}
@@ -71,7 +70,8 @@ public class Lights : MonoBehaviour
 			}
 			if(leaveOn)
 				flickerlight.intensity = 0.9f;
-			
+			if(type  == ActionType.Flicker)
+				Destroy(objectToDestroy);
 		}
 	}
 
@@ -81,8 +81,9 @@ public class Lights : MonoBehaviour
 		yield return new WaitForSeconds(2f);
 		Light2D light1 = lightOff.GetComponent<Light2D>();
 		Light2D light2 = lightOn.GetComponent<Light2D>();
-		light1.enabled = false;
-		light2.enabled = true;
+		light1.intensity = 0;
+		light2.intensity = 0.9f;
+		Destroy(objectToDestroy);
 	}
 
 	IEnumerator candle()
