@@ -56,6 +56,7 @@ public class Transfer : MonoBehaviour
 			else
 			{
 				bgmController.SetVolume(1, 0.17f);
+				playerLight.intensity = 0f;
 				globalLight.color = new Color(208, 255, 224);
 				globalLight.intensity = 0.6f;
 			}
