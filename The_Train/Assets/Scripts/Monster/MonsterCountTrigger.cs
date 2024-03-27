@@ -23,7 +23,6 @@ public class MonsterCountTrigger : MonoBehaviour
         if (CheckAll())
         {
             _triggerMonster = true;
-            _saveSystemObject.SaveFunction();
             
         }
     }
@@ -50,7 +49,8 @@ public class MonsterCountTrigger : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
         if (collision.CompareTag("Player") && _triggerMonster)
-        {
+		{
+			_saveSystemObject.SaveFunction();
 			TriggerMonster();
             Debug.Log("Run!!!");
             gameObject.SetActive(false);
