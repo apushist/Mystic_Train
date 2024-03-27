@@ -74,11 +74,12 @@ public class Inventory : MonoBehaviour
             MouseExitItemNeeded(i);
         }
     }
-    public void AddItem(int ident)
+    public void AddItem(int ident, bool playSound = true)
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
         items.Add(item);
-        _audioSource.Play();
+        if(playSound)
+            _audioSource.Play();
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
             if (itemsGrid[i].empty)

@@ -10,9 +10,14 @@ public class Lights : MonoBehaviour
 	public GameObject objectToDestroy;
 	[Header("Flicker")]
 	[SerializeField] public GameObject lightObject;
+	public float maxWait = 1;
+	public float maxFlicker = 0.2f;
+	public int countOfFlickers = 2;
+	public float minIntensity = 0.5f;
 	[Header("Change")]
 	[SerializeField] public GameObject lightOff;
 	[SerializeField] public GameObject lightOn;
+	public float waitTime = 2;
 	[Header("Candle")]
 	[SerializeField] public GameObject candleLightObject;
 	[SerializeField] public float frequency;
@@ -58,15 +63,14 @@ public class Lights : MonoBehaviour
 		if(!safeModeOn)
 		{
 			flickerlight = lightObject.GetComponent<Light2D>();
-			float seconds = 0.2f;
-			flickerlight.intensity = 0;
-			yield return new WaitForSeconds(seconds);
-			for (int i = 0; i < 2; i++)
+			flickerlight.intensity = minIntensity;
+			yield return new WaitForSeconds(Random.Range(0, maxFlicker));
+			for (int i = 0; i < countOfFlickers; i++)
 			{
 				flickerlight.intensity = 0.9f;
-				yield return new WaitForSeconds(seconds);
-				flickerlight.intensity = 0;
-				yield return new WaitForSeconds(seconds);
+				yield return new WaitForSeconds(Random.Range(0,maxWait));
+				flickerlight.intensity = minIntensity;
+				yield return new WaitForSeconds(Random.Range(0, maxFlicker));
 			}
 			if(leaveOn)
 				flickerlight.intensity = 0.9f;
@@ -78,7 +82,7 @@ public class Lights : MonoBehaviour
 	IEnumerator changeLight()
 	{
 		StartCoroutine(flickerLight(false));
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(waitTime);
 		Light2D light1 = lightOff.GetComponent<Light2D>();
 		Light2D light2 = lightOn.GetComponent<Light2D>();
 		light1.intensity = 0;
