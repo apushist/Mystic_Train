@@ -12,10 +12,13 @@ public class GearPuzzle : PuzzleBase
 
     [SerializeField] internal List<GearTarget> _gearList = new List<GearTarget>();
 
+    [SerializeField] float _maxSetOffset;
+
     GearTarget startGear;
     GearTarget endGear;
     List<Vector2> _gearTargetPos = new List<Vector2>();
     public static GearPuzzle instance;
+    
 
     private void Awake()
     {
@@ -81,7 +84,7 @@ public class GearPuzzle : PuzzleBase
                     if (_gearList[i].gear == null || _gearList[j].gear == null)
                         continue;
                     var magn = (_gearTargetPos[j] - _gearTargetPos[i]).magnitude;
-                    if (magn < Mathf.Abs(_gearList[i].gear.radius + _gearList[j].gear.radius))
+                    if (magn < Mathf.Abs(_gearList[i].gear.radius + _gearList[j].gear.radius) && magn > Mathf.Abs(_gearList[i].gear.radius + _gearList[j].gear.radius - _maxSetOffset))
                     {
                         if (_gearList[i].gear.GetEnableRotation())
                         {

@@ -8,6 +8,8 @@ public class ColorPanel : MonoBehaviour
     [HideInInspector] public int[] _itemsIndex;
     [HideInInspector] public RectTransform[] _itemsObject;
 
+    [SerializeField] public bool _isCentral = false;
+
     void Start()
     {
         int iters = _itemsParent.childCount;
@@ -16,7 +18,7 @@ public class ColorPanel : MonoBehaviour
         for (int i = 0; i < iters; i++)
         {
             _itemsObject[i] = _itemsParent.GetChild(i).GetComponent<RectTransform>();
-            for (int j = 0; j < iters; j++)
+            for (int j = 0; j < ColorPanelsPuzzle.instance._itemsReference.Length; j++)
             {
                 if (ColorPanelsPuzzle.instance._itemsReference[j] == _itemsObject[i].GetComponent<Image>().sprite)
                 {
@@ -34,13 +36,6 @@ public class ColorPanel : MonoBehaviour
             _state++;
     }
 
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
 }
 public enum PanelRotateState { up, right, down, left }
