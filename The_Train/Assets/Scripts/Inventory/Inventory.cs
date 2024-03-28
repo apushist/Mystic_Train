@@ -150,7 +150,7 @@ public class Inventory : MonoBehaviour
         
         if (nearInteractionObject)
         {
-            if (currentInteraction._currentInterType == InteractionType.lockedDoor)
+            if (currentInteraction._currentInterType == InteractionType.lockedDoor || currentInteraction._currentInterType == InteractionType.LockedPuzzle)
             {
                 ChangeInventoryView(1);
                 UpdateNeededItemSpriteView(false);
@@ -227,8 +227,6 @@ public class Inventory : MonoBehaviour
             
             if (successed)
             {
-                UpdateNeededItemSpriteView(successed);
-                currentInteraction._attachedDoor.SetDoorLock(false);
                 if (moveItem._itemUseCount > 0)
                 {
                     moveItem._itemUseCount--;
@@ -237,7 +235,18 @@ public class Inventory : MonoBehaviour
                 else
                     DestroyMovedItem();//only one use
 
-                StartCoroutine(CloseToGame());
+                UpdateNeededItemSpriteView(successed);
+                if (currentInteraction._currentInterType == InteractionType.LockedPuzzle)
+                {                  
+                    currentInteraction._isLockPuzzleSetted = true;
+                    StartCoroutine(CloseToPuzzle());
+                }
+                else if(currentInteraction._currentInterType == InteractionType.lockedDoor)
+                {
+                    currentInteraction._attachedDoor.SetDoorLock(false);
+                    StartCoroutine(CloseToGame());
+                }              
+
             }
             else
             {
