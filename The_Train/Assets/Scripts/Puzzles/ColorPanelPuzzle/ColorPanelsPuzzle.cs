@@ -394,6 +394,9 @@ public class ColorPanelsPuzzle : PuzzleBase
     {
         EnableThisPuzzle(false);
         PuzzlesContoller.instance.Win();
+
+        ////////////////////////////////////////
+        End.instance.OnEndTrigger();
     }
     public override void LoosePuzzle()
     {
