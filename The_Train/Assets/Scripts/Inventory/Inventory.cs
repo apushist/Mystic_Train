@@ -90,6 +90,12 @@ public class Inventory : MonoBehaviour
         }      
         Debug.Log("Full Inventory!");
     }
+    public void RemoveItem(int ident)
+    {
+        InventoryItem item = ItemsData.instance.SearchItemById(ident);
+        bool isRemoved = items.Remove(item);
+        if (!isRemoved) Debug.Log("item doesn't exist in inventory");
+    }
 
     public void ShowMoreInfoItem(InventoryItem item)
     {
@@ -233,7 +239,10 @@ public class Inventory : MonoBehaviour
                     RevertMovedItem();//multiple use
                 }
                 else
+                {
+                    RemoveItem(moveItem._id);
                     DestroyMovedItem();//only one use
+                }
 
                 UpdateNeededItemSpriteView(successed);
                 if (currentInteraction._currentInterType == InteractionType.LockedPuzzle)
@@ -273,6 +282,8 @@ public class Inventory : MonoBehaviour
                 currentInteraction.AddItemNeeded(i-1);
                 if (currentInteraction.CheckAllItemNeededSetted())
                 {
+                    for(int j = 0; j < 3; j++)
+                        RemoveItem(currentInteraction._neededItem3[j]._id);
                     currentInteraction._isLock3Setted = true;
                     StartCoroutine(CloseToPuzzle());
                 }
@@ -389,7 +400,7 @@ public class Inventory : MonoBehaviour
     }
     IEnumerator CloseToPuzzle()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         CloseInventory();
         var tt = currentInteraction;
         InteractWithObject();//reset last interaction if it destroyed
@@ -399,7 +410,7 @@ public class Inventory : MonoBehaviour
     }
     IEnumerator CloseToGame()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         bool destroyed = currentInteraction.AfterUse();
         if (destroyed)
         {
