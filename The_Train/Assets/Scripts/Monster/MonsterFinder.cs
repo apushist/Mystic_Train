@@ -79,28 +79,6 @@ public class MonsterFinder : MonoBehaviour
             if (TrySeePlayer())
             {
                 StartMonsterRage();
-                // Установка параметров анимации в зависимости от направления движения монстра
-                Vector3 direction = _playerTarget.position - transform.position;
-                float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
-
-                StopAnimation();
-
-                if (angle >= -45 && angle < 45)
-                {
-                    animator.SetBool("IsStraight", true);
-                }
-                else if (angle >= 45 && angle < 135)
-                {
-                    animator.SetBool("IsRight", true);
-                }
-                else if (angle >= -135 && angle < -45)
-                {
-                    animator.SetBool("IsLeft", true);
-                }
-                else
-                {
-                    animator.SetBool("IsBack", true);
-                }
             }
             else if (_usePatrolPaths)
             {
@@ -116,6 +94,7 @@ public class MonsterFinder : MonoBehaviour
                 }
             }
         }
+        UpdateAnimation();
     }
 
     void StopAnimation()
@@ -178,10 +157,8 @@ public class MonsterFinder : MonoBehaviour
     IEnumerator StayAtPoint(float seconds)
     {
         _isStanding = true;
-        animator.SetBool("IsStanding", true);
         yield return new WaitForSeconds(seconds);
         _isStanding = false;
-        animator.SetBool("IsStanding", false);
     }
 
     void PlayFootSteps(bool p)
@@ -212,9 +189,28 @@ public class MonsterFinder : MonoBehaviour
     }
     public void StartMonsterRage()
     {
-        animator.SetBool("IsRaging", true);
         StartRoar();
         _seePlayerNow = true;
         _agent.speed = _rageSpeed;
+    }
+    private void UpdateAnimation()
+    {
+        // Установка параметров анимации в зависимости от направления движения монстра
+        Vector2 direction = _agent.desiredVelocity;
+
+        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            animator.SetBool("up", false);
+            animator.SetBool("down", false);
+            animator.SetBool("right", direction.x > 0);
+            animator.SetBool("left", direction.x < 0);
+        }
+        else
+        {
+            animator.SetBool("right", false);
+            animator.SetBool("left", false);
+            animator.SetBool("up", direction.y > 0);
+            animator.SetBool("down", direction.y < 0);
+        }
     }
 }
