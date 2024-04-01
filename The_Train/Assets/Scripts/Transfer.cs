@@ -20,10 +20,14 @@ public class Transfer : MonoBehaviour
 
 	private bool safeModeOn;
 
+	public GameObject overView;
+
 	private void Start()
 	{
 		safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
 		animator = animationTexture.GetComponent<Animator>();
+
+		overView.SetActive(false);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -42,13 +46,16 @@ public class Transfer : MonoBehaviour
 			float ogPlayerIntensity = playerLight.intensity;
 			animator.SetTrigger("");//Todo добавить название триггера
 			yield return new WaitForSeconds(animationLength);
-			playerLight.intensity = 0;
+            overView.SetActive(true);
+            playerLight.intensity = 0;
 			playerController.canMove = false;			
 			collision.transform.position = new Vector3(newX, newY, 0);
-			yield return new WaitForSeconds(0.5f);
+			
 			playerController.SetSound(newStepSound);
 			playerController.virtualCamera.m_Lens.OrthographicSize = newCameraOrthoSize;
-			if (toDangeon)
+            yield return new WaitForSeconds(1f);
+            overView.SetActive(false);
+            if (toDangeon)
 			{
 				bgmController.SetVolume(1, 0f);
 				playerLight.intensity = ogPlayerIntensity;
@@ -56,8 +63,10 @@ public class Transfer : MonoBehaviour
 			else
 			{
 				bgmController.SetVolume(1, 0.17f);
-				globalLight.color = new Color(208, 255, 224);
-				globalLight.intensity = 0.6f;
+				playerLight.intensity = 0f;
+				globalLight.intensity = 0f;
+				globalLight.color = new Color32(158,180,180,255);
+				globalLight.intensity = 0.9f;
 			}
 			playerController.canMove = true;
 		}

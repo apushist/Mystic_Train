@@ -1,18 +1,20 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class SaveSystemObject : MonoBehaviour
 {
-    public PlayerController controller;
-    public Inventory inventory;
+	public Inventory inventory;
+	public PlayerController controller;
 	public BGMController bgmController;
 	public Light2D globalLight;
 	public Light2D playerLight;
 	public bool isLoading_useWhileEditing;
 
+
 	private void Start()
 	{
-		if(isLoading_useWhileEditing && PlayerPrefs.GetInt("IsLoading",0) == 1 && SaveSystem.SaveFileExists())
+		if(isLoading_useWhileEditing && PlayerPrefs.GetInt("IsLoading",0) == 1)
 		{
 			Loading();
 		}
@@ -25,6 +27,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	public void SaveFunction()
     {
+		
         SaveSystem.Save(controller, inventory,bgmController,globalLight,playerLight);
     }
 
@@ -45,10 +48,7 @@ public class SaveSystemObject : MonoBehaviour
 
 		controller.SetSound(data.stepSoundNumber);
 
-		foreach (int id in data.inventoryItemsIDs)
-		{
-			inventory.AddItem(id);
-		}
+		
 
 		bgmController.clipVolumes = data.bgmVolumes;
 
@@ -61,6 +61,11 @@ public class SaveSystemObject : MonoBehaviour
 		float[] pl = data.playerLight;
 		playerLight.intensity = pl[0];
 		playerLight.color = new Color(pl[1], pl[2], pl[3], pl[4]);
+
+		foreach (int id in data.inventoryItemsIDs)
+		{
+			inventory.AddItem(id, false);
+		}
 	}
 
     public void NewGame()

@@ -6,10 +6,11 @@ public class FPScounter : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _textField;
     [SerializeField] lockStates _lockState;
+    [SerializeField] bool _showInfo = false;
     int fps = 0;
     void Awake()
     {
-        QualitySettings.vSyncCount = 0;
+        QualitySettings.vSyncCount = 1;
         switch (_lockState)
         {
             case lockStates.lock30:              
@@ -25,7 +26,8 @@ public class FPScounter : MonoBehaviour
                 Application.targetFrameRate = -1;
                 break;
         }
-        StartCoroutine(updateFrame(0.2f));
+        _textField.gameObject.SetActive(_showInfo);
+        if(_showInfo) StartCoroutine(updateFrame(0.2f));
         
     }
 

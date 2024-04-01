@@ -20,13 +20,7 @@ public class Data
         playerPosition[0] = controller.transform.position.x;
 		playerPosition[1] = controller.transform.position.y;
 
-		List<InventoryItem> items = inventory.GetItems();
-
-		inventoryItemsIDs = new int[items.Count];
-        for(int i = 0; i < items.Count; i++)
-        {
-            inventoryItemsIDs[i] = items[i]._id;
-        }
+		
 
         stepSoundNumber = controller.GetSoundNumber();
 
@@ -45,7 +39,7 @@ public class Data
 
 
 
-		playerLight = new float[4];
+		playerLight = new float[5];
         playerLight[0] = pLight.intensity;
         Color pc = pLight.color;
         playerLight[1] = pc.r;
@@ -53,5 +47,13 @@ public class Data
         playerLight[3] = pc.b;
         playerLight[4] = pc.a;
 
+
+		List<InventoryItem> items = inventory.GetItems();
+
+		inventoryItemsIDs = new int[items.Count];
+		for (int i = 0; i < items.Count; i++)
+		{
+			inventoryItemsIDs[i] = items[i]._id;
+		}
 	}
 }

@@ -6,6 +6,7 @@ public class LeverController : MonoBehaviour
 {
 	[SerializeField] GameObject _supportTextView;
 	[SerializeField] GameObject leverAnimationObject;
+	[SerializeField] GameObject attachedDialogue = null;
 	public AttachedItemType type;
 	public GameObject attachedItem;
 	
@@ -59,10 +60,14 @@ public class LeverController : MonoBehaviour
 					case AttachedItemType.markedWall:
 						attachedAnim.SetBool("IsActivated", false);
 						audioSource.Play();
+						attachedDialogue.SetActive(true);
 						break;
 					case AttachedItemType.spike:
-						spikesController.Activate();
-						break;
+						if(spikesController.IsActivated)
+							spikesController.Disactivate();
+						else
+                            spikesController.Activate();
+                        break;
                     default:
                         break;
                 }
@@ -76,8 +81,11 @@ public class LeverController : MonoBehaviour
 						audioSource.Play();
 						attachedAnim.SetBool("IsActivated", true); break;
 					case AttachedItemType.spike:
-						spikesController.Disactivate();
-						break;
+                        if (spikesController.IsActivated)
+                            spikesController.Disactivate();
+                        else
+                            spikesController.Activate();                
+                        break;
                     default:
                         break;
                 }

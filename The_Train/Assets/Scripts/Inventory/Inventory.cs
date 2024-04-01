@@ -74,11 +74,12 @@ public class Inventory : MonoBehaviour
             MouseExitItemNeeded(i);
         }
     }
-    public void AddItem(int ident)
+    public void AddItem(int ident, bool playSound = true)
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
         items.Add(item);
-        _audioSource.Play();
+        if(playSound)
+            _audioSource.Play();
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
             if (itemsGrid[i].empty)
@@ -88,6 +89,12 @@ public class Inventory : MonoBehaviour
             }
         }      
         Debug.Log("Full Inventory!");
+    }
+    public void RemoveItem(int ident)
+    {
+        InventoryItem item = ItemsData.instance.SearchItemById(ident);
+        bool isRemoved = items.Remove(item);
+        if (!isRemoved) Debug.Log("item doesn't exist in inventory");
     }
 
     public void ShowMoreInfoItem(InventoryItem item)
@@ -149,7 +156,7 @@ public class Inventory : MonoBehaviour
         
         if (nearInteractionObject)
         {
-            if (currentInteraction._currentInterType == InteractionType.lockedDoor)
+            if (currentInteraction._currentInterType == InteractionType.lockedDoor || currentInteraction._currentInterType == InteractionType.LockedPuzzle)
             {
                 ChangeInventoryView(1);
                 UpdateNeededItemSpriteView(false);
@@ -226,17 +233,29 @@ public class Inventory : MonoBehaviour
             
             if (successed)
             {
-                UpdateNeededItemSpriteView(successed);
-                currentInteraction._attachedDoor.SetDoorLock(false);
                 if (moveItem._itemUseCount > 0)
                 {
                     moveItem._itemUseCount--;
                     RevertMovedItem();//multiple use
                 }
                 else
+                {
+                    RemoveItem(moveItem._id);
                     DestroyMovedItem();//only one use
+                }
 
-                StartCoroutine(CloseToGame());
+                UpdateNeededItemSpriteView(successed);
+                if (currentInteraction._currentInterType == InteractionType.LockedPuzzle)
+                {                  
+                    currentInteraction._isLockPuzzleSetted = true;
+                    StartCoroutine(CloseToPuzzle());
+                }
+                else if(currentInteraction._currentInterType == InteractionType.lockedDoor)
+                {
+                    currentInteraction._attachedDoor.SetDoorLock(false);
+                    StartCoroutine(CloseToGame());
+                }              
+
             }
             else
             {
@@ -263,6 +282,8 @@ public class Inventory : MonoBehaviour
                 currentInteraction.AddItemNeeded(i-1);
                 if (currentInteraction.CheckAllItemNeededSetted())
                 {
+                    for(int j = 0; j < 3; j++)
+                        RemoveItem(currentInteraction._neededItem3[j]._id);
                     currentInteraction._isLock3Setted = true;
                     StartCoroutine(CloseToPuzzle());
                 }
@@ -379,7 +400,7 @@ public class Inventory : MonoBehaviour
     }
     IEnumerator CloseToPuzzle()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         CloseInventory();
         var tt = currentInteraction;
         InteractWithObject();//reset last interaction if it destroyed
@@ -389,7 +410,7 @@ public class Inventory : MonoBehaviour
     }
     IEnumerator CloseToGame()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         bool destroyed = currentInteraction.AfterUse();
         if (destroyed)
         {

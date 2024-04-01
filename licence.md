@@ -36,5 +36,7 @@ sp-theroom.aif
 Author: N91music
 
 
+https://ateliermagicae.itch.io/japanese-horror-sound-effects-vol1
+Creator of Assets: Atelier Magicae || Bunnixia || Rin Hinasaki
 
 

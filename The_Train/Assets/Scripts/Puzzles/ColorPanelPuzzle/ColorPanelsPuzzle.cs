@@ -22,7 +22,8 @@ public class ColorPanelsPuzzle : PuzzleBase
     Vector2[,] _colorPoints;
 
     float _orientWidth = 1920;
-    float _orientHeight = 1080;
+
+    int _panelCount = 5;
 
 
     Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -43,16 +44,16 @@ public class ColorPanelsPuzzle : PuzzleBase
         canvasParentMin = CanvasToMousePoint(_parentSprite.anchoredPosition + _parentSprite.offsetMin);
         canvasParentMax = CanvasToMousePoint(_parentSprite.anchoredPosition + _parentSprite.offsetMax);
 
-        _colorPoints = new Vector2[_itemsReference.Length, _itemsReference.Length];
-        for(int i = 0; i < _itemsReference.Length; i++)
+        _colorPoints = new Vector2[_panelCount, _panelCount];
+        for(int i = 0; i < _panelCount; i++)
         {
-            for (int j = 0; j < _itemsReference.Length; j++)
+            for (int j = 0; j < _panelCount; j++)
             {
                 _colorPoints[i, j] = new Vector2(-1, -1);
             }
         }
-        _gorizontals = new RectTransform[_itemsReference.Length];
-        _verticals = new RectTransform[_itemsReference.Length];
+        _gorizontals = new RectTransform[_panelCount];
+        _verticals = new RectTransform[_panelCount];
     }
     private void Update()
     {
@@ -246,15 +247,17 @@ public class ColorPanelsPuzzle : PuzzleBase
 
     public void UpdateColors()
     {
-        for (int j = 0; j < _itemsReference.Length; j++)
+        for (int j = 0; j < _panelCount; j++)
         {
             var pan = _gorizontals[j];
             if (pan == null) continue;
             var colorPanel = pan.GetComponent<ColorPanel>();
             if (colorPanel._state == PanelRotateState.right)
             {
-                for (int i = 0; i < _itemsReference.Length; i++)
+                for (int i = 0; i < _panelCount; i++)
                 {
+                    if (colorPanel._isCentral && i == 2)
+                        continue;
                     var v2 = _colorPoints[i, j];
                     if (v2.x == -1 || v2.y == -1)
                         colorPanel._itemsObject[i].GetComponent<Image>().color = _defaultColor;
@@ -266,28 +269,32 @@ public class ColorPanelsPuzzle : PuzzleBase
             }
             else if (colorPanel._state == PanelRotateState.left)
             {
-                for (int i = 0; i < _itemsReference.Length; i++)
+                for (int i = 0; i < _panelCount; i++)
                 {
+                    if (colorPanel._isCentral && i == 2)
+                        continue;
                     var v2 = _colorPoints[i, j];
                     if (v2.x == -1 || v2.y == -1)
-                        colorPanel._itemsObject[_itemsReference.Length - i - 1].GetComponent<Image>().color = _defaultColor;
+                        colorPanel._itemsObject[_panelCount - i - 1].GetComponent<Image>().color = _defaultColor;
                     else if (v2.x == v2.y)
-                        colorPanel._itemsObject[_itemsReference.Length - i - 1].GetComponent<Image>().color = _goodColor;
+                        colorPanel._itemsObject[_panelCount - i - 1].GetComponent<Image>().color = _goodColor;
                     else
-                        colorPanel._itemsObject[_itemsReference.Length - i - 1].GetComponent<Image>().color = _badColor;
+                        colorPanel._itemsObject[_panelCount - i - 1].GetComponent<Image>().color = _badColor;
                 }
             }
 
         }
-        for (int j = 0; j < _itemsReference.Length; j++)
+        for (int j = 0; j < _panelCount; j++)
         {
             var pan = _verticals[j];
             if (pan == null) continue;
             var colorPanel = pan.GetComponent<ColorPanel>();
             if (colorPanel._state == PanelRotateState.up)
             {
-                for (int i = 0; i < _itemsReference.Length; i++)
+                for (int i = 0; i < _panelCount; i++)
                 {
+                    if (colorPanel._isCentral && i == 2)
+                        continue;
                     var v2 = _colorPoints[j, i];
                     if (v2.x == -1 || v2.y == -1)
                         colorPanel._itemsObject[i].GetComponent<Image>().color = _defaultColor;
@@ -299,15 +306,17 @@ public class ColorPanelsPuzzle : PuzzleBase
             }
             else if (colorPanel._state == PanelRotateState.down)
             {
-                for (int i = 0; i < _itemsReference.Length; i++)
+                for (int i = 0; i < _panelCount; i++)
                 {
+                    if (colorPanel._isCentral && i == 2)
+                        continue;
                     var v2 = _colorPoints[j, i];
                     if (v2.x == -1 || v2.y == -1)
-                        colorPanel._itemsObject[_itemsReference.Length - i - 1].GetComponent<Image>().color = _defaultColor;
+                        colorPanel._itemsObject[_panelCount - i - 1].GetComponent<Image>().color = _defaultColor;
                     else if (v2.x == v2.y)
-                        colorPanel._itemsObject[_itemsReference.Length - i - 1].GetComponent<Image>().color = _goodColor;
+                        colorPanel._itemsObject[_panelCount - i - 1].GetComponent<Image>().color = _goodColor;
                     else
-                        colorPanel._itemsObject[_itemsReference.Length - i - 1].GetComponent<Image>().color = _badColor;
+                        colorPanel._itemsObject[_panelCount - i - 1].GetComponent<Image>().color = _badColor;
                 }
             }
 
@@ -316,8 +325,10 @@ public class ColorPanelsPuzzle : PuzzleBase
     public void ResetPanelColor(RectTransform pan)
     {
         var colorPanel = pan.GetComponent<ColorPanel>();
-        for (int i = 0; i < _itemsReference.Length; i++)
+        for (int i = 0; i < _panelCount; i++)
         {
+            if (colorPanel._isCentral && i == 2)
+                continue;
             colorPanel._itemsObject[i].GetComponent<Image>().color = _defaultColor;
         }
     }
@@ -368,9 +379,9 @@ public class ColorPanelsPuzzle : PuzzleBase
     }
     private bool CheckForWin()
     {
-        for (int i = 0; i < _itemsReference.Length; i++)
+        for (int i = 0; i < _panelCount; i++)
         {
-            for (int j = 0; j < _itemsReference.Length; j++)
+            for (int j = 0; j < _panelCount; j++)
             {
                 var cur = _colorPoints[i, j];
                 if (cur.x != cur.y || cur.x==-1 || cur.y == -1)
@@ -383,6 +394,9 @@ public class ColorPanelsPuzzle : PuzzleBase
     {
         EnableThisPuzzle(false);
         PuzzlesContoller.instance.Win();
+
+        ////////////////////////////////////////
+        End.instance.OnEndTrigger();
     }
     public override void LoosePuzzle()
     {

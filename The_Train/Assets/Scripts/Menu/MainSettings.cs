@@ -37,31 +37,27 @@ public class MainSettings : MonoBehaviour
         {
             Screen.SetResolution(1280,720, true);
         }
-        else if(resolution.value == 1)
-        {
-            Screen.SetResolution(1280,1024, true);
-        }
-        else if (resolution.value == 2)
+        else if (resolution.value == 1)
         {
             Screen.SetResolution(1366,768, true);
         }
-        else if (resolution.value == 3)
+        else if (resolution.value == 2)
         {
             Screen.SetResolution(1280, 720,true);
         }
-        else if (resolution.value == 4)
+        else if (resolution.value == 3)
         {
             Screen.SetResolution(1920, 1080, true);
         }
-        else if (resolution.value == 5)
+        else if (resolution.value == 4)
         {
             Screen.SetResolution(2560,1440, true);
         }
-        else if (resolution.value == 6)
+        else if (resolution.value == 5)
         {
             Screen.SetResolution(3840,2160, true);
         }
-        else if (resolution.value == 7)
+        else if (resolution.value == 6)
         {
             Screen.SetResolution(144, 81, true);
         }
