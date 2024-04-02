@@ -35,7 +35,7 @@ public class Data
         globalLight[1] = gc.r;
         globalLight[2] = gc.g;
         globalLight[3] = gc.b;
-		globalLight[3] = gc.a;
+		globalLight[4] = gc.a;
 
 
 
