@@ -24,34 +24,85 @@
 -	Добавить различные звуки и музыку в проект
 -	Продумать и реализовать функции, оказывающие эмоциональное воздействие на игрока
 
-### Предупреждение: 
-окно, про которое говорится в диалоге при прохождении дальше второго вагона, в финальном билде нулевой версии по случайности было заменено на обычное:
-![image](https://github.com/apushist/The_Train/assets/114854401/f3a2329f-6fc5-4c48-935e-7188eb409753)
-Прикрепляю то, как должно было выглядеть это окно:
-![animation](https://github.com/apushist/The_Train/assets/114854401/0a12cea4-26eb-4540-995b-c85d867d39d7)
+## Предупреждение: 
+В текущей версии игры присутствует баг, из-за которого при первом нажатии Esc многие элементы интерфейса перестают работать или работают неправильно. Если вы столкнетесь с этим, достаточно нажать на Esc ещё раз для того, чтобы всё заработало.
 
-## Прохождение квеста нулевой версии:
+## Прохождение квеста версии предзащиты:
 При загрузке игры запустится диалог:
-![image](https://github.com/apushist/The_Train/assets/114854401/8163225e-4378-462c-9208-9347f6d22923)
-После его окончания, выходите в коридор и двигайтесь вправо до двери с запиской:
-![image](https://github.com/apushist/The_Train/assets/114854401/7c0cebd5-5c6a-4a81-b5e8-87cd17fe7e3e)
-Там запустится ещё один диалог:
-![image](https://github.com/apushist/The_Train/assets/114854401/51964e63-9c4e-44bb-acf3-9189f4296c6a)
-После продолжайте двигаться вправо, ключ будет за второй дверью оттуда:
-![image](https://github.com/apushist/The_Train/assets/114854401/effaae03-7f19-4d65-8cf3-823f0e36ac8a)
-Возвращайтесь к двери с запиской:
-![image](https://github.com/apushist/The_Train/assets/114854401/30db8cef-8bf4-450b-abd9-955d234f259e)
-Используйте ключ, чтобы открыть дверь:
-![image](https://github.com/apushist/The_Train/assets/114854401/23376a98-8f18-4f28-8c69-624ffa644b6b)
-![image](https://github.com/apushist/The_Train/assets/114854401/356c0221-726c-46ff-ac50-892afde5ce9e)
-Пройдите к дальней стене с панелью на ней и запустите головоломку:
-![image](https://github.com/apushist/The_Train/assets/114854401/9c9276b4-e2b8-4a7a-8aa6-89c77afe26b9)
-Правильное решение:
-![image](https://github.com/apushist/The_Train/assets/114854401/22419485-30a2-4067-b203-8ff53995355a)
-![image](https://github.com/apushist/The_Train/assets/114854401/e150a851-040f-4db4-bdae-610b2b60a689)
-Вы получите предмет:
-![image](https://github.com/apushist/The_Train/assets/114854401/52c94cc4-21e6-4361-b30b-4ddc415044c4)
-Поздравляю, вы прошли квест нулевой версии!
+![image](https://github.com/apushist/The_Train/assets/114854401/9dec8ce0-136d-4943-b1f6-c31ac5750a2a)
+
+После его окончания, выходите в коридор и двигайтесь вправо до лужи, при приближении к ней также будет запущен диалог:
+![image](https://github.com/apushist/The_Train/assets/114854401/98bf1a85-35a1-4808-9bdb-932dc02759bd)
+При нажатии на Е откроется головоломка. Её решение:
+![image](https://github.com/apushist/The_Train/assets/114854401/8344ae15-beda-43c5-96dc-23dd0dce1820)
+После решения головоломки лужа пропадет и можно будет пройти в следующий вагон:
+![image](https://github.com/apushist/The_Train/assets/114854401/2c3fe651-8e22-48d8-8f97-2cfc60d7eb7f)
+Во втором вагоне зайдите в первую дверь, там вы найдете записку с паролем:
+![image](https://github.com/apushist/The_Train/assets/114854401/0b9910bd-0907-4a92-9322-47a217288707)
+В третьем купе второго вагона находится сумка, закрытая на замок. Нажав на Е, вы получите возможность ввести пароль:
+![image](https://github.com/apushist/The_Train/assets/114854401/d70e2ba9-e45f-49b9-b1df-0e693e0bcbbc)
+![image](https://github.com/apushist/The_Train/assets/114854401/a4a67507-908a-4bfa-a311-97b0c07a9f38)
+Из сумки вы получите ключ от двери в следующий вагон:
+![image](https://github.com/apushist/The_Train/assets/114854401/dd820c42-a239-494a-8ff2-8dbe8b8991f3)
+![image](https://github.com/apushist/The_Train/assets/114854401/d58af4d9-f530-4053-aac6-46c33a36a2b4)
+В третьем вагоне за первой открытой дверью вы обнаружите панель с шестеренками. Нужно найти недостающую деталь:
+![image](https://github.com/apushist/The_Train/assets/114854401/20b8beaa-9323-409f-9e2c-50b4db73b14c)
+Шестеренка находится в пространстве между третьим и четвертым вагонами:
+![image](https://github.com/apushist/The_Train/assets/114854401/8370e0bd-f01e-4d03-8ab9-a31d4163fe17)
+Вернитесь к панели с шестеренками и решите головоломку. Один из возможных способов решения:
+![image](https://github.com/apushist/The_Train/assets/114854401/a6a46e27-3dd9-4af4-8564-cee2eb8e3d59)
+Вы получите ключ, который открывает все запертые двери в этом вагоне:
+![image](https://github.com/apushist/The_Train/assets/114854401/c1db5545-88d1-4a32-a38e-98f907254077)
+Во втором купе находится туман, который убивает при соприкосновении. Для того чтобы его активировать, нужно зайти в купе и подойти к окну:
+![image](https://github.com/apushist/The_Train/assets/114854401/94efaa9a-3f25-4559-a2f5-79d4c50ee7c1)
+![image](https://github.com/apushist/The_Train/assets/114854401/d42d4a14-efab-48c7-86a3-ad9eafa78c2e)
+Переходите в четвертый вагон. Здесь вам нужно успеть убежать от монстра и зайти в третье купе:
+![image](https://github.com/apushist/The_Train/assets/114854401/55bc7381-80f4-40b5-861b-e7cb52b5b0f8)
+Подойдите к картине:
+![image](https://github.com/apushist/The_Train/assets/114854401/d0f6fa17-6223-4b73-964b-d06fe6167593)
+Через некоторое время вас переместит в другую локацию (задержка была сделана для того, чтобы проиграть анимацию, но к сожалению, сама анимация не была подключена):
+![image](https://github.com/apushist/The_Train/assets/114854401/4f1c9a04-d329-4f98-986a-4e11755b2c7f)
+Двигайтесь вправо до комнаты, заполненой коробками:
+![image](https://github.com/apushist/The_Train/assets/114854401/1854eaa6-b085-4799-a6be-0abc455f8075)
+Маршрут для выхода из лабиринта:
+![image](https://github.com/apushist/The_Train/assets/114854401/e053a1a5-e906-4f16-8efd-2c5830922bc8)
+Далее двигайтесь по коридору до странной степы:
+![image](https://github.com/apushist/The_Train/assets/114854401/a86e5928-1cc2-4567-b8fb-938ccd309ce6)
+Продолжайти идти прямо пока не упрётесь в стену, после этого поверните в коридор сверху:
+![image](https://github.com/apushist/The_Train/assets/114854401/74bba2f2-f3de-4ecb-9263-c463ea73e0fd)
+Там активируйте рычаг с фиолетовой отметкой:
+![image](https://github.com/apushist/The_Train/assets/114854401/7ff3cdd0-4968-40d1-876b-5b42b19029bf)
+Возвращайтесь в коридор и двигайтесь вниз до поворота влево:
+![image](https://github.com/apushist/The_Train/assets/114854401/c9749cf3-279a-4a5f-8293-e5490de50df6)
+По этой части двигайтесь до поворота вниз:
+![image](https://github.com/apushist/The_Train/assets/114854401/797e315a-0ff9-421c-8a5e-24bc41dbb614)
+Там активируйте  рычаг с синей отметкой:
+![image](https://github.com/apushist/The_Train/assets/114854401/0d957596-e79e-48c8-8841-f9789803d786)
+После этого вернитесь к тому месту, где была странная стены:
+![image](https://github.com/apushist/The_Train/assets/114854401/a0ceaae7-aab6-47ae-97dd-bee174715e5a)
+Оттуда двигайтесь влево и подберите ключ:
+![image](https://github.com/apushist/The_Train/assets/114854401/7588d271-7c15-4400-9774-5320788a0c82)
+С ним двигайтесь по коридору до ворот:
+![image](https://github.com/apushist/The_Train/assets/114854401/c91e882a-4c58-4944-80a2-1d959488f538)
+Карта этой части локации:
+![image](https://github.com/apushist/The_Train/assets/114854401/b8806a39-70d4-4659-8469-ac034254d13a)
+Подойдите к красному кресту на полу:
+![image](https://github.com/apushist/The_Train/assets/114854401/4c08292e-c407-47ab-b093-04e87dc3a3f3)
+Вы переместитесь в поезд:
+![image](https://github.com/apushist/The_Train/assets/114854401/28d96ae3-845e-4bb2-afb1-64661ad262b7)
+Для того чтобы открыть шкаф нужно ввести пароль, зашифрованный в черточках на стене (5784):
+![image](https://github.com/apushist/The_Train/assets/114854401/b19dee9f-a4d2-42d6-adf1-bb222cfcc78e)
+Вы получите ключ от двери в следующий вагон.
+В двух оставшихся вагонах вы должны будете найти три части головоломки и добраться с ними до кабины машиниста, скрываясь от монстра. Части лежат во втором купе и ванной первого вагона и в третьем купе второго.
+![image](https://github.com/apushist/The_Train/assets/114854401/a6a12ed1-778f-4f3f-90e9-2bbaae47eb35)
+![image](https://github.com/apushist/The_Train/assets/114854401/42b9e5cf-432d-4df9-9028-c0bfbf63d325)
+Решение последней головоломки:
+![image](https://github.com/apushist/The_Train/assets/114854401/5045348f-323b-4043-9f00-abe282ab832a)
+
+
+![image](https://github.com/apushist/The_Train/assets/114854401/04882676-18e0-46f7-9cfc-6cffd00a37e6)
+
+
 
 
 
