@@ -24,7 +24,9 @@ public class SoundTrigger : MonoBehaviour
 			audioSource.Play();
 			switch (type)
 			{
-				case SoundTriggerType.playOnEnter: Destroy(soundTrigger, audioSource.clip.length); break;
+				case SoundTriggerType.playOnEnter: Destroy(soundTrigger, audioSource.clip.length);
+					GetComponent<Collider2D>().enabled = false;
+					break;
 				case SoundTriggerType.stopOnApproach: audioSource.loop = true; break;
 
 			}
