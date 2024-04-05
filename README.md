@@ -1,6 +1,6 @@
 # The Train
 
-**Тип проекта:** 2D top-down игра в жанре приключения с элементами триллера 
+**Тип проекта:** 2D игра в жанре приключения с элементами триллера 
 
 **Стек технологий:** Unity 
 
@@ -98,6 +98,7 @@
 ![image](https://github.com/apushist/The_Train/assets/114854401/42b9e5cf-432d-4df9-9028-c0bfbf63d325)
 Решение последней головоломки:
 ![image](https://github.com/apushist/The_Train/assets/114854401/5045348f-323b-4043-9f00-abe282ab832a)
+![image](https://github.com/apushist/The_Train/assets/114854401/ad90be20-d2d8-4f06-a3e4-366f54b02349)
 
 
 ![image](https://github.com/apushist/The_Train/assets/114854401/04882676-18e0-46f7-9cfc-6cffd00a37e6)
