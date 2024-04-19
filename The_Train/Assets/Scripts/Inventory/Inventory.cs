@@ -59,6 +59,7 @@ public class Inventory : MonoBehaviour
         dm = FindObjectOfType<DialogueManager>();
         pm = FindObjectOfType<PauseMenu>();
         PlayerController.Epressed += PressKeyInventory;
+        PlayerController.Fpressed += PressKeyInteraction;
         _audioSource = GetComponent<AudioSource>();
     }
     private void Start()
@@ -143,6 +144,20 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    public void PressKeyInteraction()
+    {
+        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened && canUseInventory)
+        {
+            if (isOpened)
+            {
+                CloseInventory();
+            }
+            else
+            {
+                OpenInteractScreen();
+            }
+        }
+    }
     public void OpenInventory()
     {
         pl.canMove = false;
@@ -153,25 +168,29 @@ public class Inventory : MonoBehaviour
         {
             MouseExitItemNeeded(i);
         }
-        
-        if (nearInteractionObject)
+        ChangeInventoryView(0);
+    }
+    public void OpenInteractScreen()
+    {
+        pl.canMove = false;
+        _inventoryScreen.SetActive(true);
+        isOpened = true;
+        DeselectAllItems();
+        for (int i = 0; i < _neededItemView.Length; i++)
         {
-            if (currentInteraction._currentInterType == InteractionType.lockedDoor || currentInteraction._currentInterType == InteractionType.LockedPuzzle)
-            {
-                ChangeInventoryView(1);
-                UpdateNeededItemSpriteView(false);
-            }
-            else if(currentInteraction._currentInterType == InteractionType.lock3Item)
-            {
-                ChangeInventoryView(2);
-                UpdateNeededItemSpriteView3(false, 1);
-                UpdateNeededItemSpriteView3(false, 2);
-                UpdateNeededItemSpriteView3(false, 3);
-            }
+            MouseExitItemNeeded(i);
         }
-        else
+        if (currentInteraction._currentInterType == InteractionType.lockedDoor || currentInteraction._currentInterType == InteractionType.LockedPuzzle)
         {
-            ChangeInventoryView(0);
+            ChangeInventoryView(1);
+            UpdateNeededItemSpriteView(false);
+        }
+        else if (currentInteraction._currentInterType == InteractionType.lock3Item)
+        {
+            ChangeInventoryView(2);
+            UpdateNeededItemSpriteView3(false, 1);
+            UpdateNeededItemSpriteView3(false, 2);
+            UpdateNeededItemSpriteView3(false, 3);
         }
     }
     public void CloseInventory()
