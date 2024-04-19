@@ -23,7 +23,7 @@ public class PuzzlesContoller : MonoBehaviour
         dm = FindObjectOfType<DialogueManager>();
         pm = FindObjectOfType<PauseMenu>();
         UpdateSupportInteractTextView(false);
-        PlayerController.Epressed += StartPuzzleLogic;
+        PlayerController.Fpressed += StartPuzzleLogic;
     }
 
     public void InteractWithObject(InteractiveZone col = null)

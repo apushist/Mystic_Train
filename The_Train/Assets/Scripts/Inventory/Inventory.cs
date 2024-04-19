@@ -168,7 +168,7 @@ public class Inventory : MonoBehaviour
     }
     public void PressKeyInteraction()
     {
-        if (!PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened && canUseInventory)
+        if (nearInteractionObject && !PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened && canUseInventory)
         {
             if (isOpened)
             {
