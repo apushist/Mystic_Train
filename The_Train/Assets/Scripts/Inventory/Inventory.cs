@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEditor.Progress;
 
 
 
@@ -88,6 +89,7 @@ public class Inventory : MonoBehaviour
         StartCoroutine(IndicateNewItem(item));
         if (playSound)
             _audioSource.Play();
+        Debug.Log(ident);
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
             if (itemsGrid[i].empty)
@@ -115,9 +117,30 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveItem(int ident)
     {
-        InventoryItem item = ItemsData.instance.SearchItemById(ident);
-        bool isRemoved = items.Remove(item);
-        if (!isRemoved) Debug.Log("item doesn't exist in inventory");
+        bool isIn = false;
+        for(var i = 0; i<items.Count; i++)
+        {
+            if(items[i]._id== ident)
+            {
+                items.RemoveAt(i);
+                isIn = true;
+                break;
+            }
+        }
+        if (!isIn)
+        {
+            Debug.Log("item doesn't exist in inventory");
+            return;
+        }
+        for (int i = 0; i < _itemCount * _itemCount; i++)
+        {
+            if (itemsGrid[i]._id == ident)
+            {
+                itemsGrid[i].SetNewItem(_inventoryItemDefault, true);
+                break;
+            }
+        }
+        
     }
 
     public void ShowMoreInfoItem(InventoryItem item)
