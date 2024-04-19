@@ -34,6 +34,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Image _itemBigImage;
     [SerializeField] GameObject _plank;
 
+    [Header("Item Indicator")]
+    [SerializeField] private GameObject _itemIndicator;
+    private CanvasGroup _itemIndicatorGroup;
+
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
     bool canUseInventory = true;
@@ -61,6 +65,7 @@ public class Inventory : MonoBehaviour
         PlayerController.Epressed += PressKeyInventory;
         PlayerController.Fpressed += PressKeyInteraction;
         _audioSource = GetComponent<AudioSource>();
+        _itemIndicatorGroup = _itemIndicator.GetComponent<CanvasGroup>();
     }
     private void Start()
     {
@@ -79,7 +84,9 @@ public class Inventory : MonoBehaviour
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
         items.Add(item);
-        if(playSound)
+        StopCoroutine(IndicateNewItem(item));
+        StartCoroutine(IndicateNewItem(item));
+        if (playSound)
             _audioSource.Play();
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
@@ -90,6 +97,21 @@ public class Inventory : MonoBehaviour
             }
         }      
         Debug.Log("Full Inventory!");
+    }
+    private IEnumerator IndicateNewItem(InventoryItem Item)
+    {
+        _itemIndicator.SetActive(true);
+        _itemIndicator.GetComponentInChildren<TextMeshProUGUI>().text = Item._name;
+        _itemIndicator.GetComponentInChildren<Image>().sprite = Item._itemImage;
+        _itemIndicatorGroup.alpha = 1.0f;
+        yield return new WaitForSeconds(2);
+        int j = 20;
+        for(int i = 0; i < j; i++)
+        {
+            _itemIndicatorGroup.alpha = 1f - (1f / j * i);
+            yield return new WaitForSeconds(1f/j);
+        }
+        _itemIndicator.SetActive(false);
     }
     public void RemoveItem(int ident)
     {
