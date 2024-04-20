@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 		{
 			slider.value = PlayerPrefs.GetFloat(slider.name,1);
 		}
-		Resume();
+        Resume();
 	}
 
 	void Update()
@@ -46,6 +46,7 @@ public class PauseMenu : MonoBehaviour
 	}
     public void Pause()
 	{
+		Inventory.instance.CloseInventory();
 		isOpened = true;
 		pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;

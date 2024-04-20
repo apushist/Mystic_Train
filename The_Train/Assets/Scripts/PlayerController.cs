@@ -19,8 +19,9 @@ public class PlayerController : MonoBehaviour
 	private Animator animator;
 	private float nextStep = 0.0F;
 	public static event Action Epressed;
+	public static event Action Fpressed;
 
-	private void Start()
+    private void Start()
 	{
 		animator = playerTexture.GetComponent<Animator>();
         if(stepSoundSource.clip == null && stepSounds.Length > 0)
@@ -71,6 +72,10 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.E))
         {
             Epressed?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Fpressed?.Invoke();
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEditor.Progress;
 
 
 
@@ -34,6 +35,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Image _itemBigImage;
     [SerializeField] GameObject _plank;
 
+    [Header("Item Indicator")]
+    [SerializeField] private GameObject _itemIndicator;
+    private CanvasGroup _itemIndicatorGroup;
+
     List<InventoryItem> items = new List<InventoryItem>();
     List<InventoryItem> itemsGrid = new List<InventoryItem>();
     bool canUseInventory = true;
@@ -59,7 +64,9 @@ public class Inventory : MonoBehaviour
         dm = FindObjectOfType<DialogueManager>();
         pm = FindObjectOfType<PauseMenu>();
         PlayerController.Epressed += PressKeyInventory;
+        PlayerController.Fpressed += PressKeyInteraction;
         _audioSource = GetComponent<AudioSource>();
+        _itemIndicatorGroup = _itemIndicator.GetComponent<CanvasGroup>();
     }
     private void Start()
     {
@@ -78,8 +85,11 @@ public class Inventory : MonoBehaviour
     {
         InventoryItem item = ItemsData.instance.SearchItemById(ident);
         items.Add(item);
-        if(playSound)
+        StopCoroutine(IndicateNewItem(item));
+        StartCoroutine(IndicateNewItem(item));
+        if (playSound)
             _audioSource.Play();
+        Debug.Log(ident);
         for (int i = 0; i < _itemCount * _itemCount; i++)
         {
             if (itemsGrid[i].empty)
@@ -90,11 +100,47 @@ public class Inventory : MonoBehaviour
         }      
         Debug.Log("Full Inventory!");
     }
+    private IEnumerator IndicateNewItem(InventoryItem Item)
+    {
+        _itemIndicator.SetActive(true);
+        _itemIndicator.GetComponentInChildren<TextMeshProUGUI>().text = Item._name;
+        _itemIndicator.GetComponentInChildren<Image>().sprite = Item._itemImage;
+        _itemIndicatorGroup.alpha = 1.0f;
+        yield return new WaitForSeconds(2);
+        int j = 20;
+        for(int i = 0; i < j; i++)
+        {
+            _itemIndicatorGroup.alpha = 1f - (1f / j * i);
+            yield return new WaitForSeconds(1f/j);
+        }
+        _itemIndicator.SetActive(false);
+    }
     public void RemoveItem(int ident)
     {
-        InventoryItem item = ItemsData.instance.SearchItemById(ident);
-        bool isRemoved = items.Remove(item);
-        if (!isRemoved) Debug.Log("item doesn't exist in inventory");
+        bool isIn = false;
+        for(var i = 0; i<items.Count; i++)
+        {
+            if(items[i]._id== ident)
+            {
+                items.RemoveAt(i);
+                isIn = true;
+                break;
+            }
+        }
+        if (!isIn)
+        {
+            Debug.Log("item doesn't exist in inventory");
+            return;
+        }
+        for (int i = 0; i < _itemCount * _itemCount; i++)
+        {
+            if (itemsGrid[i]._id == ident)
+            {
+                itemsGrid[i].SetNewItem(_inventoryItemDefault, true);
+                break;
+            }
+        }
+        
     }
 
     public void ShowMoreInfoItem(InventoryItem item)
@@ -143,6 +189,20 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    public void PressKeyInteraction()
+    {
+        if (nearInteractionObject && !PuzzlesContoller.instance.nearInteractionObject && !dm.isOpened && !pm.isOpened && canUseInventory)
+        {
+            if (isOpened)
+            {
+                CloseInventory();
+            }
+            else
+            {
+                OpenInteractScreen();
+            }
+        }
+    }
     public void OpenInventory()
     {
         pl.canMove = false;
@@ -153,25 +213,29 @@ public class Inventory : MonoBehaviour
         {
             MouseExitItemNeeded(i);
         }
-        
-        if (nearInteractionObject)
+        ChangeInventoryView(0);
+    }
+    public void OpenInteractScreen()
+    {
+        pl.canMove = false;
+        _inventoryScreen.SetActive(true);
+        isOpened = true;
+        DeselectAllItems();
+        for (int i = 0; i < _neededItemView.Length; i++)
         {
-            if (currentInteraction._currentInterType == InteractionType.lockedDoor || currentInteraction._currentInterType == InteractionType.LockedPuzzle)
-            {
-                ChangeInventoryView(1);
-                UpdateNeededItemSpriteView(false);
-            }
-            else if(currentInteraction._currentInterType == InteractionType.lock3Item)
-            {
-                ChangeInventoryView(2);
-                UpdateNeededItemSpriteView3(false, 1);
-                UpdateNeededItemSpriteView3(false, 2);
-                UpdateNeededItemSpriteView3(false, 3);
-            }
+            MouseExitItemNeeded(i);
         }
-        else
+        if (currentInteraction._currentInterType == InteractionType.lockedDoor || currentInteraction._currentInterType == InteractionType.LockedPuzzle)
         {
-            ChangeInventoryView(0);
+            ChangeInventoryView(1);
+            UpdateNeededItemSpriteView(false);
+        }
+        else if (currentInteraction._currentInterType == InteractionType.lock3Item)
+        {
+            ChangeInventoryView(2);
+            UpdateNeededItemSpriteView3(false, 1);
+            UpdateNeededItemSpriteView3(false, 2);
+            UpdateNeededItemSpriteView3(false, 3);
         }
     }
     public void CloseInventory()
