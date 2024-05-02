@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +9,10 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] bool _seePlayerAllTime = false;
     [SerializeField] bool _seePlayerNow = false;
     [SerializeField] bool _usePatrolPaths = true;
+    [SerializeField] bool _canLoosePlayer = false;
+    [SerializeField] float _timeToLoosePlayer = 2f;
     [SerializeField] float _baseSpeed;
+    [SerializeField] float _rageSpeed;
     [SerializeField] Transform[] _patrolPoints;
     [SerializeField] AudioSource _roarAudioSource;
     [SerializeField] AudioClip _roarStartClip;
@@ -19,20 +23,22 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] float _angleFound = 60;
     [SerializeField] float _rangeFound = 2;
     [SerializeField] float _absoluteRangeFound = 0.5f;
+    [SerializeField] float _absoluteRangeFoundInRage = 2f;
     [SerializeField] int _rayCountFound = 5;
-    [SerializeField] float _rageSpeed;
+    
 
     private Animator animator;
     private Transform _currentPatrolPoint;
     private int _currentPatrolIndex = 0;
 
     private bool _isStanding = false;
+    private float _globalTimeLooseAt = 0;
 
     private NavMeshAgent _agent;
 
     private AudioSource _audioSource;
 
-    void Start()
+    void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
@@ -73,6 +79,17 @@ public class MonsterFinder : MonoBehaviour
             {
                 OnMonsterDeath();
             }
+            if (_canLoosePlayer)
+            {
+                if (TrySeePlayerInRage())
+                {
+                    _globalTimeLooseAt = Time.time;
+                }
+                if(Time.time - _globalTimeLooseAt > _timeToLoosePlayer)
+                {
+                    LoosePlayer();
+                }
+            }
         }
         else
         {
@@ -97,15 +114,6 @@ public class MonsterFinder : MonoBehaviour
         UpdateAnimation();
     }
 
-    void StopAnimation()
-    {
-        animator.SetBool("IsBack", false);
-        animator.SetBool("IsStraight", false);
-        animator.SetBool("IsLeft", false);
-        animator.SetBool("IsRight", false);
-    }
-
-
     bool ReachedDestination()
     {
         if (!_agent.pathPending)
@@ -120,7 +128,6 @@ public class MonsterFinder : MonoBehaviour
         }
         return false;
     }
-
     bool TrySeePlayer()
     {
         RaycastHit2D preHit = Physics2D.Raycast(transform.position, _playerTarget.position - transform.position, _absoluteRangeFound, _layerMask);
@@ -153,6 +160,20 @@ public class MonsterFinder : MonoBehaviour
 
         return false;
     }
+    bool TrySeePlayerInRage()
+    {
+        RaycastHit2D preHit = Physics2D.Raycast(transform.position, _playerTarget.position - transform.position, _absoluteRangeFoundInRage, _layerMask);
+        Debug.DrawLine(transform.position, transform.position + (_playerTarget.position - transform.position).normalized * _absoluteRangeFoundInRage, Color.red);/////////////
+        if (preHit)
+        {
+            if (preHit.collider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     IEnumerator StayAtPoint(float seconds)
     {
@@ -161,37 +182,59 @@ public class MonsterFinder : MonoBehaviour
         _isStanding = false;
     }
 
-    void PlayFootSteps(bool p)
+    private void LoosePlayer()
     {
-        if (p)
-            _audioSource.UnPause();
-        else
-            _audioSource.Pause();
+        _seePlayerNow = false;
+        StopMonsterRage();
+        _agent.SetDestination(_agent.transform.position);
+        StartCoroutine(StayAtPoint(2));
     }
-
     public void OnMonsterAlive()
     {
-        if((_seePlayerAllTime || _seePlayerNow)&& _roarAudioSource!=null && _roarStartClip!=null)
-            StartRoar();
         gameObject.SetActive(true);
+        if (_seePlayerAllTime || _seePlayerNow)
+            StartMonsterRage();
+        
     }
     public void OnMonsterDeath()
     {
-        if ((_seePlayerAllTime || _seePlayerNow) && _roarAudioSource != null && _roarStartClip != null)
-            _roarAudioSource.PlayOneShot(_roarEndClip);
-        var deathVFX = Instantiate(_deathEffect, transform.position, Quaternion.identity);
-        Destroy(deathVFX, 4);
+        if (_seePlayerAllTime || _seePlayerNow)
+        {
+            StopMonsterRage();
+            var deathVFX = Instantiate(_deathEffect, transform.position, Quaternion.identity);
+            Destroy(deathVFX, 4);
+        }
         gameObject.SetActive(false);
     }
-    private void StartRoar()
-    {
-        _roarAudioSource.PlayOneShot(_roarStartClip);
-    }
+    
     public void StartMonsterRage()
     {
-        StartRoar();
+        StartRoarAudio();
         _seePlayerNow = true;
         _agent.speed = _rageSpeed;
+    }
+    public void StopMonsterRage()
+    {
+        EndRoarAudio();
+        _seePlayerNow = false;
+        _agent.speed = _baseSpeed;
+    }
+    private void StartRoarAudio()
+    {
+        if (_roarAudioSource != null && _roarStartClip != null)
+            _roarAudioSource.PlayOneShot(_roarStartClip);
+    }
+    private void EndRoarAudio()
+    {
+        if (_roarAudioSource != null && _roarEndClip != null)
+            _roarAudioSource.PlayOneShot(_roarEndClip);
+    }
+    void PlayFootSteps(bool p)
+    {
+        if (p)
+            _audioSource.Stop();
+        else
+            _audioSource.Play();
     }
     private void UpdateAnimation()
     {
