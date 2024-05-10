@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class End : MonoBehaviour
 {
@@ -25,8 +26,16 @@ public class End : MonoBehaviour
     [SerializeField] private GameObject _camMain;
     [SerializeField] private GameObject _camShake;
     [SerializeField] private int _effectTime = 100;
+    [SerializeField] private int _loreItemCountThreshold;
+    /// <summary>
+    /// поле для хранения текстов концовки в зависимости от найденных предметов
+    /// 0 - плохая
+    /// 1 - хорошая
+    /// </summary>
+    [SerializeField] private string[] endingTexts = new string[2];
 
-    private void Awake()
+
+	private void Awake()
     {
         instance = this;
     }
@@ -62,7 +71,15 @@ public class End : MonoBehaviour
 
     void EnableDeathScreen()
     {
-        _deathScreen.SetActive(true);
+        if(_player.loreItemsFound >= _loreItemCountThreshold)
+        {
+            _deathScreen.GetComponent<Text>().text = endingTexts[0];
+        }
+        else { 
+            _deathScreen.GetComponent<Text>().text = endingTexts[1];
+
+		}
+		_deathScreen.SetActive(true);
         _animator.SetTrigger("end");
     }
     public void BlockAll()
