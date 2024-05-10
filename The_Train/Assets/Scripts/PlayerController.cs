@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true; //чтобы запретить игроку двигаться, когда он в инвентаре
 	public AudioClip[] stepSounds;
     public CinemachineVirtualCamera virtualCamera;
+    public int loreItemsFound;
 
 
     private int currentSoundNumber;
