@@ -22,6 +22,7 @@ public class InteractiveZone : MonoBehaviour
     [SerializeField] public InventoryItem _neededItem;
     [SerializeField] public Door _attachedDoor;
 
+    [HideInInspector] public Animator _animator;
 
     internal bool[] _neededItem3setted;
     internal bool _isLock3Setted = false;
@@ -29,6 +30,7 @@ public class InteractiveZone : MonoBehaviour
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         _neededItem3setted = new bool[3];
     }
     public bool TrySetItem(InventoryItem item)

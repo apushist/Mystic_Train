@@ -82,6 +82,8 @@ public class Lights : MonoBehaviour
 	IEnumerator changeLight()
 	{
 		StartCoroutine(flickerLight(false));
+		FindObjectOfType<PlayerController>().SetAnimationOnLight();
+		
 		yield return new WaitForSeconds(waitTime);
 		Light2D light1 = lightOff.GetComponent<Light2D>();
 		Light2D light2 = lightOn.GetComponent<Light2D>();
