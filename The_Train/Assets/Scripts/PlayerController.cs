@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 	public static event Action Epressed;
 	public static event Action Fpressed;
 
+    private bool isLightOn = false;
+
     private void Start()
 	{
 		animator = playerTexture.GetComponent<Animator>();
@@ -158,4 +160,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public int GetSoundNumber() { return currentSoundNumber;}
+
+    public void SetAnimationOnLight()
+    {
+        isLightOn = !isLightOn;
+        animator.SetBool("IsLightOn", isLightOn);
+    }
 }

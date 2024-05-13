@@ -70,6 +70,7 @@ public class PuzzlesContoller : MonoBehaviour
     public void Win()
     {
         isOpened = false;
+        if (currentInteraction._animator != null) currentInteraction._animator.SetTrigger("Play");
         if(currentInteraction._winItem!=null) Inventory.instance.AddItem(currentInteraction._winItem._id);
         bool destroyed = currentInteraction.AfterUse();
         if (destroyed)
