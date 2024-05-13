@@ -15,8 +15,10 @@ public class Transfer : MonoBehaviour
 	public float newCameraOrthoSize;
 	public BGMController bgmController;
 	public bool toDangeon;
+	
 
 	private Animator animator;
+	private AudioSource audioSource;
 
 	private bool safeModeOn;
 
@@ -26,7 +28,7 @@ public class Transfer : MonoBehaviour
 	{
 		safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
 		animator = animationTexture.GetComponent<Animator>();
-
+		audioSource = GetComponent<AudioSource>();
 		overView.SetActive(false);
 	}
 
@@ -44,6 +46,7 @@ public class Transfer : MonoBehaviour
 		if (!safeModeOn)
 		{
 			float ogPlayerIntensity = playerLight.intensity;
+			audioSource.Play();
 			animator.SetTrigger("");//Todo добавить название триггера
 			yield return new WaitForSeconds(animationLength);
             overView.SetActive(true);
@@ -68,6 +71,8 @@ public class Transfer : MonoBehaviour
 				globalLight.color = new Color32(158,180,180,255);
 				globalLight.intensity = 0.9f;
 			}
+			Destroy(audioSource); 
+			audioSource = null;
 			playerController.canMove = true;
 		}
 	}
