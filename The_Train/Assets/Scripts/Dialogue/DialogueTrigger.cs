@@ -5,6 +5,7 @@ public class DialogueTrigger : MonoBehaviour
 	public GameObject dialogueObject;
 	public bool destroyObjectAfter;
 	public Dialogue dialogue;
+    public bool partOfLore = false;
     
    
 
@@ -15,7 +16,11 @@ public class DialogueTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        TriggerDialogue();
+		if (partOfLore)
+		{
+			FindObjectOfType<PlayerController>().loreItemsFound++;
+		}
+		TriggerDialogue();
         if(destroyObjectAfter)
         {
             Destroy(gameObject);
