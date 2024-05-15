@@ -34,8 +34,11 @@ Author: YourPalRob
 https://n91music.itch.io/free-horror-starter-pack
 Author: N91music
 
-
 https://ateliermagicae.itch.io/japanese-horror-sound-effects-vol1
 Creator of Assets: Atelier Magicae || Bunnixia || Rin Hinasaki
 
+https://nox-sound-design.itch.io/essentials-series-sfx-nox-sound
+Author:	Nox_Sound_Design
 
+https://zvukipro.com/predmet/135-zvuki-radio.html
+Author: Claudia
