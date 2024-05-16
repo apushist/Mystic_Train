@@ -6,10 +6,16 @@ public class DialogueTrigger : MonoBehaviour
 	public bool destroyObjectAfter;
 	public Dialogue dialogue;
     public bool partOfLore = false;
-    
-   
+	public bool destroyObjectAfterAnimation;
 
-    public void TriggerDialogue()
+	private Animator animator;
+
+	private void Start()
+	{
+		animator = GetComponent<Animator>();
+	}
+
+	public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
@@ -25,5 +31,11 @@ public class DialogueTrigger : MonoBehaviour
         {
             Destroy(gameObject);
         }
+		if(destroyObjectAfterAnimation)
+		{
+			animator.SetTrigger("Play");
+			Destroy(gameObject,1f);
+
+		}
 	}
 }
