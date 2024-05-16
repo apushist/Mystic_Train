@@ -25,8 +25,8 @@ public class MonsterFinder : MonoBehaviour
     [SerializeField] float _absoluteRangeFound = 0.5f;
     [SerializeField] float _absoluteRangeFoundInRage = 2f;
     [SerializeField] int _rayCountFound = 5;
-    
 
+    private BGMController bgmc;
     private Animator animator;
     private Transform _currentPatrolPoint;
     private int _currentPatrolIndex = 0;
@@ -44,7 +44,8 @@ public class MonsterFinder : MonoBehaviour
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _agent.speed = _seePlayerAllTime ? _rageSpeed : _baseSpeed;
-        _audioSource = GetComponent<AudioSource>();     
+        _audioSource = GetComponent<AudioSource>();
+        bgmc = FindObjectOfType<BGMController>();
 
         if (_patrolPoints.Length == 0)
         {
@@ -188,6 +189,10 @@ public class MonsterFinder : MonoBehaviour
         StopMonsterRage();
         _agent.SetDestination(_agent.transform.position);
         StartCoroutine(StayAtPoint(2));
+
+        bgmc.SetVolume(0, 1f);
+        bgmc.SetVolume(2, 0f);
+        bgmc.RestartClip(0);
     }
     public void OnMonsterAlive()
     {
@@ -204,6 +209,9 @@ public class MonsterFinder : MonoBehaviour
             var deathVFX = Instantiate(_deathEffect, transform.position, Quaternion.identity);
             Destroy(deathVFX, 4);
         }
+        bgmc.SetVolume(0, 1f);
+        bgmc.SetVolume(2, 0f);
+        bgmc.RestartClip(0);
         gameObject.SetActive(false);
     }
     
@@ -212,6 +220,10 @@ public class MonsterFinder : MonoBehaviour
         StartRoarAudio();
         _seePlayerNow = true;
         _agent.speed = _rageSpeed;
+
+        bgmc.SetVolume(2, 1f);
+        bgmc.SetVolume(0, 0f);
+        bgmc.RestartClip(2);
     }
     public void StopMonsterRage()
     {

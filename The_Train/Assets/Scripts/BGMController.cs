@@ -9,6 +9,8 @@ public class BGMController : MonoBehaviour
 
     private float[] nextPlay;
 
+    public static BGMController instance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,14 @@ public class BGMController : MonoBehaviour
     public void SetVolume(int soundIndex, float volume)
     {
         clipVolumes[soundIndex] = volume;
+    }
+    public void RestartClip(int soundIndex)
+    {
+        for (int i = 0; i < clips.Length; i++)
+        {
+            nextPlay[soundIndex] = 0;
+        }
+        audioSource.Stop();
     }
 
 }
