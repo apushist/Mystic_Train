@@ -31,10 +31,14 @@ public class DialogueTrigger : MonoBehaviour
         {
             Destroy(gameObject);
         }
-		if(destroyObjectAfterAnimation)
+		
+	}
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (destroyObjectAfterAnimation)
 		{
 			animator.SetTrigger("Play");
-			Destroy(gameObject,1f);
+			Destroy(gameObject, 1f);
 
 		}
 	}
