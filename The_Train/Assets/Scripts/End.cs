@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using Cinemachine;
 using UnityEngine.UI;
+using TMPro;
 
 public class End : MonoBehaviour
 {
@@ -73,10 +74,10 @@ public class End : MonoBehaviour
     {
         if(_player.loreItemsFound >= _loreItemCountThreshold)
         {
-            _deathScreen.GetComponent<Text>().text = endingTexts[0];
+            _deathScreen.GetComponentInChildren<TextMeshProUGUI>().text = endingTexts[0];
         }
         else { 
-            _deathScreen.GetComponent<Text>().text = endingTexts[1];
+            _deathScreen.GetComponentInChildren<TextMeshProUGUI>().text = endingTexts[1];
 
 		}
 		_deathScreen.SetActive(true);

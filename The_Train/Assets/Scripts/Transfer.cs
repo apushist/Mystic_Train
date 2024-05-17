@@ -23,8 +23,9 @@ public class Transfer : MonoBehaviour
 	private bool safeModeOn;
 
 	public GameObject overView;
+	public ParticleSystem attachedParticleSystem;
 
-	private void Start()
+    private void Start()
 	{
 		safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
 		animator = animationTexture.GetComponent<Animator>();
@@ -45,13 +46,15 @@ public class Transfer : MonoBehaviour
 	{
 		if (!safeModeOn)
 		{
-			float ogPlayerIntensity = playerLight.intensity;
+			if(attachedParticleSystem != null) attachedParticleSystem.Play();//play fog effect
+            playerController.canMove = false;
+            float ogPlayerIntensity = playerLight.intensity;
 			audioSource.Play();
 			animator.SetTrigger("");//Todo добавить название триггера
 			yield return new WaitForSeconds(animationLength);
             overView.SetActive(true);
             playerLight.intensity = 0;
-			playerController.canMove = false;			
+						
 			collision.transform.position = new Vector3(newX, newY, 0);
 			
 			playerController.SetSound(newStepSound);
@@ -75,6 +78,9 @@ public class Transfer : MonoBehaviour
 			Destroy(audioSource); 
 			audioSource = null;
 			playerController.canMove = true;
-		}
-	}
+
+            if (attachedParticleSystem != null) Destroy(attachedParticleSystem.gameObject);
+
+        }
+    }
 }
