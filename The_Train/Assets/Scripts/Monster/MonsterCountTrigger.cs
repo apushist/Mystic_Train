@@ -50,6 +50,7 @@ public class MonsterCountTrigger : MonoBehaviour
 	{
         if (collision.CompareTag("Player") && _triggerMonster)
 		{
+            _saveSystemObject.getOnMap = false;
 			_saveSystemObject.SaveFunction();
 			TriggerMonster();
             Debug.Log("Run!!!");

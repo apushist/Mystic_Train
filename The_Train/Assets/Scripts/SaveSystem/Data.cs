@@ -14,7 +14,11 @@ public class Data
 	public float[] globalLight;
 	public float[] playerLight;
 
-	public Data(PlayerController controller, Inventory inventory, BGMController bgm, Light2D gLight, Light2D pLight)
+    public int countOfLoreItems;
+    public bool threeItemsOnMap;
+
+
+	public Data(PlayerController controller, Inventory inventory, BGMController bgm, Light2D gLight, Light2D pLight, bool lastThreeItems)
     {
         playerPosition = new float[2];
         playerPosition[0] = controller.transform.position.x;
@@ -55,5 +59,9 @@ public class Data
 		{
 			inventoryItemsIDs[i] = items[i]._id;
 		}
+
+        countOfLoreItems = controller.loreItemsFound;
+
+        threeItemsOnMap = lastThreeItems;
 	}
 }

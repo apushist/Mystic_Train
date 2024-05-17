@@ -22,16 +22,18 @@ public class DialogueTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (partOfLore)
+		if (collision.CompareTag("Player"))
 		{
-			FindObjectOfType<PlayerController>().loreItemsFound++;
+			if (partOfLore)
+			{
+				FindObjectOfType<PlayerController>().loreItemsFound++;
+			}
+			TriggerDialogue();
+			if (destroyObjectAfter)
+			{
+				Destroy(gameObject);
+			}
 		}
-		TriggerDialogue();
-        if(destroyObjectAfter)
-        {
-            Destroy(gameObject);
-        }
-		
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{

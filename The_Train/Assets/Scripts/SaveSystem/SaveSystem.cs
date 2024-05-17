@@ -5,18 +5,19 @@ using UnityEngine.Rendering.Universal;
 
 public static class SaveSystem 
 {
+
 	public static string GetPath()
 	{
 		return Application.persistentDataPath + "/data.save";
 	}
 
-    public static void Save(PlayerController controller, Inventory inventory, BGMController bgmController, Light2D gLight, Light2D pLight)
+    public static void Save(PlayerController controller, Inventory inventory, BGMController bgmController, Light2D gLight, Light2D pLight, bool getObjectOnMap)
     {
 		BinaryFormatter formatter = new BinaryFormatter();
 		string path = GetPath();
 		FileStream fileStream = new FileStream(path, FileMode.Create);
 
-		Data data = new Data(controller, inventory,bgmController,gLight,pLight);
+		Data data = new Data(controller, inventory,bgmController,gLight,pLight,getObjectOnMap);
 		formatter.Serialize(fileStream, data);
 
 		fileStream.Close();

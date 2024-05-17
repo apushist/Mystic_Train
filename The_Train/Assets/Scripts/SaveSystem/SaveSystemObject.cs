@@ -9,6 +9,8 @@ public class SaveSystemObject : MonoBehaviour
 	public BGMController bgmController;
 	public Light2D globalLight;
 	public Light2D playerLight;
+	public GameObject[] lastThreeItems;
+	public bool getOnMap = true;
 	public bool isLoading_useWhileEditing;
 
 
@@ -27,8 +29,7 @@ public class SaveSystemObject : MonoBehaviour
 
 	public void SaveFunction()
     {
-		
-        SaveSystem.Save(controller, inventory,bgmController,globalLight,playerLight);
+        SaveSystem.Save(controller, inventory,bgmController,globalLight,playerLight,getOnMap);
     }
 
     public void LoadFunction()
@@ -48,8 +49,6 @@ public class SaveSystemObject : MonoBehaviour
 
 		controller.SetSound(data.stepSoundNumber);
 
-		
-
 		bgmController.clipVolumes = data.bgmVolumes;
 
 		controller.virtualCamera.m_Lens.OrthographicSize = data.cameraOrthoSize;
@@ -65,6 +64,21 @@ public class SaveSystemObject : MonoBehaviour
 		foreach (int id in data.inventoryItemsIDs)
 		{
 			inventory.AddItem(id, false);
+		}
+
+		controller.loreItemsFound = data.countOfLoreItems;
+
+		getOnMap = data.threeItemsOnMap;
+
+		if (!getOnMap)
+		{
+			foreach(GameObject go in lastThreeItems)
+			{
+				if (go != null)
+				{
+					go.SetActive(false);
+				}
+			}
 		}
 	}
 
