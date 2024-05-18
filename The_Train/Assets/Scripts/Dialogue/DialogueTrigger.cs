@@ -5,7 +5,7 @@ public class DialogueTrigger : MonoBehaviour
 	public GameObject dialogueObject;
 	public bool destroyObjectAfter;
 	public Dialogue dialogue;
-	public bool destroyObjectAfterAnimation;
+	public Animator attachedObjectToAnimate;
 
 	private Animator animator;
 
@@ -16,7 +16,7 @@ public class DialogueTrigger : MonoBehaviour
 
 	public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue,attachedObjectToAnimate);
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -31,13 +31,5 @@ public class DialogueTrigger : MonoBehaviour
 			}
 		}
 	}
-	private void OnTriggerExit2D(Collider2D collision)
-	{
-		if (destroyObjectAfterAnimation)
-		{
-			animator.SetTrigger("Play");
-			Destroy(gameObject, 1f);
-
-		}
-	}
+	
 }

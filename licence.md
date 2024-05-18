@@ -42,3 +42,6 @@ Author:	Nox_Sound_Design
 
 https://zvukipro.com/predmet/135-zvuki-radio.html
 Author: Claudia
+
+https://stealthix.itch.io/horror-interior-assets
+Author: Stealthix

@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     bool canUseDialogue = true;
 
 	private Queue<string> sentences;
+    private Animator animatorOfAttachedItem;
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +30,13 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-	public void StartDialogue(Dialogue dialogue)
+	public void StartDialogue(Dialogue dialogue, Animator animator = null)
     {
         if (!canUseDialogue) return;
-
+        if(animator != null)
+        {
+            animatorOfAttachedItem = animator;
+        }
         isOpened = true;
 		playerController.canMove = false;
 		animator.SetBool("IsOpen", true);
@@ -80,6 +84,10 @@ public class DialogueManager : MonoBehaviour
         isOpened = false;
         playerController.canMove = true;
 		animator.SetBool("IsOpen", false);
+        if(animatorOfAttachedItem != null)
+        {
+            animator.SetTrigger("Play");
+        }
     }
 
     public void BlockDialogue()
