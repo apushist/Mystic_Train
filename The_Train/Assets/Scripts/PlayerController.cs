@@ -163,7 +163,18 @@ public class PlayerController : MonoBehaviour
 
     public void SetAnimationOnLight()
     {
+        StopAnimation();
         isLightOn = !isLightOn;
         animator.SetBool("IsLightOn", isLightOn);
     }
+
+    public void DeathBlue()
+    {
+        animator.SetTrigger("DeathBlue");
+    }
+
+	public void DeathYellow()
+	{
+		animator.SetTrigger("DeathYellow");
+	}
 }

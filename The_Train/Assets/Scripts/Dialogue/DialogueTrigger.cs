@@ -5,41 +5,33 @@ public class DialogueTrigger : MonoBehaviour
 	public GameObject dialogueObject;
 	public bool destroyObjectAfter;
 	public Dialogue dialogue;
-    public bool partOfLore = false;
-	public bool destroyObjectAfterAnimation;
+	public bool hasAnimator = false;
+	public float destroyDelay = 0f;
 
 	private Animator animator;
 
 	private void Start()
 	{
-		animator = GetComponent<Animator>();
+		if(hasAnimator)
+			animator = dialogueObject.GetComponent<Animator>();
 	}
 
 	public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue,animator);
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (partOfLore)
+		if (collision.CompareTag("Player"))
 		{
-			FindObjectOfType<PlayerController>().loreItemsFound++;
-		}
-		TriggerDialogue();
-        if(destroyObjectAfter)
-        {
-            Destroy(gameObject);
-        }
-		
-	}
-	private void OnTriggerExit2D(Collider2D collision)
-	{
-		if (destroyObjectAfterAnimation)
-		{
-			animator.SetTrigger("Play");
-			Destroy(gameObject, 1f);
-
+			
+			TriggerDialogue();
+			if (destroyObjectAfter)
+			{
+				Destroy(gameObject,destroyDelay);
+			}
 		}
 	}
+	
 }

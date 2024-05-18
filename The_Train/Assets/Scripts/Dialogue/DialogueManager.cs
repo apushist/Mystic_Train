@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     bool canUseDialogue = true;
 
 	private Queue<string> sentences;
+    private Animator animatorOfAttachedItem;
 
     // Start is called before the first frame update
     void Start()
@@ -29,18 +30,25 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-	public void StartDialogue(Dialogue dialogue)
+	public void StartDialogue(Dialogue dialogue, Animator attachedAnimator = null)
     {
         if (!canUseDialogue) return;
-
+        if(attachedAnimator != null)
+        {
+            animatorOfAttachedItem = attachedAnimator;
+        }
         isOpened = true;
 		playerController.canMove = false;
 		animator.SetBool("IsOpen", true);
         nameText.text = dialogue.name;
 
         sentences.Clear();
+		if (dialogue.partOfLore)
+		{
+			playerController.loreItemsFound++;
+		}
 
-        foreach(string sentence in dialogue.sentences)
+		foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -76,6 +84,10 @@ public class DialogueManager : MonoBehaviour
         isOpened = false;
         playerController.canMove = true;
 		animator.SetBool("IsOpen", false);
+        if(animatorOfAttachedItem != null)
+        {
+            animatorOfAttachedItem.SetTrigger("Play");
+        }
     }
 
     public void BlockDialogue()
