@@ -39,8 +39,12 @@ public class DialogueManager : MonoBehaviour
         nameText.text = dialogue.name;
 
         sentences.Clear();
+		if (dialogue.partOfLore)
+		{
+			playerController.loreItemsFound++;
+		}
 
-        foreach(string sentence in dialogue.sentences)
+		foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }

@@ -5,7 +5,6 @@ public class DialogueTrigger : MonoBehaviour
 	public GameObject dialogueObject;
 	public bool destroyObjectAfter;
 	public Dialogue dialogue;
-    public bool partOfLore = false;
 	public bool destroyObjectAfterAnimation;
 
 	private Animator animator;
@@ -24,10 +23,7 @@ public class DialogueTrigger : MonoBehaviour
 	{
 		if (collision.CompareTag("Player"))
 		{
-			if (partOfLore)
-			{
-				FindObjectOfType<PlayerController>().loreItemsFound++;
-			}
+			
 			TriggerDialogue();
 			if (destroyObjectAfter)
 			{
