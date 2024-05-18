@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+public enum DeathType { Monster, YellowSpikes, BlueSpikes};
+
 public class Death : MonoBehaviour
 {
     public static Death instance;
@@ -18,6 +20,8 @@ public class Death : MonoBehaviour
     private ColorAdjustments _satur;
 
     [SerializeField] private GameObject _deathScreen;
+
+    private DeathType _deathType;
 
     private void Awake()
     {
@@ -39,10 +43,13 @@ public class Death : MonoBehaviour
         _animator = GetComponent<Animator>();   
     }
 
-    public void OnDeathTrigger()
-    {
-        BlockAll();
-        StartCoroutine(DropSaturation());
+    public void OnDeathTrigger(DeathType dt = DeathType.Monster)
+	{
+		_deathType = dt;
+		BlockAll();
+		
+		StartCoroutine(DropSaturation());
+       
         Invoke("EnableDeathScreen", 3);/////
 		
 	}
@@ -72,11 +79,22 @@ public class Death : MonoBehaviour
         float time = 1.5f;
         float maxValue = _satur.saturation.value;
         float minValue = -100;
-        for (int i = 0; i < iters; i++)
+		switch (_deathType)
+		{
+			case DeathType.BlueSpikes: { Debug.Log("BlueDie)"); _player.DeathBlue(); break; }
+			case DeathType.YellowSpikes: { Debug.Log("YellowDie)"); _player.DeathYellow(); break; }
+			default: break;
+		}
+		for (int i = 0; i < iters; i++)
         {
             _satur.saturation.value = minValue + (maxValue-minValue) / iters * (iters - i - 1);
             yield return new WaitForSeconds(time / iters);
 		}
-		_player.DeathMonster();
+        if (_deathType == DeathType.Monster)
+        {
+			Debug.Log("MonsterDie)");
+			_player.DeathMonster();                
+		}
+            
 	}
 }

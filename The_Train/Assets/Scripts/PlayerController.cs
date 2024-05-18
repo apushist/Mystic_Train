@@ -21,8 +21,7 @@ public class PlayerController : MonoBehaviour
 	private float nextStep = 0.0F;
 	public static event Action Epressed;
 	public static event Action Fpressed;
-
-    private bool isLightOn = false;
+    [HideInInspector] public bool isLightOn = false;
 
     private void Start()
 	{
@@ -148,7 +147,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log("death");
             Death.instance.OnDeathTrigger();
         }
-    }
+        else if (collision.CompareTag("BlueSpikes"))
+		{
+			Debug.Log("deathBlue");
+			Death.instance.OnDeathTrigger(DeathType.BlueSpikes);
+		}
+		else if (collision.CompareTag("YellowSpikes"))
+		{
+			Debug.Log("deathYellow");
+			Death.instance.OnDeathTrigger(DeathType.YellowSpikes);
+		}
+	}
 
     public void SetSound(int soundNumber)
     {
@@ -161,11 +170,11 @@ public class PlayerController : MonoBehaviour
 
     public int GetSoundNumber() { return currentSoundNumber;}
 
-    public void SetAnimationOnLight()
-    {
-        StopAnimation();
-        isLightOn = !isLightOn;
-        animator.SetBool("IsLightOn", isLightOn);
+    public void SetAnimationOnLight(bool on = true)
+	{
+		isLightOn = on;
+		StopAnimation();
+        animator.SetBool("IsLightOn", on);
     }
 
     public void DeathBlue()

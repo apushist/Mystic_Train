@@ -16,6 +16,7 @@ public class Data
 
     public int countOfLoreItems;
     public bool threeItemsOnMap;
+    public bool isLightOn;
 
 
 	public Data(PlayerController controller, Inventory inventory, BGMController bgm, Light2D gLight, Light2D pLight, bool lastThreeItems)
@@ -63,5 +64,7 @@ public class Data
         countOfLoreItems = controller.loreItemsFound;
 
         threeItemsOnMap = lastThreeItems;
+
+        isLightOn = controller.isLightOn;
 	}
 }
