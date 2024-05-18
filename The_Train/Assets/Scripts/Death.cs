@@ -81,7 +81,7 @@ public class Death : MonoBehaviour
         float minValue = -100;
 		switch (_deathType)
 		{
-			case DeathType.BlueSpikes: { Debug.Log("BlueDie)"); _player.DeathBlue(); break; }
+			case DeathType.BlueSpikes: { Debug.Log("BlueDie)"); break; }
 			case DeathType.YellowSpikes: { Debug.Log("YellowDie)"); _player.DeathYellow(); break; }
 			default: break;
 		}

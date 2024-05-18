@@ -68,6 +68,7 @@ public class SaveSystemObject : MonoBehaviour
 
 		controller.loreItemsFound = data.countOfLoreItems;
 		controller.isLightOn = data.isLightOn;
+		controller.SetAnimationOnLight(data.isLightOn);
 
 		getOnMap = data.threeItemsOnMap;
 

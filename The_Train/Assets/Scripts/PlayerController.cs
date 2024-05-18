@@ -1,6 +1,8 @@
 using Cinemachine;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,11 +24,14 @@ public class PlayerController : MonoBehaviour
 	public static event Action Epressed;
 	public static event Action Fpressed;
     [HideInInspector] public bool isLightOn = false;
+    private bool dead;
 
     private void Start()
 	{
+        dead = false;
 		animator = playerTexture.GetComponent<Animator>();
-        if(stepSoundSource.clip == null && stepSounds.Length > 0)
+		SetAnimationOnLight(isLightOn);
+		if (stepSoundSource.clip == null && stepSounds.Length > 0)
         {
             SetSound(0);
 		}
@@ -69,7 +74,8 @@ public class PlayerController : MonoBehaviour
         else
         {
 			moveDirection = new Vector2(0, 0);
-            StopAnimation();
+			if (!dead)
+				StopAnimation();
 		}
 		if (Input.GetKeyDown(KeyCode.E))
         {
@@ -90,7 +96,8 @@ public class PlayerController : MonoBehaviour
     {
         if(moveX == 0 && moveY == 0)
         {
-			StopAnimation();
+			if (!dead)
+				StopAnimation();
 		}
         else
         {
@@ -147,13 +154,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("death");
             Death.instance.OnDeathTrigger();
         }
-        else if (collision.CompareTag("BlueSpikes"))
+		else if (collision.CompareTag("BlueSpikes"))
 		{
+            dead = true;
 			Debug.Log("deathBlue");
 			Death.instance.OnDeathTrigger(DeathType.BlueSpikes);
 		}
 		else if (collision.CompareTag("YellowSpikes"))
 		{
+            dead = true;
 			Debug.Log("deathYellow");
 			Death.instance.OnDeathTrigger(DeathType.YellowSpikes);
 		}
