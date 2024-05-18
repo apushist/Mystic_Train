@@ -177,4 +177,10 @@ public class PlayerController : MonoBehaviour
 	{
 		animator.SetTrigger("DeathYellow");
 	}
+
+    public void DeathMonster()
+    {
+        StopAnimation();
+		animator.SetTrigger("DeathMonster");
+	}
 }

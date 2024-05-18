@@ -44,13 +44,14 @@ public class Death : MonoBehaviour
         BlockAll();
         StartCoroutine(DropSaturation());
         Invoke("EnableDeathScreen", 3);/////
-    }
+		
+	}
 
     void EnableDeathScreen()
-    {
-        _deathScreen.SetActive(true);
-        _animator.SetTrigger("death");
-    }
+	{
+		_deathScreen.SetActive(true);
+		_animator.SetTrigger("death");
+	}
     public void BlockAll()
     {
         _inventory.BlockInventory();
@@ -75,6 +76,7 @@ public class Death : MonoBehaviour
         {
             _satur.saturation.value = minValue + (maxValue-minValue) / iters * (iters - i - 1);
             yield return new WaitForSeconds(time / iters);
-        }
-    }
+		}
+		_player.DeathMonster();
+	}
 }
