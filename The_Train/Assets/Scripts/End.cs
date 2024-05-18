@@ -28,12 +28,12 @@ public class End : MonoBehaviour
     [SerializeField] private GameObject _camShake;
     [SerializeField] private int _effectTime = 100;
     [SerializeField] private int _loreItemCountThreshold;
-    /// <summary>
-    /// поле для хранения текстов концовки в зависимости от найденных предметов
-    /// 0 - плохая
-    /// 1 - хорошая
-    /// </summary>
-    [SerializeField] private string[] endingTexts = new string[2];
+	/// <summary>
+	/// поле для хранения текстов концовки в зависимости от найденных предметов
+	/// 0 - хорошая 
+	/// 1 - плохая
+	/// </summary>
+	[SerializeField] private string[] endingTexts = new string[2];
 
 
 	private void Awake()
