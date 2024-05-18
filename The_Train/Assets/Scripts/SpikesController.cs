@@ -3,12 +3,16 @@ using UnityEngine;
 public class SpikesController : MonoBehaviour
 {
     public bool IsActivated;
+	public bool isYellow = false;
 
     private Animator[] animators;
+
+	private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
+		playerController = FindObjectOfType<PlayerController>();
         animators = GetComponentsInChildren<Animator>();
 		if (IsActivated)
 		{
@@ -43,8 +47,11 @@ public class SpikesController : MonoBehaviour
 			foreach (var anim in animators)
 			{
                 anim.SetTrigger("PlayerEnter");
-
 			}
+			if(isYellow)
+				playerController.DeathYellow();
+			else
+				playerController.DeathBlue();
 		}
 	}
 }
