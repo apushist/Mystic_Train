@@ -30,12 +30,12 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-	public void StartDialogue(Dialogue dialogue, Animator animator = null)
+	public void StartDialogue(Dialogue dialogue, Animator attachedAnimator = null)
     {
         if (!canUseDialogue) return;
-        if(animator != null)
+        if(attachedAnimator != null)
         {
-            animatorOfAttachedItem = animator;
+            animatorOfAttachedItem = attachedAnimator;
         }
         isOpened = true;
 		playerController.canMove = false;
@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
 		animator.SetBool("IsOpen", false);
         if(animatorOfAttachedItem != null)
         {
-            animator.SetTrigger("Play");
+            animatorOfAttachedItem.SetTrigger("Play");
         }
     }
 
