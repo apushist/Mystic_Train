@@ -21,13 +21,15 @@ public class PlayerController : MonoBehaviour
 	private float nextStep = 0.0F;
 	public static event Action Epressed;
 	public static event Action Fpressed;
-
-    private bool isLightOn = false;
+    [HideInInspector] public bool isLightOn = false;
+    private bool dead;
 
     private void Start()
 	{
+        dead = false;
 		animator = playerTexture.GetComponent<Animator>();
-        if(stepSoundSource.clip == null && stepSounds.Length > 0)
+		SetAnimationOnLight(isLightOn);
+		if (stepSoundSource.clip == null && stepSounds.Length > 0)
         {
             SetSound(0);
 		}
@@ -70,7 +72,8 @@ public class PlayerController : MonoBehaviour
         else
         {
 			moveDirection = new Vector2(0, 0);
-            StopAnimation();
+			if (!dead)
+				StopAnimation();
 		}
 		if (Input.GetKeyDown(KeyCode.E))
         {
@@ -91,7 +94,8 @@ public class PlayerController : MonoBehaviour
     {
         if(moveX == 0 && moveY == 0)
         {
-			StopAnimation();
+			if (!dead)
+				StopAnimation();
 		}
         else
         {
@@ -148,7 +152,19 @@ public class PlayerController : MonoBehaviour
             Debug.Log("death");
             Death.instance.OnDeathTrigger();
         }
-    }
+		else if (collision.CompareTag("BlueSpikes"))
+		{
+            dead = true;
+			Debug.Log("deathBlue");
+			Death.instance.OnDeathTrigger(DeathType.BlueSpikes);
+		}
+		else if (collision.CompareTag("YellowSpikes"))
+		{
+            dead = true;
+			Debug.Log("deathYellow");
+			Death.instance.OnDeathTrigger(DeathType.YellowSpikes);
+		}
+	}
 
     public void SetSound(int soundNumber)
     {
@@ -161,11 +177,11 @@ public class PlayerController : MonoBehaviour
 
     public int GetSoundNumber() { return currentSoundNumber;}
 
-    public void SetAnimationOnLight()
-    {
-        StopAnimation();
-        isLightOn = !isLightOn;
-        animator.SetBool("IsLightOn", isLightOn);
+    public void SetAnimationOnLight(bool on = true)
+	{
+		isLightOn = on;
+		StopAnimation();
+        animator.SetBool("IsLightOn", on);
     }
 
     public void DeathBlue()

@@ -5,15 +5,14 @@ public class DialogueTrigger : MonoBehaviour
 	public GameObject dialogueObject;
 	public bool destroyObjectAfter;
 	public Dialogue dialogue;
-	public bool hasAnimator = false;
-	public float destroyDelay = 0f;
+	public GameObject animObject;
 
 	private Animator animator;
 
 	private void Start()
 	{
-		if(hasAnimator)
-			animator = dialogueObject.GetComponent<Animator>();
+		if(animObject != null)
+			animator = animObject.GetComponent<Animator>();
 	}
 
 	public void TriggerDialogue()
@@ -29,7 +28,7 @@ public class DialogueTrigger : MonoBehaviour
 			TriggerDialogue();
 			if (destroyObjectAfter)
 			{
-				Destroy(gameObject,destroyDelay);
+				Destroy(gameObject);
 			}
 		}
 	}

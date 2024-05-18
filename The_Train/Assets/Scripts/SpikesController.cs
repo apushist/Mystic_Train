@@ -25,7 +25,7 @@ public class SpikesController : MonoBehaviour
         foreach(var anim in animators)
         {
             anim.SetBool("IsActivated", true);
-			tag = "DeathZone";
+			tag = isYellow? "YellowSpikes" : "BlueSpikes";
         }
 		IsActivated = true;
 	}
@@ -48,10 +48,6 @@ public class SpikesController : MonoBehaviour
 			{
                 anim.SetTrigger("PlayerEnter");
 			}
-			if(isYellow)
-				playerController.DeathYellow();
-			else
-				playerController.DeathBlue();
 		}
 	}
 }
