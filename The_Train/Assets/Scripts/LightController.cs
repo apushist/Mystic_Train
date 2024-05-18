@@ -28,7 +28,6 @@ public class Lights : MonoBehaviour
 
 	private void Start()
 	{
-		//safeModeOn = PlayerPrefs.GetInt("SafeModeOn", 0) == 1;
 		if(type == ActionType.Candle)
 		{
 			candlelight = candleLightObject.GetComponent<Light2D>();
