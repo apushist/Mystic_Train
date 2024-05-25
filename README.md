@@ -30,28 +30,30 @@
 
 При столкновении следует использовать другой распаковщик
 
-## Прохождение квеста версии предзащиты (будет обновлен в ближайшее время):
+## Прохождение квеста:
 При загрузке игры запустится диалог:
 ![image](https://github.com/apushist/The_Train/assets/114854401/9dec8ce0-136d-4943-b1f6-c31ac5750a2a)
 
 После его окончания, выходите в коридор и двигайтесь вправо до лужи, при приближении к ней также будет запущен диалог:
-![image](https://github.com/apushist/The_Train/assets/114854401/98bf1a85-35a1-4808-9bdb-932dc02759bd)
-При нажатии на Е откроется головоломка. Её решение:
+![image](https://github.com/apushist/The_Train/assets/114854401/375bae19-63a0-43e5-8a8e-1eafd7d6fc89)
+
+При нажатии на F откроется головоломка. Её решение:
 ![image](https://github.com/apushist/The_Train/assets/114854401/8344ae15-beda-43c5-96dc-23dd0dce1820)
 После решения головоломки лужа пропадет и можно будет пройти в следующий вагон:
 ![image](https://github.com/apushist/The_Train/assets/114854401/2c3fe651-8e22-48d8-8f97-2cfc60d7eb7f)
 Во втором вагоне зайдите в первую дверь, там вы найдете записку с паролем:
 ![image](https://github.com/apushist/The_Train/assets/114854401/0b9910bd-0907-4a92-9322-47a217288707)
-В третьем купе второго вагона находится сумка, закрытая на замок. Нажав на Е, вы получите возможность ввести пароль:
-![image](https://github.com/apushist/The_Train/assets/114854401/d70e2ba9-e45f-49b9-b1df-0e693e0bcbbc)
+В третьем купе второго вагона находится сумка, закрытая на замок. Нажав на F, вы получите возможность ввести пароль:
+![image](https://github.com/apushist/The_Train/assets/114854401/a997d33f-b635-4982-a36f-53646671c160)
 ![image](https://github.com/apushist/The_Train/assets/114854401/a4a67507-908a-4bfa-a311-97b0c07a9f38)
 Из сумки вы получите ключ от двери в следующий вагон:
 ![image](https://github.com/apushist/The_Train/assets/114854401/dd820c42-a239-494a-8ff2-8dbe8b8991f3)
-![image](https://github.com/apushist/The_Train/assets/114854401/d58af4d9-f530-4053-aac6-46c33a36a2b4)
+![image](https://github.com/apushist/The_Train/assets/114854401/82ec9be9-cc0d-4425-a964-f440f7cf9a1e)
+
 В третьем вагоне за первой открытой дверью вы обнаружите панель с шестеренками. Нужно найти недостающую деталь:
-![image](https://github.com/apushist/The_Train/assets/114854401/20b8beaa-9323-409f-9e2c-50b4db73b14c)
+![image](https://github.com/apushist/The_Train/assets/114854401/1d73c007-1d95-4a22-babc-b7e9cb354fbe)
 Шестеренка находится в пространстве между третьим и четвертым вагонами:
-![image](https://github.com/apushist/The_Train/assets/114854401/8370e0bd-f01e-4d03-8ab9-a31d4163fe17)
+![image](https://github.com/apushist/The_Train/assets/114854401/3b84898a-d0ad-4add-b85a-accee886a344)
 Вернитесь к панели с шестеренками и решите головоломку. Один из возможных способов решения:
 ![image](https://github.com/apushist/The_Train/assets/114854401/a6a46e27-3dd9-4af4-8564-cee2eb8e3d59)
 Вы получите ключ, который открывает все запертые двери в этом вагоне:
@@ -60,39 +62,27 @@
 ![image](https://github.com/apushist/The_Train/assets/114854401/94efaa9a-3f25-4559-a2f5-79d4c50ee7c1)
 ![image](https://github.com/apushist/The_Train/assets/114854401/d42d4a14-efab-48c7-86a3-ad9eafa78c2e)
 Переходите в четвертый вагон. Здесь вам нужно успеть убежать от монстра и зайти в третье купе:
-![image](https://github.com/apushist/The_Train/assets/114854401/55bc7381-80f4-40b5-861b-e7cb52b5b0f8)
+![image](https://github.com/apushist/The_Train/assets/114854401/5def793d-9e9f-4a48-bd66-e1da842d88d9)
+
 Подойдите к картине:
-![image](https://github.com/apushist/The_Train/assets/114854401/d0f6fa17-6223-4b73-964b-d06fe6167593)
-Через некоторое время вас переместит в другую локацию (задержка была сделана для того, чтобы проиграть анимацию, но к сожалению, сама анимация не была подключена):
-![image](https://github.com/apushist/The_Train/assets/114854401/4f1c9a04-d329-4f98-986a-4e11755b2c7f)
+![image](https://github.com/apushist/The_Train/assets/114854401/c020e81f-9bb0-4ebc-a605-4c612d1eee4b)
+
+Вас переместит в другую локацию:
+![image](https://github.com/apushist/The_Train/assets/114854401/274b8d08-6589-41e5-bcaa-21901c898353)
+
 Двигайтесь вправо до комнаты, заполненой коробками:
-![image](https://github.com/apushist/The_Train/assets/114854401/1854eaa6-b085-4799-a6be-0abc455f8075)
+![image](https://github.com/apushist/The_Train/assets/114854401/35c1c0fb-0d67-4bda-b937-c4b292515b47)
 Маршрут для выхода из лабиринта:
-![image](https://github.com/apushist/The_Train/assets/114854401/e053a1a5-e906-4f16-8efd-2c5830922bc8)
-Далее двигайтесь по коридору до странной степы:
-![image](https://github.com/apushist/The_Train/assets/114854401/a86e5928-1cc2-4567-b8fb-938ccd309ce6)
-Продолжайти идти прямо пока не упрётесь в стену, после этого поверните в коридор сверху:
-![image](https://github.com/apushist/The_Train/assets/114854401/74bba2f2-f3de-4ecb-9263-c463ea73e0fd)
-Там активируйте рычаг с фиолетовой отметкой:
-![image](https://github.com/apushist/The_Train/assets/114854401/7ff3cdd0-4968-40d1-876b-5b42b19029bf)
-Возвращайтесь в коридор и двигайтесь вниз до поворота влево:
-![image](https://github.com/apushist/The_Train/assets/114854401/c9749cf3-279a-4a5f-8293-e5490de50df6)
-По этой части двигайтесь до поворота вниз:
-![image](https://github.com/apushist/The_Train/assets/114854401/797e315a-0ff9-421c-8a5e-24bc41dbb614)
-Там активируйте  рычаг с синей отметкой:
-![image](https://github.com/apushist/The_Train/assets/114854401/0d957596-e79e-48c8-8841-f9789803d786)
-После этого вернитесь к тому месту, где была странная стены:
-![image](https://github.com/apushist/The_Train/assets/114854401/a0ceaae7-aab6-47ae-97dd-bee174715e5a)
-Оттуда двигайтесь влево и подберите ключ:
-![image](https://github.com/apushist/The_Train/assets/114854401/7588d271-7c15-4400-9774-5320788a0c82)
-С ним двигайтесь по коридору до ворот:
-![image](https://github.com/apushist/The_Train/assets/114854401/c91e882a-4c58-4944-80a2-1d959488f538)
+![image](https://github.com/apushist/The_Train/assets/114854401/11c48769-3d6a-41b8-95ca-00855eeaae3a)
+
+Далее вы попадете в следующую часть лабиринта, где нужно добыть ключ, избегая встречи с монстром.  Получив ключ, отправляйтесь через запертые ворота по коридору.
 Карта этой части локации:
-![image](https://github.com/apushist/The_Train/assets/114854401/b8806a39-70d4-4659-8469-ac034254d13a)
+![image](https://github.com/apushist/The_Train/assets/114854401/d74c6af5-d996-4854-83e9-0ecf3b7936c2)
+Ключ в зеленом круге, чтобы его получить нужно использовать рычаги в белых.
 Подойдите к красному кресту на полу:
-![image](https://github.com/apushist/The_Train/assets/114854401/4c08292e-c407-47ab-b093-04e87dc3a3f3)
+![image](https://github.com/apushist/The_Train/assets/114854401/11dff9d1-7cfb-450a-a578-67fcc0767c25)
 Вы переместитесь в поезд:
-![image](https://github.com/apushist/The_Train/assets/114854401/28d96ae3-845e-4bb2-afb1-64661ad262b7)
+![image](https://github.com/apushist/The_Train/assets/114854401/444dd540-87ef-4669-8c49-2839747f41f7)
 Для того чтобы открыть шкаф нужно ввести пароль, зашифрованный в черточках на стене (5784):
 ![image](https://github.com/apushist/The_Train/assets/114854401/b19dee9f-a4d2-42d6-adf1-bb222cfcc78e)
 Вы получите ключ от двери в следующий вагон.
@@ -103,10 +93,37 @@
 ![image](https://github.com/apushist/The_Train/assets/114854401/5045348f-323b-4043-9f00-abe282ab832a)
 ![image](https://github.com/apushist/The_Train/assets/114854401/ad90be20-d2d8-4f06-a3e4-366f54b02349)
 
+### Концовка №1:
+![image](https://github.com/apushist/The_Train/assets/114854401/8c97560e-4ead-46c5-9030-a65dc3bf92e0)
 
-![image](https://github.com/apushist/The_Train/assets/114854401/04882676-18e0-46f7-9cfc-6cffd00a37e6)
+### Для того, чтобы получить концовку №2, нужно по мере прохождения "собрать" хотя бы 5 сюжетных предметов:
+Если при приближении к ним появляется кнопка взаимодействия, нужно её нажать, для того чтобы этот предмет был учтен.
+Халат в первом вагоне:
+
+![image](https://github.com/apushist/The_Train/assets/114854401/c73bc9dd-e58f-4cbd-8a7a-b1bbc1e3b28c)
+Билет во втором купе во втором вагоне:
+
+![image](https://github.com/apushist/The_Train/assets/114854401/dd7d9a4d-9579-427d-8755-58b04d1b3859)
+Постер в первом купе в третьем вагоне:
+
+![image](https://github.com/apushist/The_Train/assets/114854401/96d70ae7-94ac-4893-8c36-6d2ce537b2f0)
+Призрак в начале подземелья (после перемещения двигайтесь вниз):
+
+![image](https://github.com/apushist/The_Train/assets/114854401/db48326c-b269-4878-a909-db36f2ec3156)
+
+Фотография и дневник в лабиринте с монтром:
+![image](https://github.com/apushist/The_Train/assets/114854401/6070b2aa-57eb-4a92-af04-c22d7c80e73d)
+
+Ещё один дневник во втором купе вагона с шкафом на пароле:
+![image](https://github.com/apushist/The_Train/assets/114854401/3a64f6f1-650e-41b2-aa51-5eac9c9dae8c)
+
+Радиоприемник во втором купе последнего вагона:
+![image](https://github.com/apushist/The_Train/assets/114854401/46e68090-dfb9-4c73-a996-aacee8879e36)
 
 
+### Концовка №2:
+
+![image](https://github.com/apushist/The_Train/assets/114854401/bef8d2d8-b14a-41f4-bb7b-008f6c64337e)
 
 
 
